@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Quality Gate — TerminalX CSS</title>
+  <link rel="stylesheet" href="terminalx.css">
+  <style>
+    .gate-result {
+      display: flex;
+      align-items: center;
+      gap: var(--space);
+      font-size: 0.95rem;
+    }
+
+    .gate-icon {
+      font-size: 1.1rem;
+      flex-shrink: 0;
+      width: 20px;
+      text-align: center;
+    }
+
+    .gate-icon.pass { color: var(--success); }
+    .gate-icon.fail { color: var(--error); }
+    .gate-icon.warn { color: var(--warning); }
+
+    .gate-name {
+      font-family: var(--font-sans);
+      font-weight: 500;
+    }
+
+    .gate-detail {
+      margin-left: auto;
+      font-size: 0.85rem;
+      color: var(--text-secondary);
+      text-align: right;
+    }
+
+    .gate-threshold {
+      font-size: 0.8rem;
+      color: var(--text-muted);
+    }
+
+    .score-big {
+      font-size: 3rem;
+      font-weight: 700;
+      font-family: var(--font-sans);
+      line-height: 1;
+    }
+
+    .score-label {
+      font-size: 0.85rem;
+      color: var(--text-muted);
+      margin-top: var(--space-sm);
+    }
+
+    .test-summary {
+      display: flex;
+      gap: var(--space-xl);
+      margin-bottom: var(--space-lg);
+    }
+
+    .test-count {
+      font-size: 1.5rem;
+      font-weight: 700;
+      font-family: var(--font-sans);
+    }
+
+    .test-label {
+      font-size: 0.8rem;
+      color: var(--text-muted);
+    }
+</style>
+</head>
+<body>
+
+  <nav>
+    <ul>
+      <li><a href="demo.html" >TerminalX</a></li>
+      <li><a href="pipeline.html" >Pipeline</a></li>
+      <li><a href="builds.html" >Builds</a></li>
+      <li><a href="agents.html" >Agents</a></li>
+      <li><a href="queue.html" >Queue</a></li>
+      <li><a href="run-detail.html" >Run</a></li>
+      <li><a href="diff.html" >Diff</a></li>
+      <li><a href="templates.html" >Templates</a></li>
+      <li><a href="costs.html" >Costs</a></li>
+      <li><a href="audit.html" >Audit</a></li>
+      <li><a href="quality.html" class="active">Quality</a></li>
+      <li><a href="models.html" >Models</a></li>
+      <li><a href="webhooks.html" >Webhooks</a></li>
+    </ul>
+  </nav>
+
+  
+
+  <h1>Quality Gate <span class="badge badge-success">passed</span></h1>
+  <p>Automated quality checks for Run <a href="run-detail.html">#1204</a> — user-service</p>
+
+  <hr>
+
+  <div class="grid-auto" style="margin-bottom: var(--space-xl)">
+    <div class="card text-center">
+      <div class="score-big" style="color: var(--success)">A</div>
+      <div class="score-label">Overall Grade</div>
+    </div>
+    <div class="card text-center">
+      <div class="score-big" style="color: var(--success)">94%</div>
+      <div class="score-label">Test Coverage</div>
+    </div>
+    <div class="card text-center">
+      <div class="score-big" style="color: var(--text)">0</div>
+      <div class="score-label">Lint Errors</div>
+    </div>
+    <div class="card text-center">
+      <div class="score-big" style="color: var(--success)">100%</div>
+      <div class="score-label">Type Coverage</div>
+    </div>
+  </div>
+
+  <div class="section-title">Gate Checks</div>
+  <ul class="item-list item-list-bordered" style="margin-bottom: var(--space-xl)">
+    <li class="gate-result">
+      <span class="gate-icon pass">&#x2714;</span>
+      <span class="gate-name">TypeScript Compilation</span>
+      <span class="gate-detail">0 errors, 0 warnings<br><span class="gate-threshold">threshold: 0 errors</span></span>
+    </li>
+    <li class="gate-result">
+      <span class="gate-icon pass">&#x2714;</span>
+      <span class="gate-name">ESLint</span>
+      <span class="gate-detail">0 errors, 2 warnings<br><span class="gate-threshold">threshold: 0 errors, &lt;5 warnings</span></span>
+    </li>
+    <li class="gate-result">
+      <span class="gate-icon pass">&#x2714;</span>
+      <span class="gate-name">Unit Tests</span>
+      <span class="gate-detail">38/38 passed<br><span class="gate-threshold">threshold: 100% pass rate</span></span>
+    </li>
+    <li class="gate-result">
+      <span class="gate-icon pass">&#x2714;</span>
+      <span class="gate-name">Integration Tests</span>
+      <span class="gate-detail">12/12 passed<br><span class="gate-threshold">threshold: 100% pass rate</span></span>
+    </li>
+    <li class="gate-result">
+      <span class="gate-icon pass">&#x2714;</span>
+      <span class="gate-name">Code Coverage</span>
+      <span class="gate-detail">94.2% (lines)<br><span class="gate-threshold">threshold: &ge;80%</span></span>
+    </li>
+    <li class="gate-result">
+      <span class="gate-icon warn">&#x25B2;</span>
+      <span class="gate-name">Bundle Size</span>
+      <span class="gate-detail">14.2 kB (+2.1 kB)<br><span class="gate-threshold">threshold: &lt;50 kB (warning at +2 kB delta)</span></span>
+    </li>
+    <li class="gate-result">
+      <span class="gate-icon pass">&#x2714;</span>
+      <span class="gate-name">Security Audit</span>
+      <span class="gate-detail">0 vulnerabilities<br><span class="gate-threshold">threshold: 0 high/critical</span></span>
+    </li>
+    <li class="gate-result">
+      <span class="gate-icon pass">&#x2714;</span>
+      <span class="gate-name">License Check</span>
+      <span class="gate-detail">All dependencies MIT/Apache-2.0<br><span class="gate-threshold">threshold: no GPL/AGPL</span></span>
+    </li>
+  </ul>
+
+  <div class="two-col">
+    <div>
+      <div class="section-title">Test Results</div>
+      <div class="test-summary">
+        <div>
+          <div class="test-count" style="color: var(--success)">50</div>
+          <div class="test-label">Passed</div>
+        </div>
+        <div>
+          <div class="test-count" style="color: var(--error)">0</div>
+          <div class="test-label">Failed</div>
+        </div>
+        <div>
+          <div class="test-count" style="color: var(--text-muted)">0</div>
+          <div class="test-label">Skipped</div>
+        </div>
+      </div>
+
+      <details>
+        <summary>Test Details (50 tests)</summary>
+        <pre><code>  PASS  src/routes/users.test.ts
+    GET /users
+      &#x2714; returns paginated list (4ms)
+      &#x2714; respects limit parameter (2ms)
+      &#x2714; respects offset parameter (2ms)
+    GET /users/:id
+      &#x2714; returns user by id (3ms)
+      &#x2714; returns 404 for missing user (1ms)
+    POST /users
+      &#x2714; creates user with valid data (5ms)
+      &#x2714; returns 400 for invalid email (2ms)
+      &#x2714; returns 400 for missing name (1ms)
+    PUT /users/:id
+      &#x2714; updates user fields (4ms)
+      &#x2714; returns 404 for missing user (1ms)
+    DELETE /users/:id
+      &#x2714; deletes existing user (3ms)
+      &#x2714; returns 404 for missing user (1ms)
+  ...and 38 more tests</code></pre>
+      </details>
+    </div>
+
+    <div>
+      <div class="section-title">Coverage by File</div>
+      <table>
+        <thead>
+          <tr>
+            <th>File</th>
+            <th>Lines</th>
+            <th>Branches</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><code>routes/users.ts</code></td>
+            <td style="color: var(--success)">96%</td>
+            <td style="color: var(--success)">92%</td>
+          </tr>
+          <tr>
+            <td><code>models/user.ts</code></td>
+            <td style="color: var(--success)">100%</td>
+            <td style="color: var(--success)">100%</td>
+          </tr>
+          <tr>
+            <td><code>middleware/validate.ts</code></td>
+            <td style="color: var(--success)">91%</td>
+            <td style="color: var(--success)">88%</td>
+          </tr>
+          <tr>
+            <td><code>db.ts</code></td>
+            <td style="color: var(--warning)">78%</td>
+            <td style="color: var(--text-muted)">N/A</td>
+          </tr>
+          <tr>
+            <td><code>index.ts</code></td>
+            <td style="color: var(--success)">100%</td>
+            <td style="color: var(--success)">100%</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <hr>
+  <footer><p><small>Quality gate for Run <a href="run-detail.html">#1204</a> — <a href="diff.html">View diff</a></small></p></footer>
+
+
+</body>
+</html>

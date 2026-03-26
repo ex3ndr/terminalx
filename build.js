@@ -2,7 +2,7 @@ const fs = require('fs');
 const path = require('path');
 
 const SRC = path.join(__dirname, 'src');
-const DIST = path.join(__dirname, 'dist');
+const DIST = path.join(__dirname, 'examples');
 const PAGES = path.join(SRC, 'pages');
 
 // Read layout template
@@ -78,4 +78,4 @@ for (const file of pageFiles) {
   console.log(`Built ${file}`);
 }
 
-console.log(`\nDone! ${pageFiles.length} pages built to dist/`);
+console.log(`\nDone! ${pageFiles.length} pages built to examples/`);

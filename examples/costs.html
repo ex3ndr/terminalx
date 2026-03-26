@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Cost Tracker — TerminalX CSS</title>
+  <link rel="stylesheet" href="terminalx.css">
+  <style>
+    .cost-bar {
+      display: flex;
+      height: 24px;
+      border-radius: var(--radius);
+      overflow: hidden;
+      margin-bottom: var(--space-lg);
+      background: var(--bg-elevated);
+    }
+
+    .cost-bar-segment {
+      height: 100%;
+      transition: width 0.3s ease;
+    }
+
+    .cost-legend {
+      display: flex;
+      gap: var(--space-lg);
+      flex-wrap: wrap;
+      font-size: 0.85rem;
+      margin-bottom: var(--space-xl);
+    }
+
+    .cost-legend-item {
+      display: flex;
+      align-items: center;
+      gap: var(--space-sm);
+    }
+
+    .cost-legend-swatch {
+      width: 12px;
+      height: 12px;
+      border-radius: 3px;
+      flex-shrink: 0;
+    }
+
+    .cost-big {
+      font-size: 2.5rem;
+      font-weight: 700;
+      font-family: var(--font-sans);
+      color: var(--text);
+      line-height: 1.2;
+    }
+
+    .cost-period {
+      font-size: 0.85rem;
+      color: var(--text-muted);
+    }
+
+    .sparkline {
+      display: flex;
+      align-items: flex-end;
+      gap: 2px;
+      height: 40px;
+    }
+
+    .sparkline-bar {
+      flex: 1;
+      background: var(--accent);
+      border-radius: 2px 2px 0 0;
+      min-width: 4px;
+      opacity: 0.7;
+    }
+
+    .sparkline-bar:last-child { opacity: 1; }
+    .sparkline-bar:hover { opacity: 1; background: var(--accent-hover); }
+
+    .cost-bar-segment { cursor: pointer; position: relative; }
+    .cost-bar-segment:hover { opacity: 0.8; }
+</style>
+</head>
+<body>
+
+  <nav>
+    <ul>
+      <li><a href="demo.html" >TerminalX</a></li>
+      <li><a href="pipeline.html" >Pipeline</a></li>
+      <li><a href="builds.html" >Builds</a></li>
+      <li><a href="agents.html" >Agents</a></li>
+      <li><a href="queue.html" >Queue</a></li>
+      <li><a href="run-detail.html" >Run</a></li>
+      <li><a href="diff.html" >Diff</a></li>
+      <li><a href="templates.html" >Templates</a></li>
+      <li><a href="costs.html" class="active">Costs</a></li>
+      <li><a href="audit.html" >Audit</a></li>
+      <li><a href="quality.html" >Quality</a></li>
+      <li><a href="models.html" >Models</a></li>
+      <li><a href="webhooks.html" >Webhooks</a></li>
+    </ul>
+  </nav>
+
+  
+
+  <h1>Cost Tracker</h1>
+  <p>Token usage and API spend across projects and models.</p>
+
+  <hr>
+
+  <div class="grid-auto" style="margin-bottom: var(--space-xl)">
+    <div class="card">
+      <div class="section-title" style="margin-bottom: var(--space-sm)">This Month</div>
+      <div class="cost-big">$1,247</div>
+      <div class="cost-period">Mar 1–26, 2026</div>
+    </div>
+    <div class="card">
+      <div class="section-title" style="margin-bottom: var(--space-sm)">Today</div>
+      <div class="cost-big">$84</div>
+      <div class="cost-period">Mar 26, 2026</div>
+    </div>
+    <div class="card">
+      <div class="section-title" style="margin-bottom: var(--space-sm)">Tokens (Month)</div>
+      <div class="cost-big">48.2M</div>
+      <div class="cost-period">in: 12.1M, out: 36.1M</div>
+    </div>
+    <div class="card">
+      <div class="section-title" style="margin-bottom: var(--space-sm)">Avg Cost / Run</div>
+      <div class="cost-big">$1.47</div>
+      <div class="cost-period">across 847 runs</div>
+    </div>
+  </div>
+
+  <div class="section-title">Daily Spend (last 14 days)</div>
+  <div class="sparkline" style="margin-bottom: var(--space-sm)">
+    <div class="sparkline-bar" style="height: 55%" title="Mar 13 — $46"></div>
+    <div class="sparkline-bar" style="height: 62%" title="Mar 14 — $52"></div>
+    <div class="sparkline-bar" style="height: 48%" title="Mar 15 — $40"></div>
+    <div class="sparkline-bar" style="height: 71%" title="Mar 16 — $60"></div>
+    <div class="sparkline-bar" style="height: 80%" title="Mar 17 — $67"></div>
+    <div class="sparkline-bar" style="height: 65%" title="Mar 18 — $55"></div>
+    <div class="sparkline-bar" style="height: 42%" title="Mar 19 — $35"></div>
+    <div class="sparkline-bar" style="height: 58%" title="Mar 20 — $49"></div>
+    <div class="sparkline-bar" style="height: 75%" title="Mar 21 — $63"></div>
+    <div class="sparkline-bar" style="height: 88%" title="Mar 22 — $74"></div>
+    <div class="sparkline-bar" style="height: 70%" title="Mar 23 — $59"></div>
+    <div class="sparkline-bar" style="height: 92%" title="Mar 24 — $77"></div>
+    <div class="sparkline-bar" style="height: 85%" title="Mar 25 — $71"></div>
+    <div class="sparkline-bar" style="height: 100%" title="Mar 26 — $84"></div>
+  </div>
+  <div style="display: flex; justify-content: space-between; font-size: 0.8rem; color: var(--text-muted); margin-bottom: var(--space-xl)">
+    <span>Mar 13</span>
+    <span>Mar 26</span>
+  </div>
+
+  <div class="section-title">Spend by Model</div>
+  <div class="cost-bar">
+    <div class="cost-bar-segment" style="width: 52%; background: var(--accent)" title="Opus 4 — $648 (52%)"></div>
+    <div class="cost-bar-segment" style="width: 31%; background: var(--info)" title="Sonnet 4 — $387 (31%)"></div>
+    <div class="cost-bar-segment" style="width: 17%; background: var(--success)" title="Haiku 4 — $212 (17%)"></div>
+  </div>
+  <div class="cost-legend">
+    <div class="cost-legend-item">
+      <div class="cost-legend-swatch" style="background: var(--accent)"></div>
+      <span>Opus 4 — $648 (52%)</span>
+    </div>
+    <div class="cost-legend-item">
+      <div class="cost-legend-swatch" style="background: var(--info)"></div>
+      <span>Sonnet 4 — $387 (31%)</span>
+    </div>
+    <div class="cost-legend-item">
+      <div class="cost-legend-swatch" style="background: var(--success)"></div>
+      <span>Haiku 4 — $212 (17%)</span>
+    </div>
+  </div>
+
+  <div class="section-title">Spend by Project</div>
+  <table>
+    <thead>
+      <tr>
+        <th>Project</th>
+        <th>Runs</th>
+        <th>Tokens</th>
+        <th>Cost</th>
+        <th>% of Total</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><code>user-service</code></td>
+        <td>142</td>
+        <td>12.4M</td>
+        <td>$318</td>
+        <td>25.5%</td>
+      </tr>
+      <tr>
+        <td><code>payment-gateway</code></td>
+        <td>98</td>
+        <td>9.8M</td>
+        <td>$256</td>
+        <td>20.5%</td>
+      </tr>
+      <tr>
+        <td><code>dashboard-frontend</code></td>
+        <td>203</td>
+        <td>8.1M</td>
+        <td>$198</td>
+        <td>15.9%</td>
+      </tr>
+      <tr>
+        <td><code>auth-middleware</code></td>
+        <td>87</td>
+        <td>6.2M</td>
+        <td>$167</td>
+        <td>13.4%</td>
+      </tr>
+      <tr>
+        <td><code>legacy-migration</code></td>
+        <td>64</td>
+        <td>5.9M</td>
+        <td>$154</td>
+        <td>12.3%</td>
+      </tr>
+      <tr>
+        <td class="text-muted">Other (12 projects)</td>
+        <td>253</td>
+        <td>5.8M</td>
+        <td>$154</td>
+        <td>12.4%</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <hr>
+  <footer><p><small>Cost data refreshed every 5 min — <a href="#">Export report</a></small></p></footer>
+
+
+</body>
+</html>

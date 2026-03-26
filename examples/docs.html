@@ -1,0 +1,306 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Docs — TerminalX CSS</title>
+  <link rel="stylesheet" href="terminalx.css">
+  <style>
+    .doc-section {
+      margin-bottom: var(--space-xl);
+      padding-bottom: var(--space-xl);
+      border-bottom: 1px solid var(--border);
+    }
+
+    .doc-section:last-child {
+      border-bottom: none;
+    }
+
+    .option-row {
+      display: flex;
+      gap: var(--space);
+      align-items: baseline;
+      margin-bottom: var(--space);
+    }
+
+    .option-name {
+      font-family: var(--font-mono);
+      font-size: 0.9rem;
+      color: var(--accent);
+      min-width: 140px;
+      flex-shrink: 0;
+    }
+
+    .option-desc {
+      color: var(--text-secondary);
+      font-size: 0.9rem;
+    }
+
+    .option-default {
+      color: var(--text-muted);
+      font-family: var(--font-mono);
+      font-size: 0.85rem;
+    }
+</style>
+</head>
+<body>
+
+  <nav>
+    <ul>
+      <li><a href="demo.html" >TerminalX</a></li>
+      <li><a href="pipeline.html" >Pipeline</a></li>
+      <li><a href="builds.html" >Builds</a></li>
+      <li><a href="agents.html" >Agents</a></li>
+      <li><a href="queue.html" >Queue</a></li>
+      <li><a href="run-detail.html" >Run</a></li>
+      <li><a href="diff.html" >Diff</a></li>
+      <li><a href="templates.html" >Templates</a></li>
+      <li><a href="costs.html" >Costs</a></li>
+      <li><a href="audit.html" >Audit</a></li>
+      <li><a href="quality.html" >Quality</a></li>
+      <li><a href="models.html" >Models</a></li>
+      <li><a href="webhooks.html" >Webhooks</a></li>
+    </ul>
+  </nav>
+
+  
+
+  <h1>Documentation</h1>
+  <p>Reference guide for <code>wrc</code> — a fictional CLI tool for project scaffolding.</p>
+
+  <hr>
+
+  <div class="sidebar-layout">
+    <aside class="sidebar-nav">
+      <ul>
+        <li><a href="#install" class="active">Install</a></li>
+        <li><a href="#quickstart">Quick Start</a></li>
+        <li><a href="#commands">Commands</a></li>
+        <li><a href="#config">Configuration</a></li>
+        <li><a href="#templates">Templates</a></li>
+        <li><a href="#plugins">Plugins</a></li>
+      </ul>
+    </aside>
+
+    <main>
+      <div class="doc-section" id="install">
+        <h2>Install</h2>
+        <p>Install <code>wrc</code> globally via npm:</p>
+        <pre><code>npm install -g wrc</code></pre>
+        <p>Or use it directly with npx:</p>
+        <pre><code>npx wrc init my-project</code></pre>
+        <p>Verify your installation:</p>
+        <pre><code>$ wrc --version
+wrc v2.4.1 (node v20.11.0)</code></pre>
+      </div>
+
+      <div class="doc-section" id="quickstart">
+        <h2>Quick Start</h2>
+        <p>Create a new project in seconds:</p>
+        <pre><code>$ wrc init my-app
+  Scaffolding project in ./my-app ...
+
+  Done. Now run:
+    cd my-app
+    npm install
+    npm run dev</code></pre>
+        <p>The <code>init</code> command creates a directory with:</p>
+        <ul>
+          <li><code>src/</code> — source files</li>
+          <li><code>public/</code> — static assets</li>
+          <li><code>wrc.config.js</code> — project configuration</li>
+          <li><code>package.json</code> — dependencies and scripts</li>
+        </ul>
+      </div>
+
+      <div class="doc-section" id="commands">
+        <h2>Commands</h2>
+
+        <h3><code>wrc init &lt;name&gt;</code></h3>
+        <p>Scaffold a new project from a template.</p>
+        <table>
+          <thead>
+            <tr>
+              <th>Flag</th>
+              <th>Description</th>
+              <th>Default</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><code>--template, -t</code></td>
+              <td>Template to use</td>
+              <td><code>default</code></td>
+            </tr>
+            <tr>
+              <td><code>--force, -f</code></td>
+              <td>Overwrite existing directory</td>
+              <td><code>false</code></td>
+            </tr>
+            <tr>
+              <td><code>--git</code></td>
+              <td>Initialize git repository</td>
+              <td><code>true</code></td>
+            </tr>
+            <tr>
+              <td><code>--install</code></td>
+              <td>Run npm install after scaffold</td>
+              <td><code>true</code></td>
+            </tr>
+          </tbody>
+        </table>
+
+        <h3><code>wrc dev</code></h3>
+        <p>Start the development server with hot reload.</p>
+        <pre><code>$ wrc dev --port 8080
+  Server running at http://localhost:8080
+  Watching for changes...</code></pre>
+
+        <h3><code>wrc build</code></h3>
+        <p>Build for production. Outputs to <code>dist/</code> by default.</p>
+        <pre><code>$ wrc build
+  Building for production...
+  dist/index.html     1.2 kB
+  dist/style.css      3.1 kB
+  dist/main.js       12.4 kB
+
+  Build complete in 340ms.</code></pre>
+
+        <h3><code>wrc add &lt;plugin&gt;</code></h3>
+        <p>Add a plugin to the current project.</p>
+        <pre><code>$ wrc add @wrc/tailwind
+  Installing @wrc/tailwind...
+  Updated wrc.config.js
+  Done.</code></pre>
+      </div>
+
+      <div class="doc-section" id="config">
+        <h2>Configuration</h2>
+        <p>All options live in <code>wrc.config.js</code> at the project root:</p>
+
+        <pre><code>// wrc.config.js
+export default {
+  root: './src',
+  outDir: './dist',
+  port: 3000,
+  open: true,
+  plugins: [],
+  build: {
+    minify: true,
+    sourcemap: false,
+    target: 'es2022'
+  }
+}</code></pre>
+
+        <h3>Options</h3>
+        <div class="option-row">
+          <span class="option-name">root</span>
+          <span class="option-desc">Source directory for entry files</span>
+          <span class="option-default">"./src"</span>
+        </div>
+        <div class="option-row">
+          <span class="option-name">outDir</span>
+          <span class="option-desc">Output directory for builds</span>
+          <span class="option-default">"./dist"</span>
+        </div>
+        <div class="option-row">
+          <span class="option-name">port</span>
+          <span class="option-desc">Dev server port</span>
+          <span class="option-default">3000</span>
+        </div>
+        <div class="option-row">
+          <span class="option-name">open</span>
+          <span class="option-desc">Open browser on dev start</span>
+          <span class="option-default">true</span>
+        </div>
+        <div class="option-row">
+          <span class="option-name">build.minify</span>
+          <span class="option-desc">Minify output files</span>
+          <span class="option-default">true</span>
+        </div>
+        <div class="option-row">
+          <span class="option-name">build.sourcemap</span>
+          <span class="option-desc">Generate source maps</span>
+          <span class="option-default">false</span>
+        </div>
+      </div>
+
+      <div class="doc-section" id="templates">
+        <h2>Templates</h2>
+        <p>Built-in templates for common project types:</p>
+
+        <table>
+          <thead>
+            <tr>
+              <th>Name</th>
+              <th>Description</th>
+              <th>Includes</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><code>default</code></td>
+              <td>Vanilla HTML/CSS/JS</td>
+              <td>None</td>
+            </tr>
+            <tr>
+              <td><code>react</code></td>
+              <td>React with JSX</td>
+              <td>React 19, ReactDOM</td>
+            </tr>
+            <tr>
+              <td><code>vue</code></td>
+              <td>Vue 3 SFC</td>
+              <td>Vue 3, Volar types</td>
+            </tr>
+            <tr>
+              <td><code>node</code></td>
+              <td>Node.js API</td>
+              <td>Express, nodemon</td>
+            </tr>
+            <tr>
+              <td><code>static</code></td>
+              <td>Static site</td>
+              <td>Markdown, layouts</td>
+            </tr>
+          </tbody>
+        </table>
+
+        <p>Use any template with the <code>--template</code> flag:</p>
+        <pre><code>wrc init my-app --template react</code></pre>
+      </div>
+
+      <div class="doc-section" id="plugins">
+        <h2>Plugins</h2>
+        <p>Extend <code>wrc</code> with community and official plugins.</p>
+
+        <details>
+          <summary><code>@wrc/tailwind</code> — Tailwind CSS integration</summary>
+          <p>Adds Tailwind CSS processing to the build pipeline. Auto-generates <code>tailwind.config.js</code> and PostCSS config.</p>
+          <pre><code>wrc add @wrc/tailwind</code></pre>
+        </details>
+
+        <details>
+          <summary><code>@wrc/mdx</code> — MDX support</summary>
+          <p>Write pages in MDX with full JSX component support. Great for documentation sites and blogs.</p>
+          <pre><code>wrc add @wrc/mdx</code></pre>
+        </details>
+
+        <details>
+          <summary><code>@wrc/icons</code> — Icon bundling</summary>
+          <p>Tree-shakeable icon imports from popular icon sets. Only bundles icons you actually use.</p>
+          <pre><code>wrc add @wrc/icons</code></pre>
+        </details>
+      </div>
+    </main>
+  </div>
+
+  <hr>
+
+  <footer>
+    <p><small>wrc docs — built with <a href="demo.html">TerminalX CSS</a></small></p>
+  </footer>
+
+
+</body>
+</html>

@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Pipeline — TerminalX CSS</title>
+  <link rel="stylesheet" href="terminalx.css">
+  <style>
+    .pipeline-stages {
+      display: flex;
+      gap: 2px;
+      margin-bottom: var(--space-xl);
+    }
+
+    .stage {
+      flex: 1;
+      background: var(--bg-surface);
+      border: 1px solid var(--border);
+      padding: var(--space-lg);
+      position: relative;
+    }
+
+    .stage:first-child { border-radius: var(--radius) 0 0 var(--radius); }
+    .stage:last-child { border-radius: 0 var(--radius) var(--radius) 0; }
+
+    .stage-name {
+      font-family: var(--font-sans);
+      font-weight: 600;
+      font-size: 0.9rem;
+      margin-bottom: var(--space-sm);
+    }
+
+    .stage-time {
+      font-size: 0.8rem;
+      color: var(--text-muted);
+    }
+
+    .stage.success { border-color: var(--success); }
+    .stage.success .stage-name { color: var(--success); }
+    .stage.running { border-color: var(--accent); }
+    .stage.running .stage-name { color: var(--accent); }
+    .stage.pending { opacity: 0.5; }
+
+    .stage-icon {
+      font-size: 1.2rem;
+      margin-bottom: var(--space-sm);
+    }
+
+    .log-output {
+      background: var(--bg-surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: var(--space-lg);
+      font-size: 0.85rem;
+      line-height: 1.7;
+      max-height: 300px;
+      overflow-y: auto;
+      margin-bottom: var(--space-lg);
+    }
+
+    .log-line { color: var(--text-muted); }
+    .log-line .log-ts { color: var(--text-muted); margin-right: var(--space); }
+    .log-line.success { color: var(--success); }
+    .log-line.error { color: var(--error); }
+    .log-line.info { color: var(--text-secondary); }
+    .log-line.accent { color: var(--accent); }
+
+    @media (max-width: 680px) {
+      .pipeline-stages { flex-direction: column; }
+      .stage:first-child { border-radius: var(--radius) var(--radius) 0 0; }
+      .stage:last-child { border-radius: 0 0 var(--radius) var(--radius); }
+    }
+</style>
+</head>
+<body>
+
+  <nav>
+    <ul>
+      <li><a href="demo.html" >TerminalX</a></li>
+      <li><a href="pipeline.html" class="active">Pipeline</a></li>
+      <li><a href="builds.html" >Builds</a></li>
+      <li><a href="agents.html" >Agents</a></li>
+      <li><a href="queue.html" >Queue</a></li>
+      <li><a href="run-detail.html" >Run</a></li>
+      <li><a href="diff.html" >Diff</a></li>
+      <li><a href="templates.html" >Templates</a></li>
+      <li><a href="costs.html" >Costs</a></li>
+      <li><a href="audit.html" >Audit</a></li>
+      <li><a href="quality.html" >Quality</a></li>
+      <li><a href="models.html" >Models</a></li>
+      <li><a href="webhooks.html" >Webhooks</a></li>
+    </ul>
+  </nav>
+
+  
+
+  <h1>Pipeline <span class="badge badge-accent">run #847</span></h1>
+  <p>Triggered by push to <code>main</code> — commit <code>a3f8c21</code> — <span class="text-muted">2 min ago</span></p>
+
+  <hr>
+
+  <div class="pipeline-stages">
+    <div class="stage success">
+      <div class="stage-icon">&#x2714;</div>
+      <div class="stage-name">Clone</div>
+      <div class="stage-time">3s</div>
+    </div>
+    <div class="stage success">
+      <div class="stage-icon">&#x2714;</div>
+      <div class="stage-name">Install</div>
+      <div class="stage-time">12s</div>
+    </div>
+    <div class="stage success">
+      <div class="stage-icon">&#x2714;</div>
+      <div class="stage-name">Build</div>
+      <div class="stage-time">28s</div>
+    </div>
+    <div class="stage running">
+      <div class="stage-icon">&#x25CB;</div>
+      <div class="stage-name">Test</div>
+      <div class="stage-time">running...</div>
+    </div>
+    <div class="stage pending">
+      <div class="stage-icon">&#x2022;</div>
+      <div class="stage-name">Deploy</div>
+      <div class="stage-time">waiting</div>
+    </div>
+  </div>
+
+  <div class="two-col">
+    <div>
+      <div class="section-title">Pipeline Info</div>
+      <table>
+        <tbody>
+          <tr><td><strong>Branch</strong></td><td><code>main</code></td></tr>
+          <tr><td><strong>Commit</strong></td><td><code>a3f8c21</code> — Fix auth token refresh</td></tr>
+          <tr><td><strong>Author</strong></td><td>jane-dev</td></tr>
+          <tr><td><strong>Started</strong></td><td>Mar 26, 14:31:02 UTC</td></tr>
+          <tr><td><strong>Duration</strong></td><td>43s (running)</td></tr>
+          <tr><td><strong>Runner</strong></td><td><code>runner-prod-02</code></td></tr>
+        </tbody>
+      </table>
+    </div>
+    <div>
+      <div class="section-title">Artifacts</div>
+      <ul class="item-list">
+        <li>
+          <code>dist/</code>
+          <span class="badge badge-success" style="margin-left: auto">3.1 MB</span>
+        </li>
+        <li>
+          <code>coverage/</code>
+          <span class="badge badge-muted" style="margin-left: auto">pending</span>
+        </li>
+        <li>
+          <code>docker-image</code>
+          <span class="badge badge-muted" style="margin-left: auto">pending</span>
+        </li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="section-title">Build Log — Test Stage</div>
+  <div class="log-output">
+    <div class="log-line info"><span class="log-ts">14:31:34</span>Running test suite...</div>
+    <div class="log-line"><span class="log-ts">14:31:34</span>  PASS  src/auth.test.ts (12 tests)</div>
+    <div class="log-line"><span class="log-ts">14:31:35</span>  PASS  src/api.test.ts (8 tests)</div>
+    <div class="log-line"><span class="log-ts">14:31:36</span>  PASS  src/utils.test.ts (23 tests)</div>
+    <div class="log-line accent"><span class="log-ts">14:31:37</span>  RUN   src/pipeline.test.ts</div>
+    <div class="log-line"><span class="log-ts">14:31:37</span>    &#x2714; should create pipeline from config</div>
+    <div class="log-line"><span class="log-ts">14:31:37</span>    &#x2714; should retry failed stages</div>
+    <div class="log-line"><span class="log-ts">14:31:38</span>    &#x25CB; should handle timeout (running...)</div>
+  </div>
+
+  <div style="display: flex; gap: var(--space)">
+    <button class="btn-error btn-sm">Cancel Run</button>
+    <button class="btn-ghost btn-sm">Retry from Failed</button>
+    <button class="btn-ghost btn-sm">View Raw Logs</button>
+  </div>
+
+  <hr>
+  <footer><p><small>Pipeline #847 — <a href="builds.html">All builds</a></small></p></footer>
+
+
+</body>
+</html>

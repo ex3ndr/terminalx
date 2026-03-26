@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Agent Fleet — TerminalX CSS</title>
+  <link rel="stylesheet" href="terminalx.css">
+  <style>
+    .agent-card {
+      background: var(--bg-surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-lg);
+      padding: var(--space-lg);
+    }
+
+    .agent-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: var(--space);
+    }
+
+    .agent-name {
+      font-family: var(--font-sans);
+      font-weight: 600;
+      font-size: 0.95rem;
+    }
+
+    .agent-task {
+      font-size: 0.85rem;
+      color: var(--text-secondary);
+      margin-bottom: var(--space);
+      padding: var(--space-sm) var(--space);
+      background: var(--bg-elevated);
+      border-radius: var(--radius);
+    }
+
+    .agent-stats {
+      display: flex;
+      gap: var(--space-lg);
+      font-size: 0.8rem;
+      color: var(--text-muted);
+    }
+
+    .agent-card.idle { opacity: 0.6; }
+    .agent-card.error { border-color: var(--error); }
+</style>
+</head>
+<body>
+
+  <nav>
+    <ul>
+      <li><a href="demo.html" >TerminalX</a></li>
+      <li><a href="pipeline.html" >Pipeline</a></li>
+      <li><a href="builds.html" >Builds</a></li>
+      <li><a href="agents.html" class="active">Agents</a></li>
+      <li><a href="queue.html" >Queue</a></li>
+      <li><a href="run-detail.html" >Run</a></li>
+      <li><a href="diff.html" >Diff</a></li>
+      <li><a href="templates.html" >Templates</a></li>
+      <li><a href="costs.html" >Costs</a></li>
+      <li><a href="audit.html" >Audit</a></li>
+      <li><a href="quality.html" >Quality</a></li>
+      <li><a href="models.html" >Models</a></li>
+      <li><a href="webhooks.html" >Webhooks</a></li>
+    </ul>
+  </nav>
+
+  
+
+  <h1>Agent Fleet</h1>
+  <p>Active code generation agents and their current workloads.</p>
+
+  <hr>
+
+  <div class="grid-auto" style="margin-bottom: var(--space-lg)">
+    <div class="stat-card" style="background: var(--bg-surface); border: 1px solid var(--border); border-radius: var(--radius-lg); padding: var(--space-lg);">
+      <div class="section-title" style="margin-bottom: var(--space-sm)">Active</div>
+      <div style="font-size: 2rem; font-weight: 700; font-family: var(--font-sans); color: var(--success)">6</div>
+    </div>
+    <div class="stat-card" style="background: var(--bg-surface); border: 1px solid var(--border); border-radius: var(--radius-lg); padding: var(--space-lg);">
+      <div class="section-title" style="margin-bottom: var(--space-sm)">Idle</div>
+      <div style="font-size: 2rem; font-weight: 700; font-family: var(--font-sans); color: var(--text-muted)">2</div>
+    </div>
+    <div class="stat-card" style="background: var(--bg-surface); border: 1px solid var(--border); border-radius: var(--radius-lg); padding: var(--space-lg);">
+      <div class="section-title" style="margin-bottom: var(--space-sm)">Errored</div>
+      <div style="font-size: 2rem; font-weight: 700; font-family: var(--font-sans); color: var(--error)">1</div>
+    </div>
+    <div class="stat-card" style="background: var(--bg-surface); border: 1px solid var(--border); border-radius: var(--radius-lg); padding: var(--space-lg);">
+      <div class="section-title" style="margin-bottom: var(--space-sm)">Tokens / hr</div>
+      <div style="font-size: 2rem; font-weight: 700; font-family: var(--font-sans); color: var(--accent)">1.2M</div>
+    </div>
+  </div>
+
+  <div class="grid-3" style="margin-bottom: var(--space-xl)">
+    <div class="agent-card">
+      <div class="agent-header">
+        <span class="agent-name">agent-01</span>
+        <span class="badge badge-success">running</span>
+      </div>
+      <div class="agent-task">Generating REST API for <code>user-service</code></div>
+      <div class="agent-stats">
+        <span>142k tokens</span>
+        <span>Opus 4</span>
+        <span>18m uptime</span>
+      </div>
+    </div>
+
+    <div class="agent-card">
+      <div class="agent-header">
+        <span class="agent-name">agent-02</span>
+        <span class="badge badge-success">running</span>
+      </div>
+      <div class="agent-task">Writing tests for <code>auth-middleware</code></div>
+      <div class="agent-stats">
+        <span>89k tokens</span>
+        <span>Sonnet 4</span>
+        <span>12m uptime</span>
+      </div>
+    </div>
+
+    <div class="agent-card">
+      <div class="agent-header">
+        <span class="agent-name">agent-03</span>
+        <span class="badge badge-success">running</span>
+      </div>
+      <div class="agent-task">Refactoring <code>payment-gateway</code> module</div>
+      <div class="agent-stats">
+        <span>201k tokens</span>
+        <span>Opus 4</span>
+        <span>24m uptime</span>
+      </div>
+    </div>
+
+    <div class="agent-card">
+      <div class="agent-header">
+        <span class="agent-name">agent-04</span>
+        <span class="badge badge-success">running</span>
+      </div>
+      <div class="agent-task">Generating OpenAPI spec from codebase</div>
+      <div class="agent-stats">
+        <span>56k tokens</span>
+        <span>Haiku 4</span>
+        <span>6m uptime</span>
+      </div>
+    </div>
+
+    <div class="agent-card">
+      <div class="agent-header">
+        <span class="agent-name">agent-05</span>
+        <span class="badge badge-success">running</span>
+      </div>
+      <div class="agent-task">Code review for PR <code>#312</code></div>
+      <div class="agent-stats">
+        <span>34k tokens</span>
+        <span>Sonnet 4</span>
+        <span>3m uptime</span>
+      </div>
+    </div>
+
+    <div class="agent-card">
+      <div class="agent-header">
+        <span class="agent-name">agent-06</span>
+        <span class="badge badge-success">running</span>
+      </div>
+      <div class="agent-task">Migrating <code>legacy-cron</code> to async workers</div>
+      <div class="agent-stats">
+        <span>178k tokens</span>
+        <span>Opus 4</span>
+        <span>31m uptime</span>
+      </div>
+    </div>
+
+    <div class="agent-card idle">
+      <div class="agent-header">
+        <span class="agent-name">agent-07</span>
+        <span class="badge badge-muted">idle</span>
+      </div>
+      <div class="agent-task" style="color: var(--text-muted)">No task assigned</div>
+      <div class="agent-stats">
+        <span>0 tokens</span>
+        <span>—</span>
+        <span>idle 8m</span>
+      </div>
+    </div>
+
+    <div class="agent-card idle">
+      <div class="agent-header">
+        <span class="agent-name">agent-08</span>
+        <span class="badge badge-muted">idle</span>
+      </div>
+      <div class="agent-task" style="color: var(--text-muted)">No task assigned</div>
+      <div class="agent-stats">
+        <span>0 tokens</span>
+        <span>—</span>
+        <span>idle 14m</span>
+      </div>
+    </div>
+
+    <div class="agent-card error">
+      <div class="agent-header">
+        <span class="agent-name">agent-09</span>
+        <span class="badge badge-error">error</span>
+      </div>
+      <div class="agent-task" style="color: var(--error)">Context limit exceeded on <code>monolith-split</code></div>
+      <div class="agent-stats">
+        <span>1M tokens</span>
+        <span>Opus 4</span>
+        <span>crashed 2m ago</span>
+      </div>
+    </div>
+  </div>
+
+  <div style="display: flex; gap: var(--space)">
+    <button class="btn-sm">Spawn Agent</button>
+    <button class="btn-ghost btn-sm">Rebalance</button>
+  </div>
+
+  <hr>
+  <footer><p><small>Agent Fleet — 9 total, 6 active — <a href="costs.html">Cost tracker</a></small></p></footer>
+
+
+</body>
+</html>

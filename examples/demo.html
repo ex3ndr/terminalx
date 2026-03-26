@@ -1,0 +1,507 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Components — TerminalX CSS</title>
+  <link rel="stylesheet" href="terminalx.css">
+  
+</head>
+<body>
+
+  <nav>
+    <ul>
+      <li><a href="demo.html" class="active">TerminalX</a></li>
+      <li><a href="pipeline.html" >Pipeline</a></li>
+      <li><a href="builds.html" >Builds</a></li>
+      <li><a href="agents.html" >Agents</a></li>
+      <li><a href="queue.html" >Queue</a></li>
+      <li><a href="run-detail.html" >Run</a></li>
+      <li><a href="diff.html" >Diff</a></li>
+      <li><a href="templates.html" >Templates</a></li>
+      <li><a href="costs.html" >Costs</a></li>
+      <li><a href="audit.html" >Audit</a></li>
+      <li><a href="quality.html" >Quality</a></li>
+      <li><a href="models.html" >Models</a></li>
+      <li><a href="webhooks.html" >Webhooks</a></li>
+    </ul>
+  </nav>
+
+  
+  <header>
+    <h1>TerminalX CSS</h1>
+    <p>A minimal, classless CSS library for terminal-style UIs.<br>
+    Geist fonts. Dark aesthetic. Soft details.</p>
+  </header>
+
+  <hr>
+
+  <!-- Typography -->
+  <section id="typography">
+    <h2>Typography</h2>
+    <p>Body text uses <strong>Geist Mono</strong> by default. Headings use <strong>Geist</strong> (sans-serif) for contrast and readability. The base font size is 15px with a 1.6 line height.</p>
+
+    <h1>Heading 1</h1>
+    <h2>Heading 2</h2>
+    <h3>Heading 3</h3>
+    <h4>Heading 4</h4>
+    <h5>Heading 5</h5>
+    <h6>Heading 6</h6>
+
+    <p>This is a paragraph with <strong>bold text</strong>, <em>italic text</em>, <a href="#">a link</a>, <del>deleted text</del>, <ins>inserted text</ins>, <mark>highlighted text</mark>, and <small>small text</small>.</p>
+
+    <p>Use <abbr title="Cascading Style Sheets">CSS</abbr> variables to customize everything. Press <kbd>Ctrl</kbd> + <kbd>C</kbd> to copy.</p>
+
+    <address>
+      123 Terminal Lane<br>
+      Localhost, Port 3000
+    </address>
+
+    <hr>
+  </section>
+
+  <!-- Blockquote -->
+  <section>
+    <h2>Blockquote</h2>
+    <blockquote>
+      <p>The terminal is not just a tool. It is a way of thinking about computation — direct, composable, transparent.</p>
+      <cite>Someone on the internet</cite>
+    </blockquote>
+  </section>
+
+  <!-- Code -->
+  <section id="code">
+    <h2>Code</h2>
+    <p>Inline code: <code>const x = 42;</code></p>
+
+    <pre><code>// terminalx.css — usage
+&lt;link rel="stylesheet" href="terminalx.css"&gt;
+
+// That's it. No classes needed for base elements.
+// Just write semantic HTML and it looks good.
+
+function greet(name) {
+  return `Hello, ${name}!`;
+}
+
+console.log(greet("world"));</code></pre>
+  </section>
+
+  <!-- Lists -->
+  <section>
+    <h2>Lists</h2>
+
+    <h3>Unordered</h3>
+    <ul>
+      <li>Classless styling — just write HTML</li>
+      <li>Geist + Geist Mono fonts
+        <ul>
+          <li>Sans-serif for headings</li>
+          <li>Monospace for body text</li>
+        </ul>
+      </li>
+      <li>CSS custom properties for theming</li>
+    </ul>
+
+    <h3>Ordered</h3>
+    <ol>
+      <li>Include the stylesheet</li>
+      <li>Write semantic HTML</li>
+      <li>Customize with CSS variables</li>
+    </ol>
+
+    <h3>Description List</h3>
+    <dl>
+      <dt>TerminalX</dt>
+      <dd>A terminal-inspired CSS library with soft dark aesthetics.</dd>
+      <dt>Classless</dt>
+      <dd>No need to add class names — semantic HTML elements are styled by default.</dd>
+    </dl>
+  </section>
+
+  <!-- Tables -->
+  <section>
+    <h2>Tables</h2>
+    <table>
+      <thead>
+        <tr>
+          <th>Property</th>
+          <th>Default</th>
+          <th>Description</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><code>--bg</code></td>
+          <td>#0c0c0c</td>
+          <td>Page background</td>
+        </tr>
+        <tr>
+          <td><code>--text</code></td>
+          <td>#e8e8e8</td>
+          <td>Primary text color</td>
+        </tr>
+        <tr>
+          <td><code>--accent</code></td>
+          <td>#f97316</td>
+          <td>Links, focus rings, highlights</td>
+        </tr>
+        <tr>
+          <td><code>--font-mono</code></td>
+          <td>Geist Mono</td>
+          <td>Body font family</td>
+        </tr>
+        <tr>
+          <td><code>--radius</code></td>
+          <td>6px</td>
+          <td>Border radius for elements</td>
+        </tr>
+      </tbody>
+    </table>
+  </section>
+
+  <!-- Forms -->
+  <section id="forms">
+    <h2>Forms</h2>
+    <form onsubmit="return false">
+      <label for="name">Name</label>
+      <input type="text" id="name" placeholder="Enter your name">
+
+      <label for="email">Email</label>
+      <input type="email" id="email" placeholder="you@example.com">
+
+      <label for="password">Password</label>
+      <input type="password" id="password" placeholder="••••••••">
+
+      <label for="url">Website</label>
+      <input type="url" id="url" placeholder="https://example.com">
+
+      <label for="message">Message</label>
+      <textarea id="message" placeholder="Write something..."></textarea>
+
+      <label for="role">Role</label>
+      <select id="role">
+        <option>Developer</option>
+        <option>Designer</option>
+        <option>Other</option>
+      </select>
+
+      <label for="date">Date</label>
+      <input type="date" id="date">
+
+      <fieldset>
+        <legend>Options</legend>
+        <label><input type="checkbox" checked> Dark mode</label>
+        <label><input type="checkbox"> Notifications</label>
+        <label><input type="radio" name="theme" checked> Terminal</label>
+        <label><input type="radio" name="theme"> Minimal</label>
+      </fieldset>
+
+      <button type="submit">Submit</button>
+      <button type="button" class="btn-ghost">Cancel</button>
+    </form>
+  </section>
+
+  <!-- Buttons -->
+  <section>
+    <h2>Buttons</h2>
+    <p>
+      <button>Default</button>
+      <button type="submit">Primary</button>
+      <button class="btn-ghost">Ghost</button>
+      <button class="btn-error">Error</button>
+      <button disabled>Disabled</button>
+    </p>
+    <button class="btn-block" style="margin-top: var(--space);">Block Button</button>
+  </section>
+
+  <!-- Progress -->
+  <section>
+    <h2>Progress</h2>
+    <progress value="25" max="100"></progress>
+    <progress value="60" max="100"></progress>
+    <progress value="90" max="100"></progress>
+  </section>
+
+  <!-- Details -->
+  <section>
+    <h2>Details / Summary</h2>
+    <details>
+      <summary>How do I customize the theme?</summary>
+      <p>Override the CSS custom properties in your own stylesheet. All colors, spacing, and typography can be changed through variables defined on <code>:root</code>.</p>
+    </details>
+    <details>
+      <summary>What fonts are used?</summary>
+      <p><strong>Geist</strong> for headings and UI labels. <strong>Geist Mono</strong> for body text, code, and form inputs — giving everything a terminal feel.</p>
+    </details>
+    <details open>
+      <summary>Is it really classless?</summary>
+      <p>For base elements, yes. Semantic HTML elements like headings, paragraphs, tables, forms, and code blocks are styled without any classes. A few optional utility classes are provided for buttons, alerts, and cards.</p>
+    </details>
+  </section>
+
+  <!-- Components -->
+  <section id="components">
+    <h2>Components</h2>
+
+    <h3>Alerts</h3>
+    <div class="alert">Default alert — something happened.</div>
+    <div class="alert alert-accent">Accent alert — new deployment started.</div>
+    <div class="alert alert-error">Error alert — build failed.</div>
+    <div class="alert alert-success">Success alert — tests passed.</div>
+
+    <h3>Cards</h3>
+    <div class="card">
+      <h4 class="mt-0">Getting Started</h4>
+      <p>Add a single stylesheet to your HTML and start writing. No build tools, no classes needed for base elements.</p>
+      <pre><code>&lt;link rel="stylesheet" href="terminalx.css"&gt;</code></pre>
+    </div>
+    <div class="card">
+      <h4 class="mt-0">Customization</h4>
+      <p class="mb-0">Override CSS variables to match your brand. Change <code>--accent</code> to swap the orange, or <code>--bg</code> for a different background.</p>
+    </div>
+  </section>
+
+  <!-- Modals / Dialogs -->
+  <section>
+    <h2>Modals / Dialogs</h2>
+    <p>Click a button to open a modal. Uses <code>.modal-backdrop</code> + <code>.modal</code>. Variants: default, small, large, and danger.</p>
+
+    <p>
+      <button onclick="document.getElementById('modal-default').classList.add('open')">Default Modal</button>
+      <button onclick="document.getElementById('modal-sm').classList.add('open')">Small Modal</button>
+      <button onclick="document.getElementById('modal-lg').classList.add('open')">Large Modal</button>
+      <button class="btn-error" onclick="document.getElementById('modal-danger').classList.add('open')">Danger Modal</button>
+    </p>
+
+    <!-- Default Modal -->
+    <div class="modal-backdrop" id="modal-default" onclick="if(event.target===this)this.classList.remove('open')">
+      <div class="modal">
+        <div class="modal-header">
+          <h3>Create New Project</h3>
+          <button class="modal-close" onclick="document.getElementById('modal-default').classList.remove('open')">&#x2715;</button>
+        </div>
+        <div class="modal-body">
+          <label for="m-name">Project name</label>
+          <input type="text" id="m-name" placeholder="my-project">
+          <label for="m-template">Template</label>
+          <select id="m-template">
+            <option>REST API</option>
+            <option>React Dashboard</option>
+            <option>CLI Tool</option>
+          </select>
+          <label><input type="checkbox" checked> Initialize git repository</label>
+        </div>
+        <div class="modal-footer">
+          <button class="btn-ghost" onclick="document.getElementById('modal-default').classList.remove('open')">Cancel</button>
+          <button type="submit">Create</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Small Modal -->
+    <div class="modal-backdrop" id="modal-sm" onclick="if(event.target===this)this.classList.remove('open')">
+      <div class="modal modal-sm">
+        <div class="modal-header">
+          <h3>Confirm</h3>
+          <button class="modal-close" onclick="document.getElementById('modal-sm').classList.remove('open')">&#x2715;</button>
+        </div>
+        <div class="modal-body">
+          <p>Are you sure you want to restart <code>agent-03</code>? This will cancel the current task.</p>
+        </div>
+        <div class="modal-footer">
+          <button class="btn-ghost" onclick="document.getElementById('modal-sm').classList.remove('open')">Cancel</button>
+          <button onclick="document.getElementById('modal-sm').classList.remove('open')">Restart Agent</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Large Modal -->
+    <div class="modal-backdrop" id="modal-lg" onclick="if(event.target===this)this.classList.remove('open')">
+      <div class="modal modal-lg">
+        <div class="modal-header">
+          <h3>Run Output</h3>
+          <button class="modal-close" onclick="document.getElementById('modal-lg').classList.remove('open')">&#x2715;</button>
+        </div>
+        <div class="modal-body">
+          <p>Full output from Run <code>#1204</code>:</p>
+          <pre><code>import { Hono } from 'hono';
+import { z } from 'zod';
+import { db } from '../db';
+import { users } from '../models/user';
+
+const app = new Hono();
+
+const createUserSchema = z.object({
+  name: z.string().min(1).max(100),
+  email: z.string().email(),
+  role: z.enum(['admin', 'member', 'viewer']),
+});
+
+app.get('/', async (c) =&gt; {
+  const result = await db.select().from(users);
+  return c.json({ data: result });
+});
+
+export default app;</code></pre>
+        </div>
+        <div class="modal-footer">
+          <button class="btn-ghost" onclick="document.getElementById('modal-lg').classList.remove('open')">Close</button>
+          <button class="btn-success">Approve &amp; Merge</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Danger Modal -->
+    <div class="modal-backdrop" id="modal-danger" onclick="if(event.target===this)this.classList.remove('open')">
+      <div class="modal modal-sm modal-danger">
+        <div class="modal-header">
+          <h3>Delete Project</h3>
+          <button class="modal-close" onclick="document.getElementById('modal-danger').classList.remove('open')">&#x2715;</button>
+        </div>
+        <div class="modal-body">
+          <p>This will permanently delete <strong>user-service</strong> and all associated runs, artifacts, and configuration. This cannot be undone.</p>
+          <label for="m-confirm">Type <code>user-service</code> to confirm</label>
+          <input type="text" id="m-confirm" placeholder="user-service">
+        </div>
+        <div class="modal-footer">
+          <button class="btn-ghost" onclick="document.getElementById('modal-danger').classList.remove('open')">Cancel</button>
+          <button class="btn-error">Delete permanently</button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Toasts -->
+  <section>
+    <h2>Toasts</h2>
+    <p>Notification toasts. Uses <code>.toast-container</code> with <code>.toast</code> variants.</p>
+
+    <p>
+      <button onclick="showToast('default')">Default Toast</button>
+      <button onclick="showToast('success')">Success Toast</button>
+      <button onclick="showToast('error')">Error Toast</button>
+      <button onclick="showToast('warning')">Warning Toast</button>
+      <button onclick="showToast('info')">Info Toast</button>
+    </p>
+
+    <!-- Static toast examples -->
+    <div style="position: relative; display: flex; flex-direction: column; gap: var(--space); margin-top: var(--space-lg)">
+      <div class="toast" style="position: static; pointer-events: auto; animation: none">
+        <span class="toast-message">Default toast — something happened.</span>
+        <button class="toast-close">&#x2715;</button>
+      </div>
+      <div class="toast toast-success" style="position: static; pointer-events: auto; animation: none">
+        <span class="dot dot-success" style="flex-shrink:0"></span>
+        <span class="toast-message">Build completed successfully.</span>
+        <button class="toast-close">&#x2715;</button>
+      </div>
+      <div class="toast toast-error" style="position: static; pointer-events: auto; animation: none">
+        <span class="dot dot-error" style="flex-shrink:0"></span>
+        <span class="toast-message">Agent crashed — context limit exceeded.</span>
+        <button class="toast-close">&#x2715;</button>
+      </div>
+      <div class="toast toast-warning" style="position: static; pointer-events: auto; animation: none">
+        <span class="dot dot-warning" style="flex-shrink:0"></span>
+        <span class="toast-message">Daily spend at 85% of budget.</span>
+        <button class="toast-close">&#x2715;</button>
+      </div>
+      <div class="toast toast-info" style="position: static; pointer-events: auto; animation: none">
+        <span class="dot dot-info" style="flex-shrink:0"></span>
+        <span class="toast-message">New agent spawned for code review.</span>
+        <button class="toast-close">&#x2715;</button>
+      </div>
+    </div>
+
+    <!-- Live toast container -->
+    <div class="toast-container" id="toast-container"></div>
+
+    <script>
+      let toastId = 0;
+      const toastMessages = {
+        default: 'Something happened.',
+        success: 'Build completed successfully.',
+        error: 'Pipeline failed at test stage.',
+        warning: 'Daily budget 85% consumed.',
+        info: 'Agent-04 assigned to new task.',
+      };
+
+      function showToast(type) {
+        const container = document.getElementById('toast-container');
+        const toast = document.createElement('div');
+        toast.className = 'toast' + (type !== 'default' ? ' toast-' + type : '');
+        toast.innerHTML = `
+          <span class="toast-message">${toastMessages[type]}</span>
+          <button class="toast-close" onclick="this.parentElement.remove()">&#x2715;</button>
+        `;
+        container.appendChild(toast);
+        setTimeout(() => { if (toast.parentElement) toast.remove(); }, 3000);
+      }
+    </script>
+  </section>
+
+  <!-- Loaders -->
+  <section>
+    <h2>Loaders</h2>
+    <p>Loading indicators. Spinner, dots, bar, and skeleton variants.</p>
+
+    <h3>Spinners</h3>
+    <p style="display: flex; align-items: center; gap: var(--space-xl)">
+      <span><span class="loader loader-sm"></span> <small class="text-muted">Small</small></span>
+      <span><span class="loader"></span> <small class="text-muted">Default</small></span>
+      <span><span class="loader loader-lg"></span> <small class="text-muted">Large</small></span>
+    </p>
+
+    <h3>Dots</h3>
+    <p style="display: flex; align-items: center; gap: var(--space-xl)">
+      <span>
+        <span class="loader-dots"><span></span><span></span><span></span></span>
+        <small class="text-muted"> Loading</small>
+      </span>
+    </p>
+
+    <h3>Bar</h3>
+    <div class="loader-bar" style="margin-bottom: var(--space-lg)"></div>
+
+    <h3>Skeleton</h3>
+    <div class="card" style="margin-bottom: var(--space-lg)">
+      <div style="display: flex; gap: var(--space); align-items: center; margin-bottom: var(--space-lg)">
+        <div class="skeleton skeleton-avatar"></div>
+        <div style="flex: 1">
+          <div class="skeleton skeleton-text" style="width: 30%"></div>
+          <div class="skeleton skeleton-text" style="width: 50%"></div>
+        </div>
+      </div>
+      <div class="skeleton skeleton-heading"></div>
+      <div class="skeleton skeleton-text"></div>
+      <div class="skeleton skeleton-text"></div>
+      <div class="skeleton skeleton-text" style="width: 75%"></div>
+    </div>
+
+    <h3>Inline Usage</h3>
+    <p>Use spinners inline with buttons and badges:</p>
+    <p>
+      <button disabled><span class="loader loader-sm" style="border-top-color: var(--text); vertical-align: middle"></span> Deploying...</button>
+      <button class="btn-ghost" disabled><span class="loader loader-sm" style="vertical-align: middle"></span> Running tests</button>
+      <span class="badge badge-accent"><span class="loader loader-sm" style="width:10px;height:10px;border-top-color:var(--accent);border-color:rgba(249,115,22,0.3);vertical-align:middle"></span> building</span>
+    </p>
+  </section>
+
+  <!-- Figure -->
+  <section>
+    <h2>Figure</h2>
+    <figure>
+      <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='600' height='200' fill='%23141414'%3E%3Crect width='600' height='200' rx='12'/%3E%3Ctext x='300' y='105' fill='%23555' font-family='monospace' font-size='16' text-anchor='middle'%3E600 x 200%3C/text%3E%3C/svg%3E" alt="Placeholder">
+      <figcaption>An example figure with a caption.</figcaption>
+    </figure>
+  </section>
+
+  <hr>
+
+  <footer>
+    <p><small>TerminalX CSS v0.1.0 — <a href="#">GitHub</a></small></p>
+  </footer>
+
+
+</body>
+</html>

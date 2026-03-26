@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Template Registry — TerminalX CSS</title>
+  <link rel="stylesheet" href="terminalx.css">
+  <style>
+    .template-card {
+      background: var(--bg-surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-lg);
+      padding: var(--space-lg);
+      display: flex;
+      flex-direction: column;
+    }
+
+    .template-name {
+      font-family: var(--font-sans);
+      font-weight: 600;
+      font-size: 1.05rem;
+      margin-bottom: var(--space-sm);
+    }
+
+    .template-desc {
+      font-size: 0.85rem;
+      color: var(--text-secondary);
+      margin-bottom: var(--space);
+      flex: 1;
+    }
+
+    .template-tags {
+      display: flex;
+      gap: var(--space-sm);
+      flex-wrap: wrap;
+      margin-bottom: var(--space-lg);
+    }
+
+    .template-footer {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-top: auto;
+    }
+
+    .template-meta {
+      font-size: 0.8rem;
+      color: var(--text-muted);
+    }
+</style>
+</head>
+<body>
+
+  <nav>
+    <ul>
+      <li><a href="demo.html" >TerminalX</a></li>
+      <li><a href="pipeline.html" >Pipeline</a></li>
+      <li><a href="builds.html" >Builds</a></li>
+      <li><a href="agents.html" >Agents</a></li>
+      <li><a href="queue.html" >Queue</a></li>
+      <li><a href="run-detail.html" >Run</a></li>
+      <li><a href="diff.html" >Diff</a></li>
+      <li><a href="templates.html" class="active">Templates</a></li>
+      <li><a href="costs.html" >Costs</a></li>
+      <li><a href="audit.html" >Audit</a></li>
+      <li><a href="quality.html" >Quality</a></li>
+      <li><a href="models.html" >Models</a></li>
+      <li><a href="webhooks.html" >Webhooks</a></li>
+    </ul>
+  </nav>
+
+  
+
+  <h1>Template Registry</h1>
+  <p>Pre-built project templates for common architectures. Select one to generate a new project.</p>
+
+  <hr>
+
+  <div class="inline-form" style="margin-bottom: var(--space-lg)">
+    <input type="search" placeholder="Search templates...">
+  </div>
+
+  <div class="pill-group" style="margin-bottom: var(--space-xl)">
+    <button class="active">All</button>
+    <button>API</button>
+    <button>Frontend</button>
+    <button>Full Stack</button>
+    <button>Library</button>
+    <button>CLI</button>
+  </div>
+
+  <div class="grid-3" style="margin-bottom: var(--space-xl)">
+    <div class="template-card">
+      <div class="template-name">REST API Service</div>
+      <div class="template-desc">Hono + Drizzle ORM + PostgreSQL. Includes auth, validation, error handling, and Docker setup.</div>
+      <div class="template-tags">
+        <span class="badge badge-info">api</span>
+        <span class="badge badge-muted">typescript</span>
+        <span class="badge badge-muted">docker</span>
+      </div>
+      <div class="template-footer">
+        <span class="template-meta">Used 847 times</span>
+        <button class="btn-sm">Generate</button>
+      </div>
+    </div>
+
+    <div class="template-card">
+      <div class="template-name">React Dashboard</div>
+      <div class="template-desc">Vite + React 19 + TanStack Router + shadcn/ui. Pre-built auth, layout, and data table components.</div>
+      <div class="template-tags">
+        <span class="badge badge-accent">frontend</span>
+        <span class="badge badge-muted">react</span>
+        <span class="badge badge-muted">vite</span>
+      </div>
+      <div class="template-footer">
+        <span class="template-meta">Used 632 times</span>
+        <button class="btn-sm">Generate</button>
+      </div>
+    </div>
+
+    <div class="template-card">
+      <div class="template-name">CLI Tool</div>
+      <div class="template-desc">Commander.js + TypeScript. Argument parsing, help text, config file loading, and colored output.</div>
+      <div class="template-tags">
+        <span class="badge badge-success">cli</span>
+        <span class="badge badge-muted">typescript</span>
+        <span class="badge badge-muted">node</span>
+      </div>
+      <div class="template-footer">
+        <span class="template-meta">Used 291 times</span>
+        <button class="btn-sm">Generate</button>
+      </div>
+    </div>
+
+    <div class="template-card">
+      <div class="template-name">Full Stack App</div>
+      <div class="template-desc">Next.js 15 + Prisma + NextAuth. Server components, API routes, database migrations, and deploy config.</div>
+      <div class="template-tags">
+        <span class="badge badge-warning">full-stack</span>
+        <span class="badge badge-muted">next.js</span>
+        <span class="badge badge-muted">prisma</span>
+      </div>
+      <div class="template-footer">
+        <span class="template-meta">Used 518 times</span>
+        <button class="btn-sm">Generate</button>
+      </div>
+    </div>
+
+    <div class="template-card">
+      <div class="template-name">NPM Library</div>
+      <div class="template-desc">TypeScript library with tsup bundler, Vitest, changesets, and GitHub Actions CI/CD pipeline.</div>
+      <div class="template-tags">
+        <span class="badge badge-info">library</span>
+        <span class="badge badge-muted">typescript</span>
+        <span class="badge badge-muted">npm</span>
+      </div>
+      <div class="template-footer">
+        <span class="template-meta">Used 405 times</span>
+        <button class="btn-sm">Generate</button>
+      </div>
+    </div>
+
+    <div class="template-card">
+      <div class="template-name">GraphQL API</div>
+      <div class="template-desc">Pothos + Prisma + GraphQL Yoga. Type-safe schema builder, subscriptions, and DataLoader setup.</div>
+      <div class="template-tags">
+        <span class="badge badge-info">api</span>
+        <span class="badge badge-muted">graphql</span>
+        <span class="badge badge-muted">prisma</span>
+      </div>
+      <div class="template-footer">
+        <span class="template-meta">Used 189 times</span>
+        <button class="btn-sm">Generate</button>
+      </div>
+    </div>
+
+    <div class="template-card">
+      <div class="template-name">Worker Service</div>
+      <div class="template-desc">BullMQ + Redis. Job queues, scheduled tasks, retry logic, and dead letter handling.</div>
+      <div class="template-tags">
+        <span class="badge badge-info">api</span>
+        <span class="badge badge-muted">workers</span>
+        <span class="badge badge-muted">redis</span>
+      </div>
+      <div class="template-footer">
+        <span class="template-meta">Used 156 times</span>
+        <button class="btn-sm">Generate</button>
+      </div>
+    </div>
+
+    <div class="template-card">
+      <div class="template-name">Chrome Extension</div>
+      <div class="template-desc">Manifest V3 + React popup + content script. Storage API, message passing, and CRXJS build.</div>
+      <div class="template-tags">
+        <span class="badge badge-accent">frontend</span>
+        <span class="badge badge-muted">chrome</span>
+        <span class="badge badge-muted">react</span>
+      </div>
+      <div class="template-footer">
+        <span class="template-meta">Used 94 times</span>
+        <button class="btn-sm">Generate</button>
+      </div>
+    </div>
+
+    <div class="template-card">
+      <div class="template-name">Monorepo</div>
+      <div class="template-desc">Turborepo + pnpm workspaces. Shared packages, apps scaffold, CI matrix, and release workflow.</div>
+      <div class="template-tags">
+        <span class="badge badge-warning">full-stack</span>
+        <span class="badge badge-muted">monorepo</span>
+        <span class="badge badge-muted">turbo</span>
+      </div>
+      <div class="template-footer">
+        <span class="template-meta">Used 312 times</span>
+        <button class="btn-sm">Generate</button>
+      </div>
+    </div>
+  </div>
+
+  <hr>
+  <footer><p><small>9 templates available — <a href="#">Submit a template</a></small></p></footer>
+
+
+</body>
+</html>

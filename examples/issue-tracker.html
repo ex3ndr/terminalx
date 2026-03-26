@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Issue Tracker — TerminalX CSS</title>
+  <title>Issues — TerminalX CSS</title>
   <link rel="stylesheet" href="terminalx.css">
   <style>
     .issue-header {
@@ -27,106 +27,11 @@
       gap: var(--space-sm);
     }
 
-    .stat-dot {
-      width: 8px;
-      height: 8px;
-      border-radius: 50%;
-      display: inline-block;
-    }
-
-    .stat-dot.open { background: var(--accent); }
-    .stat-dot.closed { background: var(--text-muted); }
-
-    .filters {
-      display: flex;
-      gap: var(--space);
-      margin-bottom: var(--space-lg);
-      flex-wrap: wrap;
-    }
-
-    .filters button {
-      font-size: 0.8rem;
-      padding: var(--space-sm) var(--space);
-      border-radius: 999px;
-      border: 1px solid var(--border);
-      background: transparent;
-      color: var(--text-secondary);
-    }
-
-    .filters button:hover {
-      border-color: var(--text-muted);
-      color: var(--text);
-      background: var(--bg-hover);
-    }
-
-    .filters button.active {
-      background: var(--accent-muted);
-      border-color: var(--accent);
-      color: var(--accent);
-    }
-
-    .issue-form {
-      display: flex;
-      gap: var(--space);
-      margin-bottom: var(--space-lg);
-    }
-
-    .issue-form input {
-      flex: 1;
-      margin-bottom: 0;
-    }
-
-    .issue-form select {
-      width: auto;
-      margin-bottom: 0;
-      min-width: 120px;
-    }
-
-    .issue-form button {
-      white-space: nowrap;
-    }
-
-    .issue-list {
-      list-style: none;
-      padding: 0;
-      margin: 0 0 var(--space-lg) 0;
-    }
-
-    .issue-list li {
-      display: flex;
-      align-items: flex-start;
-      gap: var(--space);
-      padding: var(--space) var(--space-lg);
-      border: 1px solid var(--border);
-      border-bottom: none;
-      background: var(--bg-surface);
-      margin-bottom: 0;
-      transition: background 0.1s ease;
-    }
-
-    .issue-list li:first-child {
-      border-radius: var(--radius) var(--radius) 0 0;
-    }
-
-    .issue-list li:last-child {
-      border-bottom: 1px solid var(--border);
-      border-radius: 0 0 var(--radius) var(--radius);
-    }
-
-    .issue-list li:only-child {
-      border-radius: var(--radius);
-      border-bottom: 1px solid var(--border);
-    }
-
-    .issue-list li:hover {
-      background: var(--bg-hover);
-    }
-
-    .issue-list li.closed {
+    .item-list-bordered li.closed {
       opacity: 0.5;
     }
 
-    .issue-list li.closed .issue-title {
+    .item-list-bordered li.closed .issue-title {
       text-decoration: line-through;
     }
 
@@ -158,39 +63,6 @@
       flex-wrap: wrap;
     }
 
-    .tag {
-      display: inline-block;
-      font-size: 0.75rem;
-      padding: 1px 8px;
-      border-radius: 999px;
-      border: 1px solid;
-      font-family: var(--font-mono);
-    }
-
-    .tag-bug {
-      color: var(--error);
-      border-color: var(--error);
-      background: var(--error-muted);
-    }
-
-    .tag-feature {
-      color: var(--accent);
-      border-color: var(--accent);
-      background: var(--accent-muted);
-    }
-
-    .tag-task {
-      color: var(--text-secondary);
-      border-color: var(--border-strong);
-      background: var(--bg-elevated);
-    }
-
-    .issue-actions {
-      display: flex;
-      gap: var(--space-sm);
-      flex-shrink: 0;
-    }
-
     .issue-actions button {
       font-size: 0.75rem;
       padding: 2px 8px;
@@ -206,50 +78,47 @@
       background: var(--error-muted);
     }
 
-    .empty-state {
-      text-align: center;
-      padding: var(--space-xl);
-      color: var(--text-muted);
-      border: 1px dashed var(--border);
-      border-radius: var(--radius);
-    }
-
     @media (max-width: 680px) {
-      .issue-form {
-        flex-direction: column;
-      }
-
-      .issue-form select {
-        width: 100%;
-      }
-
       .issue-header {
         flex-direction: column;
         align-items: flex-start;
       }
     }
-  </style>
+</style>
 </head>
 <body>
 
   <nav>
     <ul>
-      <li><a href="demo.html">TerminalX</a></li>
-      <li><a href="#" class="active">Issues</a></li>
+      <li><a href="demo.html" >TerminalX</a></li>
+      <li><a href="pipeline.html" >Pipeline</a></li>
+      <li><a href="builds.html" >Builds</a></li>
+      <li><a href="agents.html" >Agents</a></li>
+      <li><a href="queue.html" >Queue</a></li>
+      <li><a href="run-detail.html" >Run</a></li>
+      <li><a href="diff.html" >Diff</a></li>
+      <li><a href="templates.html" >Templates</a></li>
+      <li><a href="costs.html" >Costs</a></li>
+      <li><a href="audit.html" >Audit</a></li>
+      <li><a href="quality.html" >Quality</a></li>
+      <li><a href="models.html" >Models</a></li>
+      <li><a href="webhooks.html" >Webhooks</a></li>
     </ul>
   </nav>
+
+  
 
   <div class="issue-header">
     <h1 class="mt-0" style="margin-bottom: 0">Issues</h1>
     <div class="issue-stats">
-      <span><span class="stat-dot open"></span> <span id="open-count">0</span> open</span>
-      <span><span class="stat-dot closed"></span> <span id="closed-count">0</span> closed</span>
+      <span><span class="dot dot-accent"></span> <span id="open-count">0</span> open</span>
+      <span><span class="dot dot-muted"></span> <span id="closed-count">0</span> closed</span>
     </div>
   </div>
 
   <hr>
 
-  <form class="issue-form" onsubmit="return addIssue(event)">
+  <form class="inline-form" style="margin-bottom: var(--space-lg)" onsubmit="return addIssue(event)">
     <input type="text" id="issue-input" placeholder="New issue title..." required>
     <select id="issue-tag">
       <option value="task">task</option>
@@ -259,7 +128,7 @@
     <button type="submit">Add</button>
   </form>
 
-  <div class="filters">
+  <div class="pill-group" style="margin-bottom: var(--space-lg)">
     <button class="active" onclick="setFilter('all', this)">All</button>
     <button onclick="setFilter('open', this)">Open</button>
     <button onclick="setFilter('closed', this)">Closed</button>
@@ -267,7 +136,7 @@
     <button onclick="setFilter('feature', this)">Features</button>
   </div>
 
-  <ul class="issue-list" id="issue-list"></ul>
+  <ul class="item-list item-list-bordered" id="issue-list"></ul>
   <div class="empty-state" id="empty-state" style="display: none">No issues match the current filter.</div>
 
   <script>
@@ -281,6 +150,8 @@
 
     let nextId = 6;
     let currentFilter = "all";
+
+    const tagClass = { bug: "badge-error", feature: "badge-accent", task: "badge-muted" };
 
     function render() {
       const list = document.getElementById("issue-list");
@@ -312,12 +183,12 @@
           <div class="issue-body">
             <div class="issue-title">${escapeHtml(i.title)}</div>
             <div class="issue-meta">
-              <span class="tag tag-${i.tag}">${i.tag}</span>
+              <span class="badge ${tagClass[i.tag]}">${i.tag}</span>
               <span>#${i.id} opened ${i.date}</span>
             </div>
           </div>
           <div class="issue-actions">
-            <button onclick="removeIssue(${i.id})" title="Delete">✕</button>
+            <button onclick="removeIssue(${i.id})" title="Delete">&#x2715;</button>
           </div>
         </li>
       `).join("");
@@ -351,7 +222,7 @@
 
     function setFilter(filter, btn) {
       currentFilter = filter;
-      document.querySelectorAll(".filters button").forEach(b => b.classList.remove("active"));
+      document.querySelectorAll(".pill-group button").forEach(b => b.classList.remove("active"));
       btn.classList.add("active");
       render();
     }
@@ -364,6 +235,7 @@
 
     render();
   </script>
+
 
 </body>
 </html>

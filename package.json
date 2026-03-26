@@ -8,7 +8,7 @@
   ],
   "scripts": {
     "build": "node build.js",
-    "dev": "node build.js && open dist/demo.html"
+    "dev": "node build.js && open examples/demo.html"
   },
   "keywords": [
     "css",

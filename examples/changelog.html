@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Changelog — TerminalX CSS</title>
+  <link rel="stylesheet" href="terminalx.css">
+  <style>
+    .release {
+      margin-bottom: var(--space-xl);
+    }
+
+    .release-header {
+      display: flex;
+      align-items: baseline;
+      gap: var(--space);
+      flex-wrap: wrap;
+    }
+
+    .release-header h2 {
+      margin-bottom: 0;
+    }
+
+    .release-date {
+      font-size: 0.85rem;
+      color: var(--text-muted);
+      font-family: var(--font-mono);
+    }
+
+    .change-tag {
+      min-width: 70px;
+      text-align: center;
+      flex-shrink: 0;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      font-size: 0.7rem;
+    }
+</style>
+</head>
+<body>
+
+  <nav>
+    <ul>
+      <li><a href="demo.html" >TerminalX</a></li>
+      <li><a href="pipeline.html" >Pipeline</a></li>
+      <li><a href="builds.html" >Builds</a></li>
+      <li><a href="agents.html" >Agents</a></li>
+      <li><a href="queue.html" >Queue</a></li>
+      <li><a href="run-detail.html" >Run</a></li>
+      <li><a href="diff.html" >Diff</a></li>
+      <li><a href="templates.html" >Templates</a></li>
+      <li><a href="costs.html" >Costs</a></li>
+      <li><a href="audit.html" >Audit</a></li>
+      <li><a href="quality.html" >Quality</a></li>
+      <li><a href="models.html" >Models</a></li>
+      <li><a href="webhooks.html" >Webhooks</a></li>
+    </ul>
+  </nav>
+
+  
+
+  <h1>Changelog</h1>
+  <p>All notable changes to TerminalX CSS are documented here.</p>
+
+  <hr>
+
+  <div class="release">
+    <div class="release-header">
+      <h2>v0.3.0</h2>
+      <span class="release-date">2026-03-25</span>
+      <span class="badge badge-accent">latest</span>
+    </div>
+    <ul class="item-list">
+      <li>
+        <span class="badge badge-success change-tag">added</span>
+        <span>New <code>.card</code> component with rounded corners and surface background</span>
+      </li>
+      <li>
+        <span class="badge badge-success change-tag">added</span>
+        <span>Alert variants: <code>.alert-success</code>, <code>.alert-accent</code>, <code>.alert-error</code></span>
+      </li>
+      <li>
+        <span class="badge badge-success change-tag">added</span>
+        <span>Progress bar styling with accent fill and smooth radius</span>
+      </li>
+      <li>
+        <span class="badge badge-accent change-tag">fixed</span>
+        <span>Navigation links now properly show active state via <code>.active</code> or <code>aria-current</code></span>
+      </li>
+      <li>
+        <span class="badge badge-muted change-tag">changed</span>
+        <span>Default border radius increased from <code>4px</code> to <code>6px</code> for softer appearance</span>
+      </li>
+    </ul>
+  </div>
+
+  <div class="release">
+    <div class="release-header">
+      <h2>v0.2.0</h2>
+      <span class="release-date">2026-03-18</span>
+    </div>
+    <ul class="item-list">
+      <li>
+        <span class="badge badge-success change-tag">added</span>
+        <span>Full form styling: text inputs, selects, textareas, checkboxes, radio buttons</span>
+      </li>
+      <li>
+        <span class="badge badge-success change-tag">added</span>
+        <span>Button variants: <code>.btn-ghost</code>, <code>.btn-error</code>, <code>.btn-block</code></span>
+      </li>
+      <li>
+        <span class="badge badge-success change-tag">added</span>
+        <span><code>&lt;details&gt;</code> / <code>&lt;summary&gt;</code> styling with accent hover and border animation</span>
+      </li>
+      <li>
+        <span class="badge badge-error change-tag">breaking</span>
+        <span>Renamed <code>--primary</code> to <code>--accent</code> for consistency with design tokens</span>
+      </li>
+      <li>
+        <span class="badge badge-accent change-tag">fixed</span>
+        <span>Table header text now uppercase with proper letter spacing</span>
+      </li>
+      <li>
+        <span class="badge badge-accent change-tag">fixed</span>
+        <span><code>&lt;kbd&gt;</code> elements no longer inherit monospace background in <code>&lt;pre&gt;</code> blocks</span>
+      </li>
+    </ul>
+  </div>
+
+  <div class="release">
+    <div class="release-header">
+      <h2>v0.1.0</h2>
+      <span class="release-date">2026-03-10</span>
+    </div>
+    <ul class="item-list">
+      <li>
+        <span class="badge badge-success change-tag">added</span>
+        <span>Initial release with base reset and typography</span>
+      </li>
+      <li>
+        <span class="badge badge-success change-tag">added</span>
+        <span>Geist + Geist Mono font integration via Google Fonts</span>
+      </li>
+      <li>
+        <span class="badge badge-success change-tag">added</span>
+        <span>Dark theme with Factory.ai-inspired color palette</span>
+      </li>
+      <li>
+        <span class="badge badge-success change-tag">added</span>
+        <span>CSS custom properties for full theme customization</span>
+      </li>
+      <li>
+        <span class="badge badge-success change-tag">added</span>
+        <span>Classless styling for headings, paragraphs, links, lists, tables, code, blockquotes, and navigation</span>
+      </li>
+      <li>
+        <span class="badge badge-success change-tag">added</span>
+        <span>Responsive breakpoint at <code>680px</code> for mobile-friendly layout</span>
+      </li>
+    </ul>
+  </div>
+
+  <hr>
+
+  <footer>
+    <p><small>TerminalX CSS v0.3.0 — <a href="#">GitHub</a></small></p>
+  </footer>
+
+
+</body>
+</html>

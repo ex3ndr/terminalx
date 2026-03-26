@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Audit Log — TerminalX CSS</title>
+  <link rel="stylesheet" href="terminalx.css">
+  <style>
+    .audit-entry {
+      font-size: 0.9rem;
+    }
+
+    .audit-ts {
+      font-size: 0.8rem;
+      color: var(--text-muted);
+      white-space: nowrap;
+      margin-left: auto;
+      padding-left: var(--space);
+      flex-shrink: 0;
+    }
+
+    .audit-actor {
+      font-weight: 500;
+      color: var(--text);
+    }
+
+    .audit-action {
+      color: var(--text-secondary);
+    }
+</style>
+</head>
+<body>
+
+  <nav>
+    <ul>
+      <li><a href="demo.html" >TerminalX</a></li>
+      <li><a href="pipeline.html" >Pipeline</a></li>
+      <li><a href="builds.html" >Builds</a></li>
+      <li><a href="agents.html" >Agents</a></li>
+      <li><a href="queue.html" >Queue</a></li>
+      <li><a href="run-detail.html" >Run</a></li>
+      <li><a href="diff.html" >Diff</a></li>
+      <li><a href="templates.html" >Templates</a></li>
+      <li><a href="costs.html" >Costs</a></li>
+      <li><a href="audit.html" class="active">Audit</a></li>
+      <li><a href="quality.html" >Quality</a></li>
+      <li><a href="models.html" >Models</a></li>
+      <li><a href="webhooks.html" >Webhooks</a></li>
+    </ul>
+  </nav>
+
+  
+
+  <h1>Audit Log</h1>
+  <p>Chronological feed of all factory actions.</p>
+
+  <hr>
+
+  <div class="inline-form" style="margin-bottom: var(--space-lg)">
+    <input type="search" placeholder="Filter by actor, action, or target...">
+    <select>
+      <option>All actions</option>
+      <option>Runs</option>
+      <option>Deploys</option>
+      <option>Config</option>
+      <option>Auth</option>
+    </select>
+  </div>
+
+  <div class="pill-group" style="margin-bottom: var(--space-lg)">
+    <button class="active">Today</button>
+    <button>Yesterday</button>
+    <button>This Week</button>
+    <button>All Time</button>
+  </div>
+
+  <ul class="item-list">
+    <li class="audit-entry">
+      <span class="dot dot-success" style="margin-top: 6px"></span>
+      <span><span class="audit-actor">agent-01</span> <span class="audit-action">completed run</span> <a href="run-detail.html">#1204</a> — generated <code>user-service</code> (5 files, +454 lines)</span>
+      <span class="audit-ts">14:30 UTC</span>
+    </li>
+    <li class="audit-entry">
+      <span class="dot dot-accent" style="margin-top: 6px"></span>
+      <span><span class="audit-actor">jane-dev</span> <span class="audit-action">approved and merged</span> run <a href="run-detail.html">#1204</a> into <code>main</code></span>
+      <span class="audit-ts">14:28 UTC</span>
+    </li>
+    <li class="audit-entry">
+      <span class="dot dot-info" style="margin-top: 6px"></span>
+      <span><span class="audit-actor">system</span> <span class="audit-action">triggered pipeline</span> <a href="pipeline.html">#847</a> on push to <code>main</code></span>
+      <span class="audit-ts">14:28 UTC</span>
+    </li>
+    <li class="audit-entry">
+      <span class="dot dot-accent" style="margin-top: 6px"></span>
+      <span><span class="audit-actor">jane-dev</span> <span class="audit-action">queued task</span> "Fix N+1 query in dashboard endpoint" — priority P0</span>
+      <span class="audit-ts">14:22 UTC</span>
+    </li>
+    <li class="audit-entry">
+      <span class="dot dot-error" style="margin-top: 6px"></span>
+      <span><span class="audit-actor">agent-09</span> <span class="audit-action">crashed</span> on task "Split monolith into microservices" — context limit exceeded (1M tokens)</span>
+      <span class="audit-ts">14:18 UTC</span>
+    </li>
+    <li class="audit-entry">
+      <span class="dot dot-success" style="margin-top: 6px"></span>
+      <span><span class="audit-actor">agent-05</span> <span class="audit-action">completed code review</span> for PR <a href="#">#312</a> — 3 suggestions, 0 blocking</span>
+      <span class="audit-ts">14:15 UTC</span>
+    </li>
+    <li class="audit-entry">
+      <span class="dot dot-accent" style="margin-top: 6px"></span>
+      <span><span class="audit-actor">mike-ops</span> <span class="audit-action">updated model config</span> — changed default model from Sonnet 4 to Opus 4 for <code>payment-gateway</code></span>
+      <span class="audit-ts">14:02 UTC</span>
+    </li>
+    <li class="audit-entry">
+      <span class="dot dot-success" style="margin-top: 6px"></span>
+      <span><span class="audit-actor">system</span> <span class="audit-action">deployed</span> <code>v2.4.1</code> to production — pipeline <a href="pipeline.html">#846</a> passed</span>
+      <span class="audit-ts">13:58 UTC</span>
+    </li>
+    <li class="audit-entry">
+      <span class="dot dot-info" style="margin-top: 6px"></span>
+      <span><span class="audit-actor">system</span> <span class="audit-action">spawned agent</span> <code>agent-06</code> for task "Migrate legacy-cron to async workers"</span>
+      <span class="audit-ts">13:45 UTC</span>
+    </li>
+    <li class="audit-entry">
+      <span class="dot dot-warning" style="margin-top: 6px"></span>
+      <span><span class="audit-actor">system</span> <span class="audit-action">alert</span> — daily spend reached $75 (budget: $100/day)</span>
+      <span class="audit-ts">13:30 UTC</span>
+    </li>
+    <li class="audit-entry">
+      <span class="dot dot-accent" style="margin-top: 6px"></span>
+      <span><span class="audit-actor">jane-dev</span> <span class="audit-action">rejected run</span> <a href="#">#1198</a> — "Generated code doesn't handle edge case for empty arrays"</span>
+      <span class="audit-ts">13:12 UTC</span>
+    </li>
+    <li class="audit-entry">
+      <span class="dot dot-muted" style="margin-top: 6px"></span>
+      <span><span class="audit-actor">jane-dev</span> <span class="audit-action">signed in</span> via SSO</span>
+      <span class="audit-ts">12:58 UTC</span>
+    </li>
+  </ul>
+
+  <div class="text-center" style="margin-top: var(--space-lg)">
+    <button class="btn-ghost btn-sm">Load earlier entries</button>
+  </div>
+
+  <hr>
+  <footer><p><small>Showing 12 entries from Mar 26 — <a href="#">Export log</a></small></p></footer>
+
+
+</body>
+</html>

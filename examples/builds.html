@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Build History — TerminalX CSS</title>
+  <link rel="stylesheet" href="terminalx.css">
+  <style>
+    .build-row td { vertical-align: middle; }
+    .build-id { font-family: var(--font-mono); font-size: 0.85rem; }
+    .build-commit { font-family: var(--font-mono); font-size: 0.85rem; color: var(--text-secondary); }
+    .build-msg { font-family: var(--font-sans); font-weight: 500; }
+    .build-duration { color: var(--text-muted); font-size: 0.85rem; }
+    .build-branch { font-size: 0.8rem; }
+</style>
+</head>
+<body>
+
+  <nav>
+    <ul>
+      <li><a href="demo.html" >TerminalX</a></li>
+      <li><a href="pipeline.html" >Pipeline</a></li>
+      <li><a href="builds.html" class="active">Builds</a></li>
+      <li><a href="agents.html" >Agents</a></li>
+      <li><a href="queue.html" >Queue</a></li>
+      <li><a href="run-detail.html" >Run</a></li>
+      <li><a href="diff.html" >Diff</a></li>
+      <li><a href="templates.html" >Templates</a></li>
+      <li><a href="costs.html" >Costs</a></li>
+      <li><a href="audit.html" >Audit</a></li>
+      <li><a href="quality.html" >Quality</a></li>
+      <li><a href="models.html" >Models</a></li>
+      <li><a href="webhooks.html" >Webhooks</a></li>
+    </ul>
+  </nav>
+
+  
+
+  <h1>Build History</h1>
+  <p>Recent pipeline runs across all branches.</p>
+
+  <hr>
+
+  <div class="pill-group" style="margin-bottom: var(--space-lg)">
+    <button class="active">All</button>
+    <button>Passed</button>
+    <button>Failed</button>
+    <button>Running</button>
+  </div>
+
+  <table>
+    <thead>
+      <tr>
+        <th>Run</th>
+        <th>Status</th>
+        <th>Commit</th>
+        <th>Branch</th>
+        <th>Duration</th>
+        <th>When</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr class="build-row">
+        <td class="build-id"><a href="pipeline.html">#847</a></td>
+        <td><span class="badge badge-accent">running</span></td>
+        <td><span class="build-commit">a3f8c21</span> <span class="build-msg">Fix auth token refresh</span></td>
+        <td><code class="build-branch">main</code></td>
+        <td class="build-duration">43s</td>
+        <td class="build-duration">2m ago</td>
+      </tr>
+      <tr class="build-row">
+        <td class="build-id"><a href="pipeline.html">#846</a></td>
+        <td><span class="badge badge-success">passed</span></td>
+        <td><span class="build-commit">b7e2d44</span> <span class="build-msg">Add rate limiter middleware</span></td>
+        <td><code class="build-branch">main</code></td>
+        <td class="build-duration">1m 12s</td>
+        <td class="build-duration">28m ago</td>
+      </tr>
+      <tr class="build-row">
+        <td class="build-id"><a href="pipeline.html">#845</a></td>
+        <td><span class="badge badge-error">failed</span></td>
+        <td><span class="build-commit">f1c9a08</span> <span class="build-msg">Upgrade to Node 22</span></td>
+        <td><code class="build-branch">feat/node-22</code></td>
+        <td class="build-duration">48s</td>
+        <td class="build-duration">1h ago</td>
+      </tr>
+      <tr class="build-row">
+        <td class="build-id"><a href="pipeline.html">#844</a></td>
+        <td><span class="badge badge-success">passed</span></td>
+        <td><span class="build-commit">e4d3b77</span> <span class="build-msg">Update error boundary component</span></td>
+        <td><code class="build-branch">main</code></td>
+        <td class="build-duration">1m 04s</td>
+        <td class="build-duration">2h ago</td>
+      </tr>
+      <tr class="build-row">
+        <td class="build-id"><a href="pipeline.html">#843</a></td>
+        <td><span class="badge badge-success">passed</span></td>
+        <td><span class="build-commit">92a0f11</span> <span class="build-msg">Fix CORS headers for API v2</span></td>
+        <td><code class="build-branch">main</code></td>
+        <td class="build-duration">1m 18s</td>
+        <td class="build-duration">3h ago</td>
+      </tr>
+      <tr class="build-row">
+        <td class="build-id"><a href="pipeline.html">#842</a></td>
+        <td><span class="badge badge-success">passed</span></td>
+        <td><span class="build-commit">d8c4e55</span> <span class="build-msg">Add webhook retry logic</span></td>
+        <td><code class="build-branch">feat/webhooks</code></td>
+        <td class="build-duration">1m 31s</td>
+        <td class="build-duration">4h ago</td>
+      </tr>
+      <tr class="build-row">
+        <td class="build-id"><a href="pipeline.html">#841</a></td>
+        <td><span class="badge badge-error">failed</span></td>
+        <td><span class="build-commit">aa10c33</span> <span class="build-msg">Migrate DB schema v14</span></td>
+        <td><code class="build-branch">feat/schema-v14</code></td>
+        <td class="build-duration">22s</td>
+        <td class="build-duration">5h ago</td>
+      </tr>
+      <tr class="build-row">
+        <td class="build-id"><a href="pipeline.html">#840</a></td>
+        <td><span class="badge badge-success">passed</span></td>
+        <td><span class="build-commit">c67f892</span> <span class="build-msg">Refactor template engine</span></td>
+        <td><code class="build-branch">main</code></td>
+        <td class="build-duration">1m 02s</td>
+        <td class="build-duration">6h ago</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <div class="text-center">
+    <button class="btn-ghost btn-sm">Load more</button>
+  </div>
+
+  <hr>
+  <footer><p><small>Showing 8 of 847 runs — <a href="#">Export CSV</a></small></p></footer>
+
+
+</body>
+</html>

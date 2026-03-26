@@ -1,0 +1,360 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Diff Viewer — TerminalX CSS</title>
+  <link rel="stylesheet" href="terminalx.css">
+  <style>
+    .diff-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: var(--space);
+      margin-bottom: var(--space-lg);
+    }
+
+    .diff-file {
+      margin-bottom: var(--space-xl);
+    }
+
+    .diff-file-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      background: var(--bg-elevated);
+      border: 1px solid var(--border);
+      border-radius: var(--radius) var(--radius) 0 0;
+      padding: var(--space-sm) var(--space-lg);
+      font-size: 0.85rem;
+    }
+
+    .diff-file-name {
+      font-family: var(--font-mono);
+      font-weight: 500;
+    }
+
+    .diff-file-stats {
+      display: flex;
+      gap: var(--space);
+      font-size: 0.8rem;
+    }
+
+    .diff-content {
+      border: 1px solid var(--border);
+      border-top: none;
+      border-radius: 0 0 var(--radius) var(--radius);
+      overflow-x: auto;
+      font-size: 0.85rem;
+      line-height: 1.6;
+    }
+
+    .diff-line {
+      display: flex;
+      font-family: var(--font-mono);
+      border-bottom: 1px solid var(--border);
+    }
+
+    .diff-line:last-child { border-bottom: none; }
+
+    .diff-ln {
+      width: 50px;
+      text-align: right;
+      padding: 0 var(--space);
+      color: var(--text-muted);
+      background: var(--bg-surface);
+      flex-shrink: 0;
+      user-select: none;
+      font-size: 0.8rem;
+    }
+
+    .diff-code {
+      flex: 1;
+      padding: 0 var(--space-lg);
+      white-space: pre;
+      min-width: 0;
+    }
+
+    .diff-line.add { background: var(--success-muted); }
+    .diff-line.add .diff-ln { background: rgba(34, 197, 94, 0.08); }
+    .diff-line.add .diff-code { color: var(--success); }
+
+    .diff-line.del { background: var(--error-muted); }
+    .diff-line.del .diff-ln { background: rgba(239, 68, 68, 0.08); }
+    .diff-line.del .diff-code { color: var(--error); }
+
+    .diff-line.hunk {
+      background: var(--bg-elevated);
+      color: var(--text-muted);
+      font-style: italic;
+    }
+
+    .diff-line.hunk .diff-ln { background: var(--bg-elevated); }
+
+    .hunk-actions {
+      display: flex;
+      gap: var(--space);
+      padding: var(--space-sm) var(--space-lg);
+      background: var(--bg-surface);
+      border: 1px solid var(--border);
+      border-top: none;
+      justify-content: flex-end;
+    }
+
+    .hunk-actions button {
+      font-size: 0.75rem;
+      padding: 2px 10px;
+    }
+</style>
+</head>
+<body>
+
+  <nav>
+    <ul>
+      <li><a href="demo.html" >TerminalX</a></li>
+      <li><a href="pipeline.html" >Pipeline</a></li>
+      <li><a href="builds.html" >Builds</a></li>
+      <li><a href="agents.html" >Agents</a></li>
+      <li><a href="queue.html" >Queue</a></li>
+      <li><a href="run-detail.html" >Run</a></li>
+      <li><a href="diff.html" class="active">Diff</a></li>
+      <li><a href="templates.html" >Templates</a></li>
+      <li><a href="costs.html" >Costs</a></li>
+      <li><a href="audit.html" >Audit</a></li>
+      <li><a href="quality.html" >Quality</a></li>
+      <li><a href="models.html" >Models</a></li>
+      <li><a href="webhooks.html" >Webhooks</a></li>
+    </ul>
+  </nav>
+
+  
+
+  <div class="diff-header">
+    <div>
+      <h1 class="mt-0 mb-0">Diff Viewer</h1>
+      <p class="text-muted" style="margin-top: var(--space-sm)">Run #1204 — 5 files changed, <span style="color: var(--success)">+454</span> <span style="color: var(--error)">-4</span></p>
+    </div>
+    <div style="display: flex; gap: var(--space)">
+      <button class="btn-success btn-sm">Accept All</button>
+      <button class="btn-error btn-sm">Reject All</button>
+    </div>
+  </div>
+
+  <hr>
+
+  <!-- File 1 -->
+  <div class="diff-file">
+    <div class="diff-file-header">
+      <span class="diff-file-name">src/routes/users.ts</span>
+      <div class="diff-file-stats">
+        <span class="badge badge-success">new file</span>
+        <span style="color: var(--success)">+186</span>
+      </div>
+    </div>
+    <div class="diff-content">
+      <div class="diff-line hunk">
+        <span class="diff-ln"></span>
+        <span class="diff-code">@@ -0,0 +1,186 @@</span>
+      </div>
+      <div class="diff-line add">
+        <span class="diff-ln">1</span>
+        <span class="diff-code">import { Hono } from 'hono';</span>
+      </div>
+      <div class="diff-line add">
+        <span class="diff-ln">2</span>
+        <span class="diff-code">import { z } from 'zod';</span>
+      </div>
+      <div class="diff-line add">
+        <span class="diff-ln">3</span>
+        <span class="diff-code">import { db } from '../db';</span>
+      </div>
+      <div class="diff-line add">
+        <span class="diff-ln">4</span>
+        <span class="diff-code">import { users } from '../models/user';</span>
+      </div>
+      <div class="diff-line add">
+        <span class="diff-ln">5</span>
+        <span class="diff-code">import { eq } from 'drizzle-orm';</span>
+      </div>
+      <div class="diff-line add">
+        <span class="diff-ln">6</span>
+        <span class="diff-code">import { validate } from '../middleware/validate';</span>
+      </div>
+      <div class="diff-line add">
+        <span class="diff-ln">7</span>
+        <span class="diff-code"></span>
+      </div>
+      <div class="diff-line add">
+        <span class="diff-ln">8</span>
+        <span class="diff-code">const app = new Hono();</span>
+      </div>
+      <div class="diff-line add">
+        <span class="diff-ln">9</span>
+        <span class="diff-code"></span>
+      </div>
+      <div class="diff-line add">
+        <span class="diff-ln">10</span>
+        <span class="diff-code">const createUserSchema = z.object({</span>
+      </div>
+      <div class="diff-line add">
+        <span class="diff-ln">11</span>
+        <span class="diff-code">  name: z.string().min(1).max(100),</span>
+      </div>
+      <div class="diff-line add">
+        <span class="diff-ln">12</span>
+        <span class="diff-code">  email: z.string().email(),</span>
+      </div>
+      <div class="diff-line add">
+        <span class="diff-ln">13</span>
+        <span class="diff-code">  role: z.enum(['admin', 'member', 'viewer']),</span>
+      </div>
+      <div class="diff-line add">
+        <span class="diff-ln">14</span>
+        <span class="diff-code">});</span>
+      </div>
+    </div>
+    <div class="hunk-actions">
+      <button class="btn-success btn-sm">Accept</button>
+      <button class="btn-error btn-sm">Reject</button>
+    </div>
+  </div>
+
+  <!-- File 2 -->
+  <div class="diff-file">
+    <div class="diff-file-header">
+      <span class="diff-file-name">src/middleware/validate.ts</span>
+      <div class="diff-file-stats">
+        <span class="badge badge-accent">modified</span>
+        <span style="color: var(--success)">+42</span>
+        <span style="color: var(--error)">-3</span>
+      </div>
+    </div>
+    <div class="diff-content">
+      <div class="diff-line hunk">
+        <span class="diff-ln"></span>
+        <span class="diff-code">@@ -14,8 +14,47 @@ export function validate(schema) {</span>
+      </div>
+      <div class="diff-line">
+        <span class="diff-ln">14</span>
+        <span class="diff-code">  return async (c, next) =&gt; {</span>
+      </div>
+      <div class="diff-line del">
+        <span class="diff-ln">15</span>
+        <span class="diff-code">    const body = await c.req.json();</span>
+      </div>
+      <div class="diff-line del">
+        <span class="diff-ln">16</span>
+        <span class="diff-code">    const result = schema.parse(body);</span>
+      </div>
+      <div class="diff-line del">
+        <span class="diff-ln">17</span>
+        <span class="diff-code">    c.set('validated', result);</span>
+      </div>
+      <div class="diff-line add">
+        <span class="diff-ln">15</span>
+        <span class="diff-code">    try {</span>
+      </div>
+      <div class="diff-line add">
+        <span class="diff-ln">16</span>
+        <span class="diff-code">      const body = await c.req.json();</span>
+      </div>
+      <div class="diff-line add">
+        <span class="diff-ln">17</span>
+        <span class="diff-code">      const result = schema.safeParse(body);</span>
+      </div>
+      <div class="diff-line add">
+        <span class="diff-ln">18</span>
+        <span class="diff-code">      if (!result.success) {</span>
+      </div>
+      <div class="diff-line add">
+        <span class="diff-ln">19</span>
+        <span class="diff-code">        return c.json({</span>
+      </div>
+      <div class="diff-line add">
+        <span class="diff-ln">20</span>
+        <span class="diff-code">          error: 'Validation failed',</span>
+      </div>
+      <div class="diff-line add">
+        <span class="diff-ln">21</span>
+        <span class="diff-code">          issues: result.error.issues,</span>
+      </div>
+      <div class="diff-line add">
+        <span class="diff-ln">22</span>
+        <span class="diff-code">        }, 400);</span>
+      </div>
+      <div class="diff-line add">
+        <span class="diff-ln">23</span>
+        <span class="diff-code">      }</span>
+      </div>
+      <div class="diff-line add">
+        <span class="diff-ln">24</span>
+        <span class="diff-code">      c.req.valid = () =&gt; result.data;</span>
+      </div>
+      <div class="diff-line">
+        <span class="diff-ln">18</span>
+        <span class="diff-code">    await next();</span>
+      </div>
+    </div>
+    <div class="hunk-actions">
+      <button class="btn-success btn-sm">Accept</button>
+      <button class="btn-error btn-sm">Reject</button>
+    </div>
+  </div>
+
+  <!-- File 3 -->
+  <div class="diff-file">
+    <div class="diff-file-header">
+      <span class="diff-file-name">src/index.ts</span>
+      <div class="diff-file-stats">
+        <span class="badge badge-accent">modified</span>
+        <span style="color: var(--success)">+4</span>
+        <span style="color: var(--error)">-1</span>
+      </div>
+    </div>
+    <div class="diff-content">
+      <div class="diff-line hunk">
+        <span class="diff-ln"></span>
+        <span class="diff-code">@@ -8,6 +8,9 @@ import { auth } from './routes/auth';</span>
+      </div>
+      <div class="diff-line">
+        <span class="diff-ln">8</span>
+        <span class="diff-code">import { projects } from './routes/projects';</span>
+      </div>
+      <div class="diff-line add">
+        <span class="diff-ln">9</span>
+        <span class="diff-code">import { users } from './routes/users';</span>
+      </div>
+      <div class="diff-line">
+        <span class="diff-ln">9</span>
+        <span class="diff-code"></span>
+      </div>
+      <div class="diff-line">
+        <span class="diff-ln">10</span>
+        <span class="diff-code">const app = new Hono();</span>
+      </div>
+      <div class="diff-line hunk">
+        <span class="diff-ln"></span>
+        <span class="diff-code">@@ -18,6 +21,7 @@ app.route('/api/v2/auth', auth);</span>
+      </div>
+      <div class="diff-line">
+        <span class="diff-ln">18</span>
+        <span class="diff-code">app.route('/api/v2/projects', projects);</span>
+      </div>
+      <div class="diff-line add">
+        <span class="diff-ln">22</span>
+        <span class="diff-code">app.route('/api/v2/users', users);</span>
+      </div>
+    </div>
+    <div class="hunk-actions">
+      <button class="btn-success btn-sm">Accept</button>
+      <button class="btn-error btn-sm">Reject</button>
+    </div>
+  </div>
+
+  <hr>
+  <footer><p><small>Diff for Run #1204 — <a href="run-detail.html">Back to run</a></small></p></footer>
+
+
+</body>
+</html>
