@@ -1,0 +1,300 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>TerminalX — TerminalX CSS</title>
+  <link rel="stylesheet" href="terminalx.css">
+  <style>
+    .hero {
+      text-align: center;
+      padding: var(--space-xl) 0;
+    }
+
+    .hero h1 {
+      font-size: 3rem;
+      letter-spacing: -0.03em;
+      margin-bottom: var(--space);
+    }
+
+    .hero-accent {
+      color: var(--accent);
+    }
+
+    .hero p {
+      font-size: 1.1rem;
+      color: var(--text-secondary);
+      max-width: 540px;
+      margin: 0 auto var(--space-lg);
+    }
+
+    .hero-actions {
+      display: flex;
+      gap: var(--space);
+      justify-content: center;
+      margin-top: var(--space-lg);
+    }
+
+    .feature-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: var(--space-lg);
+      margin-bottom: var(--space-xl);
+    }
+
+    .feature {
+      background: var(--bg-surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-lg);
+      padding: var(--space-lg);
+    }
+
+    .feature-icon {
+      font-size: 1.5rem;
+      margin-bottom: var(--space);
+    }
+
+    .feature h3 {
+      margin-top: 0;
+      margin-bottom: var(--space-sm);
+      font-size: 1rem;
+    }
+
+    .feature p {
+      font-size: 0.85rem;
+      color: var(--text-secondary);
+      margin-bottom: 0;
+    }
+
+    .example-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+      gap: var(--space);
+    }
+
+    .example-link {
+      display: block;
+      padding: var(--space) var(--space-lg);
+      background: var(--bg-surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      font-size: 0.9rem;
+      color: var(--text);
+      transition: all 0.15s ease;
+    }
+
+    .example-link:hover {
+      border-color: var(--accent);
+      background: var(--bg-hover);
+      text-decoration: none;
+      color: var(--text);
+    }
+
+    .example-link small {
+      display: block;
+      color: var(--text-muted);
+      margin-top: 2px;
+    }
+
+    .install-block {
+      background: var(--bg-surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-lg);
+      padding: var(--space-xl);
+      text-align: center;
+      margin-bottom: var(--space-xl);
+    }
+
+    .install-block pre {
+      display: inline-block;
+      text-align: left;
+      margin: var(--space-lg) auto;
+    }
+
+    @media (max-width: 680px) {
+      .hero h1 { font-size: 2rem; }
+      .feature-grid { grid-template-columns: 1fr; }
+      .hero-actions { flex-direction: column; align-items: center; }
+    }
+</style>
+</head>
+<body>
+
+  <nav>
+    <ul>
+      <li><a href="index.html" class="active">TerminalX</a></li>
+      <li><a href="reference.html" >Reference</a></li>
+      <li><a href="pipeline.html" >Pipeline</a></li>
+      <li><a href="builds.html" >Builds</a></li>
+      <li><a href="agents.html" >Agents</a></li>
+      <li><a href="queue.html" >Queue</a></li>
+      <li><a href="run-detail.html" >Run</a></li>
+      <li><a href="diff.html" >Diff</a></li>
+      <li><a href="templates.html" >Templates</a></li>
+      <li><a href="costs.html" >Costs</a></li>
+      <li><a href="audit.html" >Audit</a></li>
+      <li><a href="quality.html" >Quality</a></li>
+      <li><a href="models.html" >Models</a></li>
+      <li><a href="webhooks.html" >Webhooks</a></li>
+    </ul>
+  </nav>
+
+  
+
+  <div class="hero">
+    <h1>Terminal<span class="hero-accent">X</span> CSS</h1>
+    <p>A minimal CSS library for building terminal-style UIs. Dark theme, monospace body, soft details. Just link the stylesheet and write HTML.</p>
+    <div class="hero-actions">
+      <a href="reference.html"><button>Reference</button></a>
+      <a href="https://github.com/ex3ndr/terminalx"><button class="btn-ghost">GitHub</button></a>
+    </div>
+  </div>
+
+  <hr>
+
+  <div class="install-block">
+    <h2 class="mt-0">Get Started</h2>
+    <p class="text-secondary">Copy <code>terminalx.css</code> into your project and add one line.</p>
+    <pre><code>&lt;link rel="stylesheet" href="terminalx.css"&gt;</code></pre>
+    <p class="text-muted mb-0">No build tools. No dependencies. No classes needed for base elements.</p>
+  </div>
+
+  <div class="feature-grid">
+    <div class="feature">
+      <div class="feature-icon">Aa</div>
+      <h3>Geist Fonts</h3>
+      <p>Geist Mono for body text gives the terminal feel. Geist Sans for headings creates clear hierarchy.</p>
+    </div>
+    <div class="feature">
+      <div class="feature-icon">{ }</div>
+      <h3>Classless Core</h3>
+      <p>Semantic HTML elements are styled by default. Headings, tables, forms, code blocks — all look good out of the box.</p>
+    </div>
+    <div class="feature">
+      <div class="feature-icon">--</div>
+      <h3>CSS Variables</h3>
+      <p>Every color, spacing value, and font is a custom property. Override <code>--accent</code> to retheme the entire library.</p>
+    </div>
+    <div class="feature">
+      <div class="feature-icon">&#x25CF;</div>
+      <h3>Soft Dark Theme</h3>
+      <p>Not harsh black. Subtle surface layers from <code>#0c0c0c</code> to <code>#222</code> with orange accents inspired by Factory.ai.</p>
+    </div>
+    <div class="feature">
+      <div class="feature-icon">&#x25A2;</div>
+      <h3>Components</h3>
+      <p>Modals, toasts, loaders, badges, toggles, cards, alerts, pills, and more — all optional utility classes.</p>
+    </div>
+    <div class="feature">
+      <div class="feature-icon">&#x2194;</div>
+      <h3>Responsive</h3>
+      <p>Single breakpoint at 680px. Sidebar layouts collapse, nav stacks, tables shrink. Works on any screen.</p>
+    </div>
+  </div>
+
+  <hr>
+
+  <h2>Examples</h2>
+  <p>Every example is built with <code>terminalx.css</code> — no custom CSS beyond page-specific layout.</p>
+
+  <div class="example-grid" style="margin-top: var(--space-lg)">
+    <a href="reference.html" class="example-link">
+      <strong>Reference</strong>
+      <small>All components and elements</small>
+    </a>
+    <a href="pipeline.html" class="example-link">
+      <strong>Pipeline</strong>
+      <small>Multi-stage build view</small>
+    </a>
+    <a href="builds.html" class="example-link">
+      <strong>Build History</strong>
+      <small>Table with status badges</small>
+    </a>
+    <a href="agents.html" class="example-link">
+      <strong>Agent Fleet</strong>
+      <small>Grid of running agents</small>
+    </a>
+    <a href="queue.html" class="example-link">
+      <strong>Task Queue</strong>
+      <small>Prioritized task list</small>
+    </a>
+    <a href="run-detail.html" class="example-link">
+      <strong>Run Detail</strong>
+      <small>Agent output and approval</small>
+    </a>
+    <a href="diff.html" class="example-link">
+      <strong>Diff Viewer</strong>
+      <small>Line-by-line code diff</small>
+    </a>
+    <a href="templates.html" class="example-link">
+      <strong>Templates</strong>
+      <small>Project template catalog</small>
+    </a>
+    <a href="costs.html" class="example-link">
+      <strong>Cost Tracker</strong>
+      <small>Spend by model and project</small>
+    </a>
+    <a href="audit.html" class="example-link">
+      <strong>Audit Log</strong>
+      <small>Chronological action feed</small>
+    </a>
+    <a href="quality.html" class="example-link">
+      <strong>Quality Gate</strong>
+      <small>Test and lint results</small>
+    </a>
+    <a href="models.html" class="example-link">
+      <strong>Model Config</strong>
+      <small>AI model settings</small>
+    </a>
+    <a href="webhooks.html" class="example-link">
+      <strong>Webhooks</strong>
+      <small>Integration management</small>
+    </a>
+    <a href="issue-tracker.html" class="example-link">
+      <strong>Issue Tracker</strong>
+      <small>Interactive todo list</small>
+    </a>
+    <a href="changelog.html" class="example-link">
+      <strong>Changelog</strong>
+      <small>Release notes</small>
+    </a>
+    <a href="docs.html" class="example-link">
+      <strong>Docs</strong>
+      <small>Sidebar documentation</small>
+    </a>
+    <a href="dashboard.html" class="example-link">
+      <strong>Dashboard</strong>
+      <small>Metrics and status</small>
+    </a>
+    <a href="blog.html" class="example-link">
+      <strong>Blog</strong>
+      <small>Long-form article</small>
+    </a>
+    <a href="settings.html" class="example-link">
+      <strong>Settings</strong>
+      <small>Forms and toggles</small>
+    </a>
+  </div>
+
+  <hr>
+
+  <h2>Customization</h2>
+  <p>Override any variable to match your brand:</p>
+
+  <pre><code>:root {
+  --accent: #8b5cf6;       /* purple instead of orange */
+  --accent-hover: #a78bfa;
+  --accent-muted: rgba(139, 92, 246, 0.15);
+  --bg: #111111;           /* slightly lighter */
+  --radius: 8px;           /* rounder corners */
+}</code></pre>
+
+  <hr>
+
+  <footer>
+    <p><small>TerminalX CSS v0.1.0 — <a href="https://github.com/ex3ndr/terminalx">GitHub</a> — MIT License</small></p>
+  </footer>
+
+
+</body>
+</html>
