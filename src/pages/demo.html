@@ -237,6 +237,231 @@ console.log(greet("world"));</code></pre>
     </div>
   </section>
 
+  <!-- Modals / Dialogs -->
+  <section>
+    <h2>Modals / Dialogs</h2>
+    <p>Click a button to open a modal. Uses <code>.modal-backdrop</code> + <code>.modal</code>. Variants: default, small, large, and danger.</p>
+
+    <p>
+      <button onclick="document.getElementById('modal-default').classList.add('open')">Default Modal</button>
+      <button onclick="document.getElementById('modal-sm').classList.add('open')">Small Modal</button>
+      <button onclick="document.getElementById('modal-lg').classList.add('open')">Large Modal</button>
+      <button class="btn-error" onclick="document.getElementById('modal-danger').classList.add('open')">Danger Modal</button>
+    </p>
+
+    <!-- Default Modal -->
+    <div class="modal-backdrop" id="modal-default" onclick="if(event.target===this)this.classList.remove('open')">
+      <div class="modal">
+        <div class="modal-header">
+          <h3>Create New Project</h3>
+          <button class="modal-close" onclick="document.getElementById('modal-default').classList.remove('open')">&#x2715;</button>
+        </div>
+        <div class="modal-body">
+          <label for="m-name">Project name</label>
+          <input type="text" id="m-name" placeholder="my-project">
+          <label for="m-template">Template</label>
+          <select id="m-template">
+            <option>REST API</option>
+            <option>React Dashboard</option>
+            <option>CLI Tool</option>
+          </select>
+          <label><input type="checkbox" checked> Initialize git repository</label>
+        </div>
+        <div class="modal-footer">
+          <button class="btn-ghost" onclick="document.getElementById('modal-default').classList.remove('open')">Cancel</button>
+          <button type="submit">Create</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Small Modal -->
+    <div class="modal-backdrop" id="modal-sm" onclick="if(event.target===this)this.classList.remove('open')">
+      <div class="modal modal-sm">
+        <div class="modal-header">
+          <h3>Confirm</h3>
+          <button class="modal-close" onclick="document.getElementById('modal-sm').classList.remove('open')">&#x2715;</button>
+        </div>
+        <div class="modal-body">
+          <p>Are you sure you want to restart <code>agent-03</code>? This will cancel the current task.</p>
+        </div>
+        <div class="modal-footer">
+          <button class="btn-ghost" onclick="document.getElementById('modal-sm').classList.remove('open')">Cancel</button>
+          <button onclick="document.getElementById('modal-sm').classList.remove('open')">Restart Agent</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Large Modal -->
+    <div class="modal-backdrop" id="modal-lg" onclick="if(event.target===this)this.classList.remove('open')">
+      <div class="modal modal-lg">
+        <div class="modal-header">
+          <h3>Run Output</h3>
+          <button class="modal-close" onclick="document.getElementById('modal-lg').classList.remove('open')">&#x2715;</button>
+        </div>
+        <div class="modal-body">
+          <p>Full output from Run <code>#1204</code>:</p>
+          <pre><code>import { Hono } from 'hono';
+import { z } from 'zod';
+import { db } from '../db';
+import { users } from '../models/user';
+
+const app = new Hono();
+
+const createUserSchema = z.object({
+  name: z.string().min(1).max(100),
+  email: z.string().email(),
+  role: z.enum(['admin', 'member', 'viewer']),
+});
+
+app.get('/', async (c) =&gt; {
+  const result = await db.select().from(users);
+  return c.json({ data: result });
+});
+
+export default app;</code></pre>
+        </div>
+        <div class="modal-footer">
+          <button class="btn-ghost" onclick="document.getElementById('modal-lg').classList.remove('open')">Close</button>
+          <button class="btn-success">Approve &amp; Merge</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Danger Modal -->
+    <div class="modal-backdrop" id="modal-danger" onclick="if(event.target===this)this.classList.remove('open')">
+      <div class="modal modal-sm modal-danger">
+        <div class="modal-header">
+          <h3>Delete Project</h3>
+          <button class="modal-close" onclick="document.getElementById('modal-danger').classList.remove('open')">&#x2715;</button>
+        </div>
+        <div class="modal-body">
+          <p>This will permanently delete <strong>user-service</strong> and all associated runs, artifacts, and configuration. This cannot be undone.</p>
+          <label for="m-confirm">Type <code>user-service</code> to confirm</label>
+          <input type="text" id="m-confirm" placeholder="user-service">
+        </div>
+        <div class="modal-footer">
+          <button class="btn-ghost" onclick="document.getElementById('modal-danger').classList.remove('open')">Cancel</button>
+          <button class="btn-error">Delete permanently</button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Toasts -->
+  <section>
+    <h2>Toasts</h2>
+    <p>Notification toasts. Uses <code>.toast-container</code> with <code>.toast</code> variants.</p>
+
+    <p>
+      <button onclick="showToast('default')">Default Toast</button>
+      <button onclick="showToast('success')">Success Toast</button>
+      <button onclick="showToast('error')">Error Toast</button>
+      <button onclick="showToast('warning')">Warning Toast</button>
+      <button onclick="showToast('info')">Info Toast</button>
+    </p>
+
+    <!-- Static toast examples -->
+    <div style="position: relative; display: flex; flex-direction: column; gap: var(--space); margin-top: var(--space-lg)">
+      <div class="toast" style="position: static; pointer-events: auto; animation: none">
+        <span class="toast-message">Default toast — something happened.</span>
+        <button class="toast-close">&#x2715;</button>
+      </div>
+      <div class="toast toast-success" style="position: static; pointer-events: auto; animation: none">
+        <span class="dot dot-success" style="flex-shrink:0"></span>
+        <span class="toast-message">Build completed successfully.</span>
+        <button class="toast-close">&#x2715;</button>
+      </div>
+      <div class="toast toast-error" style="position: static; pointer-events: auto; animation: none">
+        <span class="dot dot-error" style="flex-shrink:0"></span>
+        <span class="toast-message">Agent crashed — context limit exceeded.</span>
+        <button class="toast-close">&#x2715;</button>
+      </div>
+      <div class="toast toast-warning" style="position: static; pointer-events: auto; animation: none">
+        <span class="dot dot-warning" style="flex-shrink:0"></span>
+        <span class="toast-message">Daily spend at 85% of budget.</span>
+        <button class="toast-close">&#x2715;</button>
+      </div>
+      <div class="toast toast-info" style="position: static; pointer-events: auto; animation: none">
+        <span class="dot dot-info" style="flex-shrink:0"></span>
+        <span class="toast-message">New agent spawned for code review.</span>
+        <button class="toast-close">&#x2715;</button>
+      </div>
+    </div>
+
+    <!-- Live toast container -->
+    <div class="toast-container" id="toast-container"></div>
+
+    <script>
+      let toastId = 0;
+      const toastMessages = {
+        default: 'Something happened.',
+        success: 'Build completed successfully.',
+        error: 'Pipeline failed at test stage.',
+        warning: 'Daily budget 85% consumed.',
+        info: 'Agent-04 assigned to new task.',
+      };
+
+      function showToast(type) {
+        const container = document.getElementById('toast-container');
+        const toast = document.createElement('div');
+        toast.className = 'toast' + (type !== 'default' ? ' toast-' + type : '');
+        toast.innerHTML = `
+          <span class="toast-message">${toastMessages[type]}</span>
+          <button class="toast-close" onclick="this.parentElement.remove()">&#x2715;</button>
+        `;
+        container.appendChild(toast);
+        setTimeout(() => { if (toast.parentElement) toast.remove(); }, 3000);
+      }
+    </script>
+  </section>
+
+  <!-- Loaders -->
+  <section>
+    <h2>Loaders</h2>
+    <p>Loading indicators. Spinner, dots, bar, and skeleton variants.</p>
+
+    <h3>Spinners</h3>
+    <p style="display: flex; align-items: center; gap: var(--space-xl)">
+      <span><span class="loader loader-sm"></span> <small class="text-muted">Small</small></span>
+      <span><span class="loader"></span> <small class="text-muted">Default</small></span>
+      <span><span class="loader loader-lg"></span> <small class="text-muted">Large</small></span>
+    </p>
+
+    <h3>Dots</h3>
+    <p style="display: flex; align-items: center; gap: var(--space-xl)">
+      <span>
+        <span class="loader-dots"><span></span><span></span><span></span></span>
+        <small class="text-muted"> Loading</small>
+      </span>
+    </p>
+
+    <h3>Bar</h3>
+    <div class="loader-bar" style="margin-bottom: var(--space-lg)"></div>
+
+    <h3>Skeleton</h3>
+    <div class="card" style="margin-bottom: var(--space-lg)">
+      <div style="display: flex; gap: var(--space); align-items: center; margin-bottom: var(--space-lg)">
+        <div class="skeleton skeleton-avatar"></div>
+        <div style="flex: 1">
+          <div class="skeleton skeleton-text" style="width: 30%"></div>
+          <div class="skeleton skeleton-text" style="width: 50%"></div>
+        </div>
+      </div>
+      <div class="skeleton skeleton-heading"></div>
+      <div class="skeleton skeleton-text"></div>
+      <div class="skeleton skeleton-text"></div>
+      <div class="skeleton skeleton-text" style="width: 75%"></div>
+    </div>
+
+    <h3>Inline Usage</h3>
+    <p>Use spinners inline with buttons and badges:</p>
+    <p>
+      <button disabled><span class="loader loader-sm" style="border-top-color: var(--text); vertical-align: middle"></span> Deploying...</button>
+      <button class="btn-ghost" disabled><span class="loader loader-sm" style="vertical-align: middle"></span> Running tests</button>
+      <span class="badge badge-accent"><span class="loader loader-sm" style="width:10px;height:10px;border-top-color:var(--accent);border-color:rgba(249,115,22,0.3);vertical-align:middle"></span> building</span>
+    </p>
+  </section>
+
   <!-- Figure -->
   <section>
     <h2>Figure</h2>
