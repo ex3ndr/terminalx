@@ -1,0 +1,185 @@
+---
+title: Run Detail
+nav.run: true
+---
+
+<style>
+    .run-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      flex-wrap: wrap;
+      gap: var(--space);
+    }
+
+    .run-prompt {
+      background: var(--bg-surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: var(--space-lg);
+      margin-bottom: var(--space-lg);
+      color: var(--text-secondary);
+      font-size: 0.95rem;
+      line-height: 1.7;
+    }
+
+    .run-output {
+      background: var(--bg-surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: var(--space-lg);
+      margin-bottom: var(--space-lg);
+      font-size: 0.85rem;
+      line-height: 1.6;
+      max-height: 400px;
+      overflow-y: auto;
+    }
+
+    .run-actions {
+      display: flex;
+      gap: var(--space);
+      margin-bottom: var(--space-lg);
+    }
+
+    .file-change {
+      display: flex;
+      align-items: center;
+      gap: var(--space);
+      font-size: 0.9rem;
+    }
+
+    .file-change code { font-size: 0.85rem; }
+    .additions { color: var(--success); font-size: 0.8rem; }
+    .deletions { color: var(--error); font-size: 0.8rem; }
+</style>
+
+  <div class="run-header">
+    <div>
+      <h1 class="mt-0 mb-0">Run #1204</h1>
+      <p class="text-muted" style="margin-top: var(--space-sm)">Generate REST API for user-service</p>
+    </div>
+    <span class="badge badge-success">completed</span>
+  </div>
+
+  <hr>
+
+  <div class="two-col" style="margin-bottom: var(--space-xl)">
+    <div>
+      <div class="section-title">Run Info</div>
+      <table>
+        <tbody>
+          <tr><td><strong>Agent</strong></td><td>agent-01</td></tr>
+          <tr><td><strong>Model</strong></td><td>Opus 4 (1M context)</td></tr>
+          <tr><td><strong>Tokens</strong></td><td>142,387 (in: 28k, out: 114k)</td></tr>
+          <tr><td><strong>Duration</strong></td><td>18m 32s</td></tr>
+          <tr><td><strong>Cost</strong></td><td>$2.14</td></tr>
+          <tr><td><strong>Started</strong></td><td>Mar 26, 14:12 UTC</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <div>
+      <div class="section-title">Files Changed</div>
+      <ul class="item-list">
+        <li class="file-change">
+          <code>src/routes/users.ts</code>
+          <span class="additions">+186</span>
+          <span class="deletions">-0</span>
+          <span class="badge badge-success" style="margin-left: auto">new</span>
+        </li>
+        <li class="file-change">
+          <code>src/models/user.ts</code>
+          <span class="additions">+94</span>
+          <span class="deletions">-0</span>
+          <span class="badge badge-success" style="margin-left: auto">new</span>
+        </li>
+        <li class="file-change">
+          <code>src/middleware/validate.ts</code>
+          <span class="additions">+42</span>
+          <span class="deletions">-3</span>
+          <span class="badge badge-accent" style="margin-left: auto">modified</span>
+        </li>
+        <li class="file-change">
+          <code>src/index.ts</code>
+          <span class="additions">+4</span>
+          <span class="deletions">-1</span>
+          <span class="badge badge-accent" style="margin-left: auto">modified</span>
+        </li>
+        <li class="file-change">
+          <code>tests/users.test.ts</code>
+          <span class="additions">+128</span>
+          <span class="deletions">-0</span>
+          <span class="badge badge-success" style="margin-left: auto">new</span>
+        </li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="section-title">Prompt</div>
+  <div class="run-prompt">
+    Generate a complete REST API for a user service with the following requirements:<br><br>
+    - CRUD endpoints: GET /users, GET /users/:id, POST /users, PUT /users/:id, DELETE /users/:id<br>
+    - Input validation using Zod schemas<br>
+    - Proper error handling with typed error responses<br>
+    - PostgreSQL with Drizzle ORM<br>
+    - Write integration tests for all endpoints<br>
+    - Follow existing project patterns in src/routes/
+  </div>
+
+  <div class="section-title">Generated Output (excerpt)</div>
+  <div class="run-output">
+    <pre><code>// src/routes/users.ts
+import { Hono } from 'hono';
+import { z } from 'zod';
+import { db } from '../db';
+import { users } from '../models/user';
+import { eq } from 'drizzle-orm';
+import { validate } from '../middleware/validate';
+
+const app = new Hono();
+
+const createUserSchema = z.object({
+  name: z.string().min(1).max(100),
+  email: z.string().email(),
+  role: z.enum(['admin', 'member', 'viewer']).default('member'),
+});
+
+const updateUserSchema = createUserSchema.partial();
+
+// GET /users
+app.get('/', async (c) =&gt; {
+  const limit = Number(c.req.query('limit') || 50);
+  const offset = Number(c.req.query('offset') || 0);
+  const result = await db.select().from(users)
+    .limit(limit).offset(offset);
+  return c.json({ data: result, limit, offset });
+});
+
+// GET /users/:id
+app.get('/:id', async (c) =&gt; {
+  const id = c.req.param('id');
+  const [user] = await db.select().from(users)
+    .where(eq(users.id, id));
+  if (!user) return c.json({ error: 'Not found' }, 404);
+  return c.json({ data: user });
+});
+
+// POST /users
+app.post('/', validate(createUserSchema), async (c) =&gt; {
+  const body = c.req.valid('json');
+  const [user] = await db.insert(users)
+    .values(body).returning();
+  return c.json({ data: user }, 201);
+});
+
+// ... (truncated)</code></pre>
+  </div>
+
+  <div class="run-actions">
+    <button class="btn-success btn-sm">Approve &amp; Merge</button>
+    <button class="btn-ghost btn-sm">Request Changes</button>
+    <button class="btn-ghost btn-sm">View Full Diff</button>
+    <button class="btn-error btn-sm">Reject</button>
+  </div>
+
+  <hr>
+  <footer><p><small>Run #1204 — <a href="queue.html">Back to queue</a> — <a href="diff.html">View diff</a></small></p></footer>

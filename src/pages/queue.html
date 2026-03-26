@@ -1,0 +1,214 @@
+---
+title: Task Queue
+nav.queue: true
+---
+
+<style>
+    .queue-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: var(--space);
+    }
+
+    .queue-stats {
+      display: flex;
+      gap: var(--space-lg);
+      font-size: 0.85rem;
+      color: var(--text-secondary);
+    }
+
+    .queue-stats span {
+      display: flex;
+      align-items: center;
+      gap: var(--space-sm);
+    }
+
+    .task-priority {
+      font-size: 0.75rem;
+      font-family: var(--font-mono);
+      width: 20px;
+      text-align: center;
+      flex-shrink: 0;
+      color: var(--text-muted);
+    }
+
+    .task-priority.high { color: var(--error); }
+    .task-priority.med { color: var(--accent); }
+
+    .task-body { flex: 1; min-width: 0; }
+
+    .task-title {
+      font-family: var(--font-sans);
+      font-weight: 500;
+      font-size: 0.95rem;
+    }
+
+    .task-meta {
+      font-size: 0.8rem;
+      color: var(--text-muted);
+      margin-top: 2px;
+      display: flex;
+      gap: var(--space);
+      flex-wrap: wrap;
+    }
+
+    .task-actions {
+      display: flex;
+      gap: var(--space-sm);
+      flex-shrink: 0;
+    }
+
+    .task-actions button {
+      font-size: 0.75rem;
+      padding: 2px 8px;
+      border-radius: 4px;
+      background: transparent;
+      border: 1px solid var(--border);
+      color: var(--text-muted);
+    }
+
+    .task-actions button:hover { color: var(--text); border-color: var(--text-muted); }
+</style>
+
+  <div class="queue-header">
+    <h1 class="mt-0 mb-0">Task Queue</h1>
+    <div class="queue-stats">
+      <span><span class="dot dot-accent"></span> 4 pending</span>
+      <span><span class="dot dot-success"></span> 3 in progress</span>
+      <span><span class="dot dot-muted"></span> 12 completed today</span>
+    </div>
+  </div>
+
+  <hr>
+
+  <div class="section-title">In Progress</div>
+  <ul class="item-list item-list-bordered" style="margin-bottom: var(--space-xl)">
+    <li>
+      <span class="task-priority high">P0</span>
+      <div class="task-body">
+        <div class="task-title">Generate REST API for user-service</div>
+        <div class="task-meta">
+          <span class="badge badge-info">codegen</span>
+          <span>agent-01</span>
+          <span>started 18m ago</span>
+        </div>
+      </div>
+      <div class="task-actions">
+        <button>View</button>
+        <button>Cancel</button>
+      </div>
+    </li>
+    <li>
+      <span class="task-priority high">P0</span>
+      <div class="task-body">
+        <div class="task-title">Write integration tests for auth-middleware</div>
+        <div class="task-meta">
+          <span class="badge badge-success">testing</span>
+          <span>agent-02</span>
+          <span>started 12m ago</span>
+        </div>
+      </div>
+      <div class="task-actions">
+        <button>View</button>
+        <button>Cancel</button>
+      </div>
+    </li>
+    <li>
+      <span class="task-priority med">P1</span>
+      <div class="task-body">
+        <div class="task-title">Refactor payment-gateway to use strategy pattern</div>
+        <div class="task-meta">
+          <span class="badge badge-accent">refactor</span>
+          <span>agent-03</span>
+          <span>started 24m ago</span>
+        </div>
+      </div>
+      <div class="task-actions">
+        <button>View</button>
+        <button>Cancel</button>
+      </div>
+    </li>
+  </ul>
+
+  <div class="section-title">Pending</div>
+  <ul class="item-list item-list-bordered" style="margin-bottom: var(--space-xl)">
+    <li>
+      <span class="task-priority high">P0</span>
+      <div class="task-body">
+        <div class="task-title">Fix N+1 query in dashboard endpoint</div>
+        <div class="task-meta">
+          <span class="badge badge-error">bugfix</span>
+          <span>queued 8m ago</span>
+          <span>est. 5-10 min</span>
+        </div>
+      </div>
+      <div class="task-actions">
+        <button>Assign</button>
+        <button>Edit</button>
+        <button>Remove</button>
+      </div>
+    </li>
+    <li>
+      <span class="task-priority med">P1</span>
+      <div class="task-body">
+        <div class="task-title">Generate TypeScript types from OpenAPI spec</div>
+        <div class="task-meta">
+          <span class="badge badge-info">codegen</span>
+          <span>queued 22m ago</span>
+          <span>est. 3-5 min</span>
+        </div>
+      </div>
+      <div class="task-actions">
+        <button>Assign</button>
+        <button>Edit</button>
+        <button>Remove</button>
+      </div>
+    </li>
+    <li>
+      <span class="task-priority">P2</span>
+      <div class="task-body">
+        <div class="task-title">Add pagination to /api/v2/projects endpoint</div>
+        <div class="task-meta">
+          <span class="badge badge-info">codegen</span>
+          <span>queued 45m ago</span>
+          <span>est. 8-12 min</span>
+        </div>
+      </div>
+      <div class="task-actions">
+        <button>Assign</button>
+        <button>Edit</button>
+        <button>Remove</button>
+      </div>
+    </li>
+    <li>
+      <span class="task-priority">P2</span>
+      <div class="task-body">
+        <div class="task-title">Write JSDoc comments for public API surface</div>
+        <div class="task-meta">
+          <span class="badge badge-muted">docs</span>
+          <span>queued 1h ago</span>
+          <span>est. 15-20 min</span>
+        </div>
+      </div>
+      <div class="task-actions">
+        <button>Assign</button>
+        <button>Edit</button>
+        <button>Remove</button>
+      </div>
+    </li>
+  </ul>
+
+  <form class="inline-form">
+    <input type="text" placeholder="Add a task...">
+    <select>
+      <option value="P0">P0 — Critical</option>
+      <option value="P1" selected>P1 — High</option>
+      <option value="P2">P2 — Normal</option>
+    </select>
+    <button type="submit">Add to Queue</button>
+  </form>
+
+  <hr>
+  <footer><p><small>Task Queue — <a href="agents.html">View agents</a></small></p></footer>

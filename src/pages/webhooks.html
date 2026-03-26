@@ -1,0 +1,194 @@
+---
+title: Webhooks
+nav.webhooks: true
+---
+
+<style>
+    .webhook-card {
+      background: var(--bg-surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-lg);
+      padding: var(--space-lg);
+      margin-bottom: var(--space-lg);
+    }
+
+    .webhook-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: var(--space);
+    }
+
+    .webhook-name {
+      font-family: var(--font-sans);
+      font-weight: 600;
+      font-size: 0.95rem;
+      display: flex;
+      align-items: center;
+      gap: var(--space);
+    }
+
+    .webhook-url {
+      font-size: 0.85rem;
+      color: var(--text-muted);
+      font-family: var(--font-mono);
+      margin-bottom: var(--space);
+      word-break: break-all;
+    }
+
+    .webhook-events {
+      display: flex;
+      gap: var(--space-sm);
+      flex-wrap: wrap;
+      margin-bottom: var(--space);
+    }
+
+    .webhook-meta {
+      display: flex;
+      gap: var(--space-lg);
+      font-size: 0.8rem;
+      color: var(--text-muted);
+    }
+
+    .webhook-actions {
+      display: flex;
+      gap: var(--space-sm);
+    }
+</style>
+
+  <h1>Webhooks</h1>
+  <p>Manage outgoing webhook integrations for factory events.</p>
+
+  <hr>
+
+  <div class="webhook-card">
+    <div class="webhook-header">
+      <div class="webhook-name">
+        <span class="dot dot-success"></span>
+        GitHub — Push to Repo
+      </div>
+      <div class="webhook-actions">
+        <button class="btn-ghost btn-sm">Test</button>
+        <button class="btn-ghost btn-sm">Edit</button>
+        <button class="btn-error btn-sm">Delete</button>
+      </div>
+    </div>
+    <div class="webhook-url">POST https://api.github.com/repos/factory/main-app/dispatches</div>
+    <div class="webhook-events">
+      <span class="badge badge-success">run.completed</span>
+      <span class="badge badge-accent">run.approved</span>
+    </div>
+    <div class="webhook-meta">
+      <span>Last triggered: 14m ago</span>
+      <span>Success rate: 100% (last 30 days)</span>
+      <span>Created by jane-dev</span>
+    </div>
+  </div>
+
+  <div class="webhook-card">
+    <div class="webhook-header">
+      <div class="webhook-name">
+        <span class="dot dot-success"></span>
+        Slack — #factory-alerts
+      </div>
+      <div class="webhook-actions">
+        <button class="btn-ghost btn-sm">Test</button>
+        <button class="btn-ghost btn-sm">Edit</button>
+        <button class="btn-error btn-sm">Delete</button>
+      </div>
+    </div>
+    <div class="webhook-url">POST https://hooks.slack.com/services/T0XXX/B0XXX/xxxxxxxxxxxxx</div>
+    <div class="webhook-events">
+      <span class="badge badge-error">run.failed</span>
+      <span class="badge badge-error">agent.crashed</span>
+      <span class="badge badge-warning">budget.warning</span>
+      <span class="badge badge-success">deploy.completed</span>
+    </div>
+    <div class="webhook-meta">
+      <span>Last triggered: 2h ago</span>
+      <span>Success rate: 98.5% (last 30 days)</span>
+      <span>Created by mike-ops</span>
+    </div>
+  </div>
+
+  <div class="webhook-card">
+    <div class="webhook-header">
+      <div class="webhook-name">
+        <span class="dot dot-success"></span>
+        Linear — Auto-close Issues
+      </div>
+      <div class="webhook-actions">
+        <button class="btn-ghost btn-sm">Test</button>
+        <button class="btn-ghost btn-sm">Edit</button>
+        <button class="btn-error btn-sm">Delete</button>
+      </div>
+    </div>
+    <div class="webhook-url">POST https://api.linear.app/webhooks/factory-integration</div>
+    <div class="webhook-events">
+      <span class="badge badge-accent">run.approved</span>
+      <span class="badge badge-success">deploy.completed</span>
+    </div>
+    <div class="webhook-meta">
+      <span>Last triggered: 28m ago</span>
+      <span>Success rate: 100% (last 30 days)</span>
+      <span>Created by jane-dev</span>
+    </div>
+  </div>
+
+  <div class="webhook-card" style="border-color: var(--text-muted); opacity: 0.6">
+    <div class="webhook-header">
+      <div class="webhook-name">
+        <span class="dot dot-muted"></span>
+        PagerDuty — Critical Alerts
+        <span class="badge badge-muted">disabled</span>
+      </div>
+      <div class="webhook-actions">
+        <button class="btn-ghost btn-sm">Enable</button>
+        <button class="btn-ghost btn-sm">Edit</button>
+        <button class="btn-error btn-sm">Delete</button>
+      </div>
+    </div>
+    <div class="webhook-url">POST https://events.pagerduty.com/v2/enqueue</div>
+    <div class="webhook-events">
+      <span class="badge badge-error">agent.crashed</span>
+      <span class="badge badge-error">pipeline.failed</span>
+    </div>
+    <div class="webhook-meta">
+      <span>Last triggered: 12d ago</span>
+      <span>Disabled by mike-ops on Mar 14</span>
+    </div>
+  </div>
+
+  <hr>
+
+  <h2>Add Webhook</h2>
+  <form onsubmit="return false">
+    <label for="wh-name">Name</label>
+    <input type="text" id="wh-name" placeholder="e.g., Slack — #deploys">
+
+    <label for="wh-url">URL</label>
+    <input type="url" id="wh-url" placeholder="https://...">
+
+    <label for="wh-secret">Secret (optional)</label>
+    <input type="password" id="wh-secret" placeholder="Used to sign payloads">
+
+    <label>Events</label>
+    <fieldset>
+      <legend>Trigger on</legend>
+      <label><input type="checkbox"> run.completed</label>
+      <label><input type="checkbox"> run.failed</label>
+      <label><input type="checkbox"> run.approved</label>
+      <label><input type="checkbox"> agent.crashed</label>
+      <label><input type="checkbox"> deploy.completed</label>
+      <label><input type="checkbox"> pipeline.failed</label>
+      <label><input type="checkbox"> budget.warning</label>
+    </fieldset>
+
+    <div style="display: flex; gap: var(--space)">
+      <button type="submit">Create Webhook</button>
+      <button type="button" class="btn-ghost">Cancel</button>
+    </div>
+  </form>
+
+  <hr>
+  <footer><p><small>4 webhooks configured — <a href="audit.html">View audit log</a></small></p></footer>

@@ -1,0 +1,213 @@
+---
+title: Issues
+nav.issues: true
+---
+
+<style>
+    .issue-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: var(--space);
+    }
+
+    .issue-stats {
+      display: flex;
+      gap: var(--space-lg);
+      font-size: 0.85rem;
+      color: var(--text-secondary);
+    }
+
+    .issue-stats span {
+      display: flex;
+      align-items: center;
+      gap: var(--space-sm);
+    }
+
+    .item-list-bordered li.closed {
+      opacity: 0.5;
+    }
+
+    .item-list-bordered li.closed .issue-title {
+      text-decoration: line-through;
+    }
+
+    .issue-check {
+      margin-top: 2px;
+      cursor: pointer;
+      flex-shrink: 0;
+    }
+
+    .issue-body {
+      flex: 1;
+      min-width: 0;
+    }
+
+    .issue-title {
+      font-family: var(--font-sans);
+      font-weight: 500;
+      font-size: 0.95rem;
+      color: var(--text);
+    }
+
+    .issue-meta {
+      font-size: 0.8rem;
+      color: var(--text-muted);
+      margin-top: 2px;
+      display: flex;
+      gap: var(--space);
+      align-items: center;
+      flex-wrap: wrap;
+    }
+
+    .issue-actions button {
+      font-size: 0.75rem;
+      padding: 2px 8px;
+      border-radius: 4px;
+      background: transparent;
+      border: 1px solid var(--border);
+      color: var(--text-muted);
+    }
+
+    .issue-actions button:hover {
+      color: var(--error);
+      border-color: var(--error);
+      background: var(--error-muted);
+    }
+
+    @media (max-width: 680px) {
+      .issue-header {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+    }
+</style>
+
+  <div class="issue-header">
+    <h1 class="mt-0" style="margin-bottom: 0">Issues</h1>
+    <div class="issue-stats">
+      <span><span class="dot dot-accent"></span> <span id="open-count">0</span> open</span>
+      <span><span class="dot dot-muted"></span> <span id="closed-count">0</span> closed</span>
+    </div>
+  </div>
+
+  <hr>
+
+  <form class="inline-form" style="margin-bottom: var(--space-lg)" onsubmit="return addIssue(event)">
+    <input type="text" id="issue-input" placeholder="New issue title..." required>
+    <select id="issue-tag">
+      <option value="task">task</option>
+      <option value="bug">bug</option>
+      <option value="feature">feature</option>
+    </select>
+    <button type="submit">Add</button>
+  </form>
+
+  <div class="pill-group" style="margin-bottom: var(--space-lg)">
+    <button class="active" onclick="setFilter('all', this)">All</button>
+    <button onclick="setFilter('open', this)">Open</button>
+    <button onclick="setFilter('closed', this)">Closed</button>
+    <button onclick="setFilter('bug', this)">Bugs</button>
+    <button onclick="setFilter('feature', this)">Features</button>
+  </div>
+
+  <ul class="item-list item-list-bordered" id="issue-list"></ul>
+  <div class="empty-state" id="empty-state" style="display: none">No issues match the current filter.</div>
+
+  <script>
+    let issues = [
+      { id: 1, title: "Dark mode flickers on initial load", tag: "bug", closed: false, date: "Mar 24" },
+      { id: 2, title: "Add keyboard shortcuts for navigation", tag: "feature", closed: false, date: "Mar 23" },
+      { id: 3, title: "Refactor CSS variable naming", tag: "task", closed: false, date: "Mar 22" },
+      { id: 4, title: "Button hover state missing on mobile", tag: "bug", closed: true, date: "Mar 21" },
+      { id: 5, title: "Add progress bar component", tag: "feature", closed: true, date: "Mar 20" },
+    ];
+
+    let nextId = 6;
+    let currentFilter = "all";
+
+    const tagClass = { bug: "badge-error", feature: "badge-accent", task: "badge-muted" };
+
+    function render() {
+      const list = document.getElementById("issue-list");
+      const empty = document.getElementById("empty-state");
+
+      const filtered = issues.filter(i => {
+        if (currentFilter === "all") return true;
+        if (currentFilter === "open") return !i.closed;
+        if (currentFilter === "closed") return i.closed;
+        return i.tag === currentFilter;
+      });
+
+      const openCount = issues.filter(i => !i.closed).length;
+      const closedCount = issues.filter(i => i.closed).length;
+      document.getElementById("open-count").textContent = openCount;
+      document.getElementById("closed-count").textContent = closedCount;
+
+      if (filtered.length === 0) {
+        list.innerHTML = "";
+        empty.style.display = "block";
+        return;
+      }
+
+      empty.style.display = "none";
+      list.innerHTML = filtered.map(i => `
+        <li class="${i.closed ? 'closed' : ''}">
+          <input type="checkbox" class="issue-check" ${i.closed ? "checked" : ""}
+            onchange="toggleIssue(${i.id})" title="${i.closed ? 'Reopen' : 'Close'}">
+          <div class="issue-body">
+            <div class="issue-title">${escapeHtml(i.title)}</div>
+            <div class="issue-meta">
+              <span class="badge ${tagClass[i.tag]}">${i.tag}</span>
+              <span>#${i.id} opened ${i.date}</span>
+            </div>
+          </div>
+          <div class="issue-actions">
+            <button onclick="removeIssue(${i.id})" title="Delete">&#x2715;</button>
+          </div>
+        </li>
+      `).join("");
+    }
+
+    function addIssue(e) {
+      e.preventDefault();
+      const input = document.getElementById("issue-input");
+      const tag = document.getElementById("issue-tag").value;
+      const title = input.value.trim();
+      if (!title) return;
+
+      const now = new Date();
+      const date = now.toLocaleDateString("en-US", { month: "short", day: "numeric" });
+
+      issues.unshift({ id: nextId++, title, tag, closed: false, date });
+      input.value = "";
+      render();
+    }
+
+    function toggleIssue(id) {
+      const issue = issues.find(i => i.id === id);
+      if (issue) issue.closed = !issue.closed;
+      render();
+    }
+
+    function removeIssue(id) {
+      issues = issues.filter(i => i.id !== id);
+      render();
+    }
+
+    function setFilter(filter, btn) {
+      currentFilter = filter;
+      document.querySelectorAll(".pill-group button").forEach(b => b.classList.remove("active"));
+      btn.classList.add("active");
+      render();
+    }
+
+    function escapeHtml(str) {
+      const div = document.createElement("div");
+      div.textContent = str;
+      return div.innerHTML;
+    }
+
+    render();
+  </script>

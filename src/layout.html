@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>{{title}} — TerminalX CSS</title>
+  <link rel="stylesheet" href="terminalx.css">
+  {{#if pageStyle}}<style>{{pageStyle}}</style>{{/if}}
+</head>
+<body>
+
+  <nav>
+    <ul>
+      <li><a href="demo.html" {{#if nav.demo}}class="active"{{/if}}>TerminalX</a></li>
+      <li><a href="pipeline.html" {{#if nav.pipeline}}class="active"{{/if}}>Pipeline</a></li>
+      <li><a href="builds.html" {{#if nav.builds}}class="active"{{/if}}>Builds</a></li>
+      <li><a href="agents.html" {{#if nav.agents}}class="active"{{/if}}>Agents</a></li>
+      <li><a href="queue.html" {{#if nav.queue}}class="active"{{/if}}>Queue</a></li>
+      <li><a href="run-detail.html" {{#if nav.run}}class="active"{{/if}}>Run</a></li>
+      <li><a href="diff.html" {{#if nav.diff}}class="active"{{/if}}>Diff</a></li>
+      <li><a href="templates.html" {{#if nav.templates}}class="active"{{/if}}>Templates</a></li>
+      <li><a href="artifacts.html" {{#if nav.artifacts}}class="active"{{/if}}>Artifacts</a></li>
+      <li><a href="costs.html" {{#if nav.costs}}class="active"{{/if}}>Costs</a></li>
+      <li><a href="audit.html" {{#if nav.audit}}class="active"{{/if}}>Audit</a></li>
+      <li><a href="quality.html" {{#if nav.quality}}class="active"{{/if}}>Quality</a></li>
+      <li><a href="models.html" {{#if nav.models}}class="active"{{/if}}>Models</a></li>
+      <li><a href="webhooks.html" {{#if nav.webhooks}}class="active"{{/if}}>Webhooks</a></li>
+    </ul>
+  </nav>
+
+  {{content}}
+
+</body>
+</html>

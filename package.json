@@ -1,0 +1,22 @@
+{
+  "name": "terminalx",
+  "version": "0.1.0",
+  "description": "A minimal, classless CSS library for terminal-style UIs with Geist fonts and soft dark aesthetics",
+  "main": "terminalx.css",
+  "files": [
+    "terminalx.css"
+  ],
+  "scripts": {
+    "build": "node build.js",
+    "dev": "node build.js && open dist/demo.html"
+  },
+  "keywords": [
+    "css",
+    "terminal",
+    "classless",
+    "dark-theme",
+    "geist"
+  ],
+  "author": "",
+  "license": "MIT"
+}

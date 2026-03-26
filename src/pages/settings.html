@@ -1,0 +1,355 @@
+---
+title: Settings
+nav.settings: true
+---
+
+<style>
+    .settings-section h2 {
+      margin-top: 0;
+      padding-bottom: var(--space);
+      border-bottom: 1px solid var(--border);
+    }
+
+    .setting-row {
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      gap: var(--space-lg);
+      padding: var(--space-lg) 0;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .setting-row:last-child {
+      border-bottom: none;
+    }
+
+    .setting-info {
+      flex: 1;
+    }
+
+    .setting-label {
+      font-family: var(--font-sans);
+      font-weight: 500;
+      color: var(--text);
+      margin-bottom: 4px;
+      display: block;
+      font-size: 0.95rem;
+    }
+
+    .setting-desc {
+      font-size: 0.85rem;
+      color: var(--text-muted);
+    }
+
+    .setting-control {
+      flex-shrink: 0;
+      min-width: 200px;
+    }
+
+    .setting-control input,
+    .setting-control select,
+    .setting-control textarea {
+      margin-bottom: 0;
+    }
+
+    .avatar-placeholder {
+      width: 64px;
+      height: 64px;
+      border-radius: 50%;
+      background: var(--bg-elevated);
+      border: 2px solid var(--border-strong);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.5rem;
+      color: var(--text-muted);
+      font-family: var(--font-sans);
+      font-weight: 600;
+      flex-shrink: 0;
+    }
+
+    .profile-header {
+      display: flex;
+      align-items: center;
+      gap: var(--space-lg);
+      margin-bottom: var(--space-lg);
+    }
+
+    .profile-header div {
+      flex: 1;
+    }
+
+    .btn-row {
+      display: flex;
+      gap: var(--space);
+      margin-top: var(--space-lg);
+    }
+
+    @media (max-width: 680px) {
+      .setting-row {
+        flex-direction: column;
+      }
+
+      .setting-control {
+        min-width: 100%;
+      }
+    }
+</style>
+
+  <h1>Settings</h1>
+  <p>Manage your account and preferences.</p>
+
+  <hr>
+
+  <div class="sidebar-layout">
+    <aside class="sidebar-nav">
+      <ul>
+        <li><a href="#profile" class="active">Profile</a></li>
+        <li><a href="#appearance">Appearance</a></li>
+        <li><a href="#notifications">Notifications</a></li>
+        <li><a href="#security">Security</a></li>
+        <li><a href="#danger">Danger Zone</a></li>
+      </ul>
+    </aside>
+
+    <main>
+      <!-- Profile -->
+      <div class="settings-section" id="profile">
+        <h2>Profile</h2>
+
+        <div class="profile-header">
+          <div class="avatar-placeholder">JD</div>
+          <div>
+            <strong>Jane Developer</strong><br>
+            <small class="text-muted">jane@terminalx.dev</small>
+          </div>
+          <button class="btn-ghost" style="align-self: flex-start;">Change photo</button>
+        </div>
+
+        <form onsubmit="return false">
+          <div class="setting-row">
+            <div class="setting-info">
+              <span class="setting-label">Display name</span>
+              <span class="setting-desc">Your public name shown across the platform.</span>
+            </div>
+            <div class="setting-control">
+              <input type="text" value="Jane Developer">
+            </div>
+          </div>
+
+          <div class="setting-row">
+            <div class="setting-info">
+              <span class="setting-label">Email</span>
+              <span class="setting-desc">Used for login and notifications.</span>
+            </div>
+            <div class="setting-control">
+              <input type="email" value="jane@terminalx.dev">
+            </div>
+          </div>
+
+          <div class="setting-row">
+            <div class="setting-info">
+              <span class="setting-label">Username</span>
+              <span class="setting-desc">Your unique handle. Alphanumeric and hyphens only.</span>
+            </div>
+            <div class="setting-control">
+              <input type="text" value="jane-dev">
+            </div>
+          </div>
+
+          <div class="setting-row">
+            <div class="setting-info">
+              <span class="setting-label">Bio</span>
+              <span class="setting-desc">A short description for your profile.</span>
+            </div>
+            <div class="setting-control">
+              <textarea rows="3">Building things with CSS and coffee.</textarea>
+            </div>
+          </div>
+
+          <div class="btn-row">
+            <button type="submit">Save changes</button>
+            <button type="button" class="btn-ghost">Cancel</button>
+          </div>
+        </form>
+      </div>
+
+      <!-- Appearance -->
+      <div class="settings-section" id="appearance">
+        <h2>Appearance</h2>
+
+        <div class="setting-row">
+          <div class="setting-info">
+            <span class="setting-label">Theme</span>
+            <span class="setting-desc">Choose your preferred color scheme.</span>
+          </div>
+          <div class="setting-control">
+            <select>
+              <option>Dark</option>
+              <option>Light</option>
+              <option>System</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="setting-row">
+          <div class="setting-info">
+            <span class="setting-label">Accent color</span>
+            <span class="setting-desc">Primary color for links, buttons, and highlights.</span>
+          </div>
+          <div class="setting-control">
+            <select>
+              <option>Orange</option>
+              <option>Blue</option>
+              <option>Green</option>
+              <option>Purple</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="setting-row">
+          <div class="setting-info">
+            <span class="setting-label">Font size</span>
+            <span class="setting-desc">Base font size for the interface.</span>
+          </div>
+          <div class="setting-control">
+            <select>
+              <option>13px</option>
+              <option>14px</option>
+              <option selected>15px</option>
+              <option>16px</option>
+              <option>18px</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="setting-row">
+          <div class="setting-info">
+            <span class="setting-label">Reduce motion</span>
+            <span class="setting-desc">Minimize animations and transitions.</span>
+          </div>
+          <div class="setting-control">
+            <label class="toggle">
+              <input type="checkbox">
+              <span class="toggle-track"></span>
+            </label>
+          </div>
+        </div>
+      </div>
+
+      <!-- Notifications -->
+      <div class="settings-section" id="notifications">
+        <h2>Notifications</h2>
+
+        <div class="setting-row">
+          <div class="setting-info">
+            <span class="setting-label">Email notifications</span>
+            <span class="setting-desc">Receive updates about your projects via email.</span>
+          </div>
+          <div class="setting-control">
+            <label class="toggle">
+              <input type="checkbox" checked>
+              <span class="toggle-track"></span>
+            </label>
+          </div>
+        </div>
+
+        <div class="setting-row">
+          <div class="setting-info">
+            <span class="setting-label">Deploy alerts</span>
+            <span class="setting-desc">Get notified when deployments succeed or fail.</span>
+          </div>
+          <div class="setting-control">
+            <label class="toggle">
+              <input type="checkbox" checked>
+              <span class="toggle-track"></span>
+            </label>
+          </div>
+        </div>
+
+        <div class="setting-row">
+          <div class="setting-info">
+            <span class="setting-label">Weekly digest</span>
+            <span class="setting-desc">Summary of activity across all your projects.</span>
+          </div>
+          <div class="setting-control">
+            <label class="toggle">
+              <input type="checkbox">
+              <span class="toggle-track"></span>
+            </label>
+          </div>
+        </div>
+
+        <div class="setting-row">
+          <div class="setting-info">
+            <span class="setting-label">Marketing emails</span>
+            <span class="setting-desc">Product updates, tips, and announcements.</span>
+          </div>
+          <div class="setting-control">
+            <label class="toggle">
+              <input type="checkbox">
+              <span class="toggle-track"></span>
+            </label>
+          </div>
+        </div>
+      </div>
+
+      <!-- Security -->
+      <div class="settings-section" id="security">
+        <h2>Security</h2>
+
+        <form onsubmit="return false">
+          <div class="setting-row">
+            <div class="setting-info">
+              <span class="setting-label">Current password</span>
+              <span class="setting-desc">Required to change your password.</span>
+            </div>
+            <div class="setting-control">
+              <input type="password" placeholder="Enter current password">
+            </div>
+          </div>
+
+          <div class="setting-row">
+            <div class="setting-info">
+              <span class="setting-label">New password</span>
+              <span class="setting-desc">Must be at least 12 characters.</span>
+            </div>
+            <div class="setting-control">
+              <input type="password" placeholder="Enter new password">
+            </div>
+          </div>
+
+          <div class="setting-row">
+            <div class="setting-info">
+              <span class="setting-label">Two-factor authentication</span>
+              <span class="setting-desc">Add an extra layer of security to your account.</span>
+            </div>
+            <div class="setting-control">
+              <button class="btn-ghost">Enable 2FA</button>
+            </div>
+          </div>
+
+          <div class="btn-row">
+            <button type="submit">Update password</button>
+          </div>
+        </form>
+      </div>
+
+      <!-- Danger Zone -->
+      <div class="settings-section" id="danger">
+        <h2>Danger Zone</h2>
+
+        <div class="danger-zone">
+          <h3>Delete Account</h3>
+          <p>Permanently delete your account and all associated data. This action cannot be undone.</p>
+          <button class="btn-error">Delete my account</button>
+        </div>
+      </div>
+    </main>
+  </div>
+
+  <hr>
+
+  <footer>
+    <p><small>TerminalX CSS v0.1.0 — <a href="demo.html">Back to docs</a></small></p>
+  </footer>

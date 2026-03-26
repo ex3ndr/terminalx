@@ -1,0 +1,259 @@
+---
+title: Model Config
+nav.models: true
+---
+
+<style>
+    .model-card {
+      background: var(--bg-surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-lg);
+      padding: var(--space-lg);
+      margin-bottom: var(--space-lg);
+    }
+
+    .model-card.active-model { border-color: var(--accent); }
+
+    .model-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: var(--space);
+    }
+
+    .model-name {
+      font-family: var(--font-sans);
+      font-weight: 600;
+      font-size: 1.05rem;
+    }
+
+    .model-desc {
+      font-size: 0.85rem;
+      color: var(--text-secondary);
+      margin-bottom: var(--space-lg);
+    }
+
+    .model-specs {
+      display: flex;
+      gap: var(--space-xl);
+      font-size: 0.85rem;
+      flex-wrap: wrap;
+    }
+
+    .model-spec-label {
+      color: var(--text-muted);
+      font-size: 0.8rem;
+    }
+
+    .model-spec-value {
+      font-weight: 500;
+    }
+
+    .setting-row {
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      gap: var(--space-lg);
+      padding: var(--space-lg) 0;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .setting-row:last-child { border-bottom: none; }
+
+    .setting-info { flex: 1; }
+
+    .setting-label {
+      font-family: var(--font-sans);
+      font-weight: 500;
+      color: var(--text);
+      margin-bottom: 4px;
+      display: block;
+      font-size: 0.95rem;
+    }
+
+    .setting-desc {
+      font-size: 0.85rem;
+      color: var(--text-muted);
+    }
+
+    .setting-control {
+      flex-shrink: 0;
+      min-width: 200px;
+    }
+
+    .setting-control input,
+    .setting-control select,
+    .setting-control textarea {
+      margin-bottom: 0;
+    }
+</style>
+
+  <h1>Model Configuration</h1>
+  <p>Configure which AI models agents use for code generation.</p>
+
+  <hr>
+
+  <div class="section-title">Available Models</div>
+
+  <div class="model-card active-model">
+    <div class="model-header">
+      <span class="model-name">Claude Opus 4</span>
+      <span class="badge badge-accent">default</span>
+    </div>
+    <div class="model-desc">Most capable model. Best for complex code generation, architecture decisions, and multi-file refactors.</div>
+    <div class="model-specs">
+      <div>
+        <div class="model-spec-label">Context</div>
+        <div class="model-spec-value">1M tokens</div>
+      </div>
+      <div>
+        <div class="model-spec-label">Input</div>
+        <div class="model-spec-value">$15 / 1M tok</div>
+      </div>
+      <div>
+        <div class="model-spec-label">Output</div>
+        <div class="model-spec-value">$75 / 1M tok</div>
+      </div>
+      <div>
+        <div class="model-spec-label">Speed</div>
+        <div class="model-spec-value">~60 tok/s</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="model-card">
+    <div class="model-header">
+      <span class="model-name">Claude Sonnet 4</span>
+      <span class="badge badge-muted">available</span>
+    </div>
+    <div class="model-desc">Balanced performance and cost. Good for code review, test generation, and straightforward implementations.</div>
+    <div class="model-specs">
+      <div>
+        <div class="model-spec-label">Context</div>
+        <div class="model-spec-value">200K tokens</div>
+      </div>
+      <div>
+        <div class="model-spec-label">Input</div>
+        <div class="model-spec-value">$3 / 1M tok</div>
+      </div>
+      <div>
+        <div class="model-spec-label">Output</div>
+        <div class="model-spec-value">$15 / 1M tok</div>
+      </div>
+      <div>
+        <div class="model-spec-label">Speed</div>
+        <div class="model-spec-value">~120 tok/s</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="model-card">
+    <div class="model-header">
+      <span class="model-name">Claude Haiku 4</span>
+      <span class="badge badge-muted">available</span>
+    </div>
+    <div class="model-desc">Fastest and cheapest. Ideal for linting, type generation, simple scaffolding, and high-volume tasks.</div>
+    <div class="model-specs">
+      <div>
+        <div class="model-spec-label">Context</div>
+        <div class="model-spec-value">200K tokens</div>
+      </div>
+      <div>
+        <div class="model-spec-label">Input</div>
+        <div class="model-spec-value">$0.80 / 1M tok</div>
+      </div>
+      <div>
+        <div class="model-spec-label">Output</div>
+        <div class="model-spec-value">$4 / 1M tok</div>
+      </div>
+      <div>
+        <div class="model-spec-label">Speed</div>
+        <div class="model-spec-value">~200 tok/s</div>
+      </div>
+    </div>
+  </div>
+
+  <hr>
+
+  <div class="section-title">Generation Settings</div>
+  <form onsubmit="return false">
+    <div class="setting-row">
+      <div class="setting-info">
+        <span class="setting-label">Default Model</span>
+        <span class="setting-desc">Model used when no override is specified in the task.</span>
+      </div>
+      <div class="setting-control">
+        <select>
+          <option selected>Opus 4</option>
+          <option>Sonnet 4</option>
+          <option>Haiku 4</option>
+        </select>
+      </div>
+    </div>
+
+    <div class="setting-row">
+      <div class="setting-info">
+        <span class="setting-label">Temperature</span>
+        <span class="setting-desc">Lower values produce more deterministic output. Higher values increase creativity.</span>
+      </div>
+      <div class="setting-control">
+        <input type="number" value="0.2" step="0.1" min="0" max="1">
+      </div>
+    </div>
+
+    <div class="setting-row">
+      <div class="setting-info">
+        <span class="setting-label">Max Output Tokens</span>
+        <span class="setting-desc">Maximum number of tokens the model can generate per request.</span>
+      </div>
+      <div class="setting-control">
+        <select>
+          <option>4,096</option>
+          <option>8,192</option>
+          <option selected>16,384</option>
+          <option>32,768</option>
+        </select>
+      </div>
+    </div>
+
+    <div class="setting-row">
+      <div class="setting-info">
+        <span class="setting-label">System Prompt</span>
+        <span class="setting-desc">Base instructions prepended to every agent run.</span>
+      </div>
+      <div class="setting-control" style="min-width: 300px">
+        <textarea rows="4">You are a senior software engineer. Write production-quality TypeScript code. Follow existing project conventions. Always include error handling and input validation.</textarea>
+      </div>
+    </div>
+
+    <div class="setting-row">
+      <div class="setting-info">
+        <span class="setting-label">Fallback Chain</span>
+        <span class="setting-desc">If the primary model fails or hits rate limits, try these models in order.</span>
+      </div>
+      <div class="setting-control">
+        <input type="text" value="Opus 4 → Sonnet 4 → Haiku 4" disabled>
+      </div>
+    </div>
+
+    <div class="setting-row">
+      <div class="setting-info">
+        <span class="setting-label">Auto-retry on failure</span>
+        <span class="setting-desc">Automatically retry failed generations up to 3 times before falling back.</span>
+      </div>
+      <div class="setting-control">
+        <label class="toggle">
+          <input type="checkbox" checked>
+          <span class="toggle-track"></span>
+        </label>
+      </div>
+    </div>
+
+    <div style="display: flex; gap: var(--space); margin-top: var(--space-lg)">
+      <button type="submit">Save Settings</button>
+      <button type="button" class="btn-ghost">Reset to Defaults</button>
+    </div>
+  </form>
+
+  <hr>
+  <footer><p><small>Model config — <a href="costs.html">View costs</a></small></p></footer>

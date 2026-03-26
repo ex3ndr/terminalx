@@ -1,0 +1,219 @@
+---
+title: Blog
+nav.blog: true
+---
+
+<style>
+    .post-meta {
+      font-size: 0.85rem;
+      color: var(--text-muted);
+      margin-bottom: var(--space-lg);
+      display: flex;
+      gap: var(--space-lg);
+      flex-wrap: wrap;
+    }
+
+    .footnote {
+      font-size: 0.85rem;
+      color: var(--text-secondary);
+      border-top: 1px solid var(--border);
+      margin-top: var(--space-xl);
+      padding-top: var(--space-lg);
+    }
+
+    .footnote ol {
+      padding-left: var(--space-lg);
+    }
+
+    .post-tags {
+      display: flex;
+      gap: var(--space-sm);
+      margin-top: var(--space-xl);
+      flex-wrap: wrap;
+    }
+
+    .post-tag {
+      font-size: 0.75rem;
+      font-family: var(--font-mono);
+      padding: 2px 10px;
+      border-radius: 999px;
+      border: 1px solid var(--border-strong);
+      color: var(--text-secondary);
+      text-decoration: none;
+    }
+
+    .post-tag:hover {
+      color: var(--accent);
+      border-color: var(--accent);
+      text-decoration: none;
+    }
+
+    .related-date {
+      font-size: 0.8rem;
+      color: var(--text-muted);
+      margin-left: var(--space);
+    }
+
+    .item-list a {
+      font-family: var(--font-sans);
+      font-weight: 500;
+    }
+</style>
+
+  <article>
+    <h1>Why We Chose a Classless Approach for TerminalX CSS</h1>
+
+    <div class="post-meta">
+      <span>Mar 25, 2026</span>
+      <span>8 min read</span>
+      <span>by <a href="#">@terminalx</a></span>
+    </div>
+
+    <p>When we started building TerminalX CSS, we had one clear goal: make semantic HTML look good without adding a single class to your markup. No <code>.container</code>, no <code>.text-lg</code>, no <code>.flex-col</code>. Just HTML elements, styled beautifully out of the box.</p>
+
+    <p>This post explains why we took that path, what we learned, and where we think classless CSS fits in the modern toolchain.</p>
+
+    <figure>
+      <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='680' height='240' fill='%23141414'%3E%3Crect width='680' height='240' rx='12'/%3E%3Ctext x='340' y='125' fill='%23555' font-family='monospace' font-size='14' text-anchor='middle'%3EBefore: 47 classes. After: 0 classes. Same result.%3C/text%3E%3C/svg%3E" alt="Before and after comparison">
+      <figcaption>A side-by-side of the same layout with and without utility classes.</figcaption>
+    </figure>
+
+    <h2>The Problem with Class-First CSS</h2>
+
+    <p>Utility-first frameworks like Tailwind are incredible for building complex UIs. But for content-heavy pages — documentation, blogs, changelogs, settings panels — they add friction. You end up decorating every element:</p>
+
+    <pre><code>&lt;!-- Tailwind approach --&gt;
+&lt;h1 class="text-2xl font-bold text-gray-100 mb-4"&gt;Title&lt;/h1&gt;
+&lt;p class="text-gray-400 leading-relaxed mb-6"&gt;Content...&lt;/p&gt;
+&lt;a class="text-orange-500 hover:text-orange-400 underline"&gt;Link&lt;/a&gt;
+
+&lt;!-- TerminalX approach --&gt;
+&lt;h1&gt;Title&lt;/h1&gt;
+&lt;p&gt;Content...&lt;/p&gt;
+&lt;a href="#"&gt;Link&lt;/a&gt;</code></pre>
+
+    <p>For rendered markdown, CMS output, or any content you don't fully control, classless styling is the only practical option<sup>1</sup>.</p>
+
+    <h2>Design Decisions</h2>
+
+    <h3>Monospace Body, Sans-Serif Headings</h3>
+
+    <p>Most CSS frameworks default to sans-serif everywhere. We flipped this: <strong>Geist Mono</strong> for body text gives the terminal aesthetic, while <strong>Geist</strong> (sans) for headings creates a clear visual hierarchy and improves scannability.</p>
+
+    <blockquote>
+      <p>Typography is what language looks like. Using monospace as the default isn't a limitation — it's a statement about the kind of interfaces we're building.</p>
+      <cite>Internal design review notes</cite>
+    </blockquote>
+
+    <h3>Soft Dark, Not Harsh Dark</h3>
+
+    <p>Pure black (<code>#000</code>) backgrounds with pure white (<code>#fff</code>) text create harsh contrast that strains the eyes. We went with <code>#0c0c0c</code> for the background and <code>#e8e8e8</code> for text — subtle but meaningfully softer. The Factory.ai aesthetic was our north star here.</p>
+
+    <p>The color hierarchy follows a clear pattern:</p>
+
+    <table>
+      <thead>
+        <tr>
+          <th>Layer</th>
+          <th>Color</th>
+          <th>Use</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Background</td>
+          <td><code>#0c0c0c</code></td>
+          <td>Page base</td>
+        </tr>
+        <tr>
+          <td>Surface</td>
+          <td><code>#141414</code></td>
+          <td>Cards, code blocks, inputs</td>
+        </tr>
+        <tr>
+          <td>Elevated</td>
+          <td><code>#1a1a1a</code></td>
+          <td>Buttons, kbd, raised elements</td>
+        </tr>
+        <tr>
+          <td>Hover</td>
+          <td><code>#222222</code></td>
+          <td>Interactive states</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <h3>CSS Variables All the Way Down</h3>
+
+    <p>Every color, spacing value, and font stack is a CSS custom property. No build tools, no Sass, no PostCSS. Override <code>--accent</code> and the entire theme shifts — links, focus rings, progress bars, alerts, everything.</p>
+
+    <pre><code>:root {
+  /* Swap orange for blue with one line */
+  --accent: #3b82f6;
+  --accent-hover: #60a5fa;
+  --accent-muted: rgba(59, 130, 246, 0.15);
+}</code></pre>
+
+    <h2>What Classless Can't Do</h2>
+
+    <p>We're not pretending this replaces Tailwind or CSS modules. Classless CSS is intentionally limited:</p>
+
+    <ul>
+      <li><strong>Layout</strong> — You still need classes for grids, flexbox layouts, and responsive patterns</li>
+      <li><strong>Complex components</strong> — Modals, dropdowns, tabs need JS and custom markup</li>
+      <li><strong>Fine-grained control</strong> — Per-element overrides need custom CSS or utility classes</li>
+    </ul>
+
+    <p>TerminalX addresses this by providing a small set of <em>optional</em> utility classes (<code>.card</code>, <code>.alert</code>, <code>.btn-ghost</code>) for patterns that can't be expressed through HTML semantics alone. But the core promise holds: if you write clean HTML, it looks good by default.</p>
+
+    <h2>Try It</h2>
+
+    <p>Drop a single <code>&lt;link&gt;</code> tag into your HTML and start writing. No npm install, no config file, no build step<sup>2</sup>.</p>
+
+    <pre><code>&lt;link rel="stylesheet"
+  href="https://unpkg.com/terminalx/terminalx.css"&gt;</code></pre>
+
+    <p>That's it. Your semantic HTML is now styled.</p>
+
+    <div class="post-tags">
+      <a href="#" class="post-tag">css</a>
+      <a href="#" class="post-tag">design</a>
+      <a href="#" class="post-tag">classless</a>
+      <a href="#" class="post-tag">dark-mode</a>
+      <a href="#" class="post-tag">geist</a>
+    </div>
+
+    <div class="footnote">
+      <h4>Footnotes</h4>
+      <ol>
+        <li>Tools like <code>@tailwindcss/typography</code> solve this partially with the <code>prose</code> class, but it's still a class wrapping uncontrolled content.</li>
+        <li>For production use, we recommend self-hosting the CSS file or pinning a version on the CDN.</li>
+      </ol>
+    </div>
+  </article>
+
+  <hr>
+
+  <div class="card">
+    <h3 class="mt-0">Related Posts</h3>
+    <ul class="item-list">
+      <li>
+        <a href="#">Building a Color System for Dark UIs</a>
+        <span class="related-date">Mar 18, 2026</span>
+      </li>
+      <li>
+        <a href="#">Geist Mono: The Best Monospace Font You're Not Using</a>
+        <span class="related-date">Mar 12, 2026</span>
+      </li>
+      <li>
+        <a href="#">CSS Variables vs. Sass: A Practical Comparison</a>
+        <span class="related-date">Mar 5, 2026</span>
+      </li>
+    </ul>
+  </div>
+
+  <hr>
+
+  <footer>
+    <p><small>TerminalX CSS Blog — <a href="demo.html">Back to docs</a></small></p>
+  </footer>

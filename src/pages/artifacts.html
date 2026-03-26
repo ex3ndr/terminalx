@@ -1,0 +1,223 @@
+---
+title: Artifacts
+nav.artifacts: true
+---
+
+<style>
+    .tree-item {
+      display: flex;
+      align-items: center;
+      gap: var(--space);
+      padding: var(--space-sm) 0;
+      font-size: 0.9rem;
+      cursor: pointer;
+    }
+
+    .tree-item:hover { color: var(--accent); }
+
+    .tree-icon {
+      width: 16px;
+      text-align: center;
+      color: var(--text-muted);
+      flex-shrink: 0;
+    }
+
+    .tree-item:hover .tree-icon { color: var(--accent); }
+
+    .tree-children {
+      padding-left: calc(var(--space-lg) + var(--space-sm));
+      border-left: 1px solid var(--border);
+      margin-left: 8px;
+    }
+
+    .tree-size {
+      margin-left: auto;
+      font-size: 0.8rem;
+      color: var(--text-muted);
+    }
+
+    .preview-panel {
+      background: var(--bg-surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: var(--space-lg);
+      font-size: 0.85rem;
+      line-height: 1.6;
+      max-height: 500px;
+      overflow-y: auto;
+    }
+
+    .preview-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: var(--space-lg);
+    }
+</style>
+
+  <h1>Artifacts</h1>
+  <p>Generated output from Run <a href="run-detail.html">#1204</a> — user-service</p>
+
+  <hr>
+
+  <div class="sidebar-layout">
+    <div>
+      <div class="section-title">File Tree</div>
+      <div class="tree-item" style="font-weight: 600">
+        <span class="tree-icon">&#x25BE;</span>
+        <code>user-service/</code>
+        <span class="tree-size">12 files</span>
+      </div>
+      <div class="tree-children">
+        <div class="tree-item" style="font-weight: 500">
+          <span class="tree-icon">&#x25BE;</span>
+          <code>src/</code>
+        </div>
+        <div class="tree-children">
+          <div class="tree-item">
+            <span class="tree-icon">&#x25B8;</span>
+            <code>routes/</code>
+          </div>
+          <div class="tree-children">
+            <div class="tree-item" style="color: var(--accent)">
+              <span class="tree-icon">&#x2022;</span>
+              <code>users.ts</code>
+              <span class="tree-size">4.2 kB</span>
+            </div>
+          </div>
+          <div class="tree-item">
+            <span class="tree-icon">&#x25B8;</span>
+            <code>models/</code>
+          </div>
+          <div class="tree-children">
+            <div class="tree-item">
+              <span class="tree-icon">&#x2022;</span>
+              <code>user.ts</code>
+              <span class="tree-size">1.8 kB</span>
+            </div>
+          </div>
+          <div class="tree-item">
+            <span class="tree-icon">&#x25B8;</span>
+            <code>middleware/</code>
+          </div>
+          <div class="tree-children">
+            <div class="tree-item">
+              <span class="tree-icon">&#x2022;</span>
+              <code>validate.ts</code>
+              <span class="tree-size">1.1 kB</span>
+            </div>
+          </div>
+          <div class="tree-item">
+            <span class="tree-icon">&#x2022;</span>
+            <code>index.ts</code>
+            <span class="tree-size">0.8 kB</span>
+          </div>
+          <div class="tree-item">
+            <span class="tree-icon">&#x2022;</span>
+            <code>db.ts</code>
+            <span class="tree-size">0.4 kB</span>
+          </div>
+        </div>
+        <div class="tree-item" style="font-weight: 500">
+          <span class="tree-icon">&#x25B8;</span>
+          <code>tests/</code>
+        </div>
+        <div class="tree-children">
+          <div class="tree-item">
+            <span class="tree-icon">&#x2022;</span>
+            <code>users.test.ts</code>
+            <span class="tree-size">3.6 kB</span>
+          </div>
+        </div>
+        <div class="tree-item">
+          <span class="tree-icon">&#x2022;</span>
+          <code>package.json</code>
+          <span class="tree-size">0.6 kB</span>
+        </div>
+        <div class="tree-item">
+          <span class="tree-icon">&#x2022;</span>
+          <code>tsconfig.json</code>
+          <span class="tree-size">0.3 kB</span>
+        </div>
+        <div class="tree-item">
+          <span class="tree-icon">&#x2022;</span>
+          <code>Dockerfile</code>
+          <span class="tree-size">0.5 kB</span>
+        </div>
+        <div class="tree-item">
+          <span class="tree-icon">&#x2022;</span>
+          <code>drizzle.config.ts</code>
+          <span class="tree-size">0.2 kB</span>
+        </div>
+      </div>
+    </div>
+
+    <div>
+      <div class="preview-header">
+        <div class="section-title mb-0">Preview — <code>src/routes/users.ts</code></div>
+        <div style="display: flex; gap: var(--space)">
+          <button class="btn-ghost btn-sm">Copy</button>
+          <button class="btn-ghost btn-sm">Download</button>
+        </div>
+      </div>
+      <div class="preview-panel">
+        <pre style="margin: 0; background: none; border: none; padding: 0"><code>import { Hono } from 'hono';
+import { z } from 'zod';
+import { db } from '../db';
+import { users } from '../models/user';
+import { eq } from 'drizzle-orm';
+import { validate } from '../middleware/validate';
+
+const app = new Hono();
+
+const createUserSchema = z.object({
+  name: z.string().min(1).max(100),
+  email: z.string().email(),
+  role: z.enum(['admin', 'member', 'viewer'])
+    .default('member'),
+});
+
+const updateUserSchema = createUserSchema.partial();
+
+// GET /users
+app.get('/', async (c) =&gt; {
+  const limit = Number(c.req.query('limit') || 50);
+  const offset = Number(c.req.query('offset') || 0);
+
+  const result = await db
+    .select()
+    .from(users)
+    .limit(limit)
+    .offset(offset);
+
+  return c.json({ data: result, limit, offset });
+});
+
+// GET /users/:id
+app.get('/:id', async (c) =&gt; {
+  const id = c.req.param('id');
+  const [user] = await db
+    .select()
+    .from(users)
+    .where(eq(users.id, id));
+
+  if (!user) {
+    return c.json({ error: 'Not found' }, 404);
+  }
+
+  return c.json({ data: user });
+});
+
+export default app;</code></pre>
+      </div>
+
+      <div style="display: flex; gap: var(--space); margin-top: var(--space-lg)">
+        <button class="btn-success btn-sm">Download All (.zip)</button>
+        <button class="btn-ghost btn-sm">View Diff</button>
+        <button class="btn-ghost btn-sm">Open in Editor</button>
+      </div>
+    </div>
+  </div>
+
+  <hr>
+  <footer><p><small>12 files, 13.5 kB total — Run <a href="run-detail.html">#1204</a></small></p></footer>

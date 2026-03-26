@@ -1,0 +1,202 @@
+---
+title: Dashboard
+nav.dashboard: true
+---
+
+<style>
+    .stat-card {
+      background: var(--bg-surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-lg);
+      padding: var(--space-lg);
+    }
+
+    .stat-label {
+      font-size: 0.8rem;
+      color: var(--text-muted);
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      font-family: var(--font-sans);
+      margin-bottom: var(--space-sm);
+    }
+
+    .stat-value {
+      font-size: 2rem;
+      font-weight: 700;
+      font-family: var(--font-sans);
+      color: var(--text);
+      line-height: 1.2;
+    }
+
+    .stat-change {
+      font-size: 0.8rem;
+      margin-top: var(--space-sm);
+      color: var(--text-muted);
+    }
+
+    .stat-change.up { color: var(--success); }
+    .stat-change.down { color: var(--error); }
+
+    .progress-row {
+      margin-bottom: var(--space-lg);
+    }
+
+    .progress-label {
+      display: flex;
+      justify-content: space-between;
+      font-size: 0.85rem;
+      margin-bottom: var(--space-sm);
+    }
+
+    .progress-label span:first-child { color: var(--text); }
+    .progress-label span:last-child { color: var(--text-muted); }
+
+    .activity-time {
+      color: var(--text-muted);
+      font-size: 0.8rem;
+      white-space: nowrap;
+      margin-left: auto;
+      padding-left: var(--space);
+    }
+
+    .service-status {
+      font-size: 0.8rem;
+      padding: 2px 10px;
+      border-radius: 999px;
+      font-family: var(--font-mono);
+      margin-left: auto;
+    }
+</style>
+
+  <h1>Dashboard</h1>
+  <p>System overview for <strong>terminalx-prod</strong> cluster.</p>
+
+  <hr>
+
+  <div class="grid-auto" style="margin-bottom: var(--space-xl)">
+    <div class="stat-card">
+      <div class="stat-label">Requests / hr</div>
+      <div class="stat-value">12.4k</div>
+      <div class="stat-change up">+8.2% from yesterday</div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-label">Error Rate</div>
+      <div class="stat-value" style="color: var(--error)">0.34%</div>
+      <div class="stat-change down">+0.12% from yesterday</div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-label">Avg Latency</div>
+      <div class="stat-value" style="color: var(--accent)">142ms</div>
+      <div class="stat-change up">-18ms from yesterday</div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-label">Uptime</div>
+      <div class="stat-value" style="color: var(--success)">99.97%</div>
+      <div class="stat-change">Last 30 days</div>
+    </div>
+  </div>
+
+  <div class="section-title">Resource Usage</div>
+
+  <div class="progress-row">
+    <div class="progress-label">
+      <span>CPU</span>
+      <span>42%</span>
+    </div>
+    <progress value="42" max="100"></progress>
+  </div>
+
+  <div class="progress-row">
+    <div class="progress-label">
+      <span>Memory</span>
+      <span>6.2 / 8 GB</span>
+    </div>
+    <progress value="78" max="100"></progress>
+  </div>
+
+  <div class="progress-row">
+    <div class="progress-label">
+      <span>Disk</span>
+      <span>124 / 500 GB</span>
+    </div>
+    <progress value="25" max="100"></progress>
+  </div>
+
+  <div class="two-col" style="margin-bottom: var(--space-xl)">
+    <div>
+      <div class="section-title">Recent Activity</div>
+      <ul class="item-list">
+        <li>
+          <span class="dot dot-success" style="margin-top: 6px"></span>
+          <span>Deployed <code>v2.4.1</code> to production</span>
+          <span class="activity-time">2m ago</span>
+        </li>
+        <li>
+          <span class="dot dot-error" style="margin-top: 6px"></span>
+          <span>Alert: memory spike on <code>worker-03</code></span>
+          <span class="activity-time">18m ago</span>
+        </li>
+        <li>
+          <span class="dot dot-accent" style="margin-top: 6px"></span>
+          <span>SSL certificate renewed for <code>*.terminalx.dev</code></span>
+          <span class="activity-time">1h ago</span>
+        </li>
+        <li>
+          <span class="dot dot-success" style="margin-top: 6px"></span>
+          <span>Deployed <code>v2.4.0</code> to staging</span>
+          <span class="activity-time">3h ago</span>
+        </li>
+        <li>
+          <span class="dot dot-muted" style="margin-top: 6px"></span>
+          <span>Scheduled backup completed</span>
+          <span class="activity-time">6h ago</span>
+        </li>
+        <li>
+          <span class="dot dot-error" style="margin-top: 6px"></span>
+          <span>Failed health check on <code>api-02</code> (recovered)</span>
+          <span class="activity-time">8h ago</span>
+        </li>
+      </ul>
+    </div>
+
+    <div>
+      <div class="section-title">Services</div>
+      <ul class="item-list">
+        <li>
+          <span>api-gateway</span>
+          <span class="service-status badge badge-success">healthy</span>
+        </li>
+        <li>
+          <span>auth-service</span>
+          <span class="service-status badge badge-success">healthy</span>
+        </li>
+        <li>
+          <span>worker-pool</span>
+          <span class="service-status badge badge-accent">degraded</span>
+        </li>
+        <li>
+          <span>postgres-primary</span>
+          <span class="service-status badge badge-success">healthy</span>
+        </li>
+        <li>
+          <span>redis-cache</span>
+          <span class="service-status badge badge-success">healthy</span>
+        </li>
+        <li>
+          <span>cdn-edge</span>
+          <span class="service-status badge badge-success">healthy</span>
+        </li>
+      </ul>
+
+      <div class="section-title" style="margin-top: var(--space-xl)">Alerts</div>
+      <div class="alert alert-error">worker-03 memory usage exceeded 90% threshold</div>
+      <div class="alert alert-accent">Scheduled maintenance window: Mar 28, 02:00–04:00 UTC</div>
+      <div class="alert alert-success">All database migrations applied successfully</div>
+    </div>
+  </div>
+
+  <hr>
+
+  <footer>
+    <p><small>Last updated: Mar 26, 2026 14:32 UTC — <a href="#">Refresh</a></small></p>
+  </footer>
