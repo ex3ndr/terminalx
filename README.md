@@ -9,7 +9,7 @@ A minimal, classless CSS library for terminal-style UIs.
 ## Features
 
 - **Geist + Geist Mono** fonts (sans for headings, mono for body)
-- **Dark theme** inspired by Factory.ai's color scheme
+- **Dark theme** inspired by 80s Kubrick aesthetics's color scheme
 - **Classless** — semantic HTML elements styled by default
 - **Soft details** — rounded corners, subtle borders, smooth transitions
 - **CSS variables** — fully customizable
