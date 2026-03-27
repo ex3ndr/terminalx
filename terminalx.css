@@ -1100,7 +1100,7 @@ nav a.active {
   transform: translateY(0);
 }
 
-.modal-sm { max-width: 380px; }
+.modal-sm { max-width: 440px; }
 .modal-lg { max-width: 680px; }
 
 .modal-header {
