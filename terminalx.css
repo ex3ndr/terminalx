@@ -1086,7 +1086,7 @@ nav a.active {
   background: var(--bg-surface);
   border: 1px solid var(--border);
   border-radius: var(--radius-lg);
-  padding: var(--space-xl);
+  padding: var(--space-lg);
   max-width: 520px;
   width: 100%;
   max-height: 85vh;
