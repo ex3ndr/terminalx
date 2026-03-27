@@ -1,0 +1,444 @@
+---
+title: Chat
+nav.chat: true
+---
+
+<style>
+    .chat-layout {
+      display: grid;
+      grid-template-columns: 220px 1fr;
+      gap: 0;
+      border: 1px solid var(--border);
+      border-radius: var(--radius-lg);
+      overflow: hidden;
+      height: 680px;
+    }
+
+    /* Sidebar */
+    .chat-sidebar {
+      background: var(--bg-surface);
+      border-right: 1px solid var(--border);
+      display: flex;
+      flex-direction: column;
+    }
+
+    .chat-sidebar-header {
+      padding: var(--space) var(--space-lg);
+      border-bottom: 1px solid var(--border);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      font-family: var(--font-sans);
+      font-weight: 600;
+      font-size: 0.9rem;
+    }
+
+    .chat-sidebar-header button {
+      padding: 2px 8px;
+      font-size: 0.8rem;
+    }
+
+    .chat-list {
+      flex: 1;
+      overflow-y: auto;
+      list-style: none;
+      padding: 0;
+      margin: 0;
+    }
+
+    .chat-list li {
+      padding: var(--space) var(--space-lg);
+      cursor: pointer;
+      border-bottom: 1px solid var(--border);
+      transition: background 0.1s ease;
+      margin-bottom: 0;
+    }
+
+    .chat-list li:hover {
+      background: var(--bg-hover);
+    }
+
+    .chat-list li.active {
+      background: var(--bg-elevated);
+      border-left: 2px solid var(--accent);
+    }
+
+    .chat-list-name {
+      font-family: var(--font-sans);
+      font-weight: 500;
+      font-size: 0.9rem;
+      margin-bottom: 2px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .chat-list-preview {
+      font-size: 0.8rem;
+      color: var(--text-muted);
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    .chat-list-time {
+      font-size: 0.7rem;
+      color: var(--text-muted);
+      flex-shrink: 0;
+    }
+
+    .chat-unread {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: var(--accent);
+      flex-shrink: 0;
+      margin-left: var(--space-sm);
+    }
+
+    /* Main chat area */
+    .chat-main {
+      display: flex;
+      flex-direction: column;
+      background: var(--bg);
+    }
+
+    .chat-header {
+      padding: var(--space) var(--space-lg);
+      border-bottom: 1px solid var(--border);
+      display: flex;
+      align-items: center;
+      gap: var(--space);
+      flex-shrink: 0;
+    }
+
+    .chat-header-name {
+      font-family: var(--font-sans);
+      font-weight: 600;
+      font-size: 0.95rem;
+    }
+
+    .chat-header-status {
+      font-size: 0.8rem;
+      color: var(--text-muted);
+    }
+
+    .chat-header-actions {
+      margin-left: auto;
+      display: flex;
+      gap: var(--space-sm);
+    }
+
+    .chat-header-actions button {
+      padding: 2px 8px;
+      font-size: 0.8rem;
+    }
+
+    /* Messages */
+    .chat-messages {
+      flex: 1;
+      overflow-y: auto;
+      padding: var(--space-lg);
+      display: flex;
+      flex-direction: column;
+      gap: var(--space);
+    }
+
+    .msg {
+      max-width: 75%;
+      display: flex;
+      flex-direction: column;
+      gap: 2px;
+    }
+
+    .msg-out {
+      align-self: flex-end;
+    }
+
+    .msg-in {
+      align-self: flex-start;
+    }
+
+    .msg-bubble {
+      padding: var(--space) var(--space-lg);
+      border-radius: var(--radius-lg);
+      font-size: 0.9rem;
+      line-height: 1.5;
+    }
+
+    .msg-in .msg-bubble {
+      background: var(--bg-surface);
+      border: 1px solid var(--border);
+      border-bottom-left-radius: 4px;
+    }
+
+    .msg-out .msg-bubble {
+      background: var(--accent-muted);
+      border: 1px solid var(--accent);
+      color: var(--text);
+      border-bottom-right-radius: 4px;
+    }
+
+    .msg-meta {
+      font-size: 0.75rem;
+      color: var(--text-muted);
+      padding: 0 var(--space-sm);
+    }
+
+    .msg-out .msg-meta {
+      text-align: right;
+    }
+
+    .msg-sender {
+      font-weight: 500;
+      color: var(--text-secondary);
+      font-size: 0.8rem;
+      padding: 0 var(--space-sm);
+    }
+
+    .msg-system {
+      align-self: center;
+      font-size: 0.8rem;
+      color: var(--text-muted);
+      padding: var(--space-sm) var(--space);
+      background: var(--bg-surface);
+      border-radius: 999px;
+    }
+
+    .msg-bubble code {
+      font-size: 0.85em;
+    }
+
+    .msg-bubble pre {
+      margin: var(--space-sm) 0 0;
+      padding: var(--space);
+      font-size: 0.8rem;
+    }
+
+    .msg-typing .msg-bubble {
+      color: var(--text-muted);
+    }
+
+    .typing-dots {
+      display: inline-flex;
+      gap: 3px;
+      align-items: center;
+    }
+
+    .typing-dots span {
+      width: 5px;
+      height: 5px;
+      border-radius: 50%;
+      background: var(--text-muted);
+      animation: dot-pulse 1s ease-in-out infinite;
+    }
+
+    .typing-dots span:nth-child(2) { animation-delay: 0.15s; }
+    .typing-dots span:nth-child(3) { animation-delay: 0.3s; }
+
+    /* Input */
+    .chat-input-area {
+      padding: var(--space) var(--space-lg);
+      border-top: 1px solid var(--border);
+      display: flex;
+      gap: var(--space);
+      align-items: flex-end;
+      flex-shrink: 0;
+    }
+
+    .chat-input-area textarea {
+      flex: 1;
+      margin-bottom: 0;
+      min-height: 40px;
+      max-height: 120px;
+      resize: none;
+      font-size: 0.9rem;
+      padding: var(--space) var(--space);
+    }
+
+    .chat-input-area button {
+      flex-shrink: 0;
+      margin-bottom: 0;
+    }
+
+    @media (max-width: 680px) {
+      .chat-layout {
+        grid-template-columns: 1fr;
+        height: auto;
+      }
+
+      .chat-sidebar {
+        border-right: none;
+        border-bottom: 1px solid var(--border);
+        max-height: 200px;
+      }
+
+      .chat-messages {
+        min-height: 400px;
+      }
+    }
+</style>
+
+  <h1 class="mt-0">Chat</h1>
+  <p>Team messaging for the software factory.</p>
+
+  <hr>
+
+  <div class="chat-layout">
+    <!-- Sidebar -->
+    <div class="chat-sidebar">
+      <div class="chat-sidebar-header">
+        Channels
+        <button class="btn-ghost">+</button>
+      </div>
+      <ul class="chat-list">
+        <li class="active">
+          <div class="chat-list-name">
+            # general
+            <span class="chat-list-time">2m</span>
+          </div>
+          <div class="chat-list-preview">agent-01: Done — PR ready for review</div>
+        </li>
+        <li>
+          <div class="chat-list-name">
+            # deployments
+            <div style="display:flex;align-items:center;gap:var(--space-sm)">
+              <span class="chat-list-time">18m</span>
+              <span class="chat-unread"></span>
+            </div>
+          </div>
+          <div class="chat-list-preview">system: Deployed v2.4.1 to production</div>
+        </li>
+        <li>
+          <div class="chat-list-name">
+            # code-review
+            <span class="chat-list-time">1h</span>
+          </div>
+          <div class="chat-list-preview">jane-dev: LGTM, merging now</div>
+        </li>
+        <li>
+          <div class="chat-list-name">
+            # alerts
+            <div style="display:flex;align-items:center;gap:var(--space-sm)">
+              <span class="chat-list-time">3h</span>
+              <span class="chat-unread"></span>
+            </div>
+          </div>
+          <div class="chat-list-preview">system: worker-03 memory at 91%</div>
+        </li>
+        <li>
+          <div class="chat-list-name">
+            # random
+            <span class="chat-list-time">1d</span>
+          </div>
+          <div class="chat-list-preview">mike-ops: anyone tried the new model?</div>
+        </li>
+      </ul>
+    </div>
+
+    <!-- Main -->
+    <div class="chat-main">
+      <div class="chat-header">
+        <span class="dot dot-success"></span>
+        <div>
+          <div class="chat-header-name"># general</div>
+          <div class="chat-header-status">5 members, 3 online</div>
+        </div>
+        <div class="chat-header-actions">
+          <button class="btn-ghost">Pin</button>
+          <button class="btn-ghost">Search</button>
+        </div>
+      </div>
+
+      <div class="chat-messages">
+        <div class="msg-system">Today, Mar 26</div>
+
+        <div class="msg msg-in">
+          <span class="msg-sender">jane-dev</span>
+          <div class="msg-bubble">Hey, can someone kick off a code gen for the new billing endpoints? We need CRUD + Stripe webhook handler.</div>
+          <span class="msg-meta">14:02</span>
+        </div>
+
+        <div class="msg msg-in">
+          <span class="msg-sender">mike-ops</span>
+          <div class="msg-bubble">On it. Queuing now with P0 priority.</div>
+          <span class="msg-meta">14:03</span>
+        </div>
+
+        <div class="msg msg-in">
+          <span class="msg-sender">mike-ops</span>
+          <div class="msg-bubble">Assigned to <code>agent-01</code> using Opus 4. Should take ~15 min based on similar tasks.</div>
+          <span class="msg-meta">14:04</span>
+        </div>
+
+        <div class="msg-system">agent-01 started run #1208</div>
+
+        <div class="msg msg-in">
+          <span class="msg-sender">jane-dev</span>
+          <div class="msg-bubble">Nice. Make sure it uses the existing Stripe SDK wrapper in <code>src/lib/stripe.ts</code> — don't want duplicated setup.</div>
+          <span class="msg-meta">14:06</span>
+        </div>
+
+        <div class="msg msg-out">
+          <div class="msg-bubble">I added that to the system prompt context. It should pick it up from the codebase scan.</div>
+          <span class="msg-meta">14:07 — you</span>
+        </div>
+
+        <div class="msg msg-in">
+          <span class="msg-sender">agent-01</span>
+          <div class="msg-bubble">
+            Run #1208 completed. Generated 6 files:
+            <pre><code>src/routes/billing.ts    (+142 lines)
+src/models/invoice.ts    (+68 lines)
+src/webhooks/stripe.ts   (+94 lines)
+tests/billing.test.ts    (+116 lines)
+tests/stripe.test.ts     (+72 lines)
+src/index.ts             (+3 lines, modified)</code></pre>
+          </div>
+          <span class="msg-meta">14:18</span>
+        </div>
+
+        <div class="msg msg-out">
+          <div class="msg-bubble">Looks great. Running quality gate now.</div>
+          <span class="msg-meta">14:19 — you</span>
+        </div>
+
+        <div class="msg-system">quality gate passed — grade A, 92% coverage</div>
+
+        <div class="msg msg-in">
+          <span class="msg-sender">jane-dev</span>
+          <div class="msg-bubble">Reviewed the diff — clean code, good test coverage. Approving. <span class="badge badge-success" style="vertical-align: middle">approved</span></div>
+          <span class="msg-meta">14:22</span>
+        </div>
+
+        <div class="msg msg-out">
+          <div class="msg-bubble">Merged to main. Pipeline #849 triggered.</div>
+          <span class="msg-meta">14:23 — you</span>
+        </div>
+
+        <div class="msg msg-in">
+          <span class="msg-sender">agent-01</span>
+          <div class="msg-bubble">Done — PR ready for review. Total cost: $1.87 (142k tokens).</div>
+          <span class="msg-meta">14:24</span>
+        </div>
+
+        <div class="msg msg-in msg-typing">
+          <span class="msg-sender">mike-ops</span>
+          <div class="msg-bubble">
+            <span class="typing-dots"><span></span><span></span><span></span></span>
+          </div>
+        </div>
+      </div>
+
+      <div class="chat-input-area">
+        <textarea rows="1" placeholder="Message #general..."></textarea>
+        <button type="submit">Send</button>
+      </div>
+    </div>
+  </div>
+
+  <hr>
+
+  <footer>
+    <p><small>Chat — <a href="agents.html">View agents</a> — <a href="queue.html">Task queue</a></small></p>
+  </footer>
