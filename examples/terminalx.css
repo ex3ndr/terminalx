@@ -192,6 +192,10 @@ address {
   color: var(--text-secondary);
 }
 
+section {
+  margin-bottom: var(--space-xl);
+}
+
 hr {
   border: none;
   border-top: 1px solid var(--border);
