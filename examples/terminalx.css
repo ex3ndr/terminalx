@@ -625,6 +625,9 @@ figcaption {
 
 nav {
   margin-bottom: var(--space-xl);
+  display: flex;
+  align-items: center;
+  gap: var(--space);
 }
 
 nav ul {
@@ -658,6 +661,95 @@ nav a[aria-current="page"],
 nav a.active {
   color: var(--text);
   border-bottom-color: var(--accent);
+}
+
+/* Hamburger toggle — hidden on wide screens */
+.nav-toggle {
+  display: none;
+  background: none;
+  border: 1px solid var(--border-strong);
+  border-radius: var(--radius);
+  color: var(--text);
+  padding: var(--space-sm);
+  cursor: pointer;
+  line-height: 1;
+  font-size: 1.2rem;
+  width: 36px;
+  height: 36px;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.nav-toggle:hover {
+  background: var(--bg-hover);
+  border-color: var(--text-muted);
+}
+
+/* Mobile sidebar overlay */
+.nav-backdrop {
+  display: none;
+}
+
+body.nav-open .nav-backdrop {
+  display: block;
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.5);
+  z-index: 90;
+}
+
+.nav-sidebar {
+  display: none;
+}
+
+body.nav-open .nav-sidebar {
+  display: block;
+  position: fixed;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  width: 240px;
+  background: var(--bg-surface);
+  border-right: 1px solid var(--border);
+  z-index: 91;
+  padding: var(--space-lg);
+  overflow-y: auto;
+}
+
+.nav-sidebar ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+}
+
+.nav-sidebar li {
+  margin-bottom: 0;
+}
+
+.nav-sidebar a {
+  display: block;
+  padding: var(--space) var(--space);
+  color: var(--text-secondary);
+  font-size: 0.9rem;
+  border-radius: var(--radius);
+  border-bottom: none;
+}
+
+.nav-sidebar a:hover {
+  color: var(--text);
+  background: var(--bg-hover);
+  text-decoration: none;
+  border-bottom-color: transparent;
+}
+
+.nav-sidebar a.active {
+  color: var(--accent);
+  background: var(--accent-muted);
+  border-bottom-color: transparent;
 }
 
 /* ============================================
@@ -1393,9 +1485,12 @@ nav a.active {
   h1 { font-size: 1.6rem; }
   h2 { font-size: 1.3rem; }
 
-  nav ul {
-    flex-direction: column;
-    gap: var(--space-sm);
+  .nav-toggle {
+    display: flex;
+  }
+
+  nav > ul {
+    display: none;
   }
 
   table {

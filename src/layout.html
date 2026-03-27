@@ -9,7 +9,29 @@
 </head>
 <body>
 
+  <div class="nav-backdrop" onclick="document.body.classList.remove('nav-open')"></div>
+  <div class="nav-sidebar">
+    <ul>
+      <li><a href="index.html" {{#if nav.index}}class="active"{{/if}}>TerminalX</a></li>
+      <li><a href="reference.html" {{#if nav.reference}}class="active"{{/if}}>Reference</a></li>
+      <li><a href="pipeline.html" {{#if nav.pipeline}}class="active"{{/if}}>Pipeline</a></li>
+      <li><a href="builds.html" {{#if nav.builds}}class="active"{{/if}}>Builds</a></li>
+      <li><a href="agents.html" {{#if nav.agents}}class="active"{{/if}}>Agents</a></li>
+      <li><a href="queue.html" {{#if nav.queue}}class="active"{{/if}}>Queue</a></li>
+      <li><a href="run-detail.html" {{#if nav.run}}class="active"{{/if}}>Run</a></li>
+      <li><a href="diff.html" {{#if nav.diff}}class="active"{{/if}}>Diff</a></li>
+      <li><a href="templates.html" {{#if nav.templates}}class="active"{{/if}}>Templates</a></li>
+      <li><a href="costs.html" {{#if nav.costs}}class="active"{{/if}}>Costs</a></li>
+      <li><a href="audit.html" {{#if nav.audit}}class="active"{{/if}}>Audit</a></li>
+      <li><a href="quality.html" {{#if nav.quality}}class="active"{{/if}}>Quality</a></li>
+      <li><a href="models.html" {{#if nav.models}}class="active"{{/if}}>Models</a></li>
+      <li><a href="webhooks.html" {{#if nav.webhooks}}class="active"{{/if}}>Webhooks</a></li>
+      <li><a href="chat.html" {{#if nav.chat}}class="active"{{/if}}>Chat</a></li>
+    </ul>
+  </div>
+
   <nav>
+    <button class="nav-toggle" onclick="document.body.classList.toggle('nav-open')" aria-label="Menu">&#9776;</button>
     <ul>
       <li><a href="index.html" {{#if nav.index}}class="active"{{/if}}>TerminalX</a></li>
       <li><a href="reference.html" {{#if nav.reference}}class="active"{{/if}}>Reference</a></li>

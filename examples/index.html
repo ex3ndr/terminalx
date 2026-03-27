@@ -120,7 +120,29 @@
 </head>
 <body>
 
+  <div class="nav-backdrop" onclick="document.body.classList.remove('nav-open')"></div>
+  <div class="nav-sidebar">
+    <ul>
+      <li><a href="index.html" class="active">TerminalX</a></li>
+      <li><a href="reference.html" >Reference</a></li>
+      <li><a href="pipeline.html" >Pipeline</a></li>
+      <li><a href="builds.html" >Builds</a></li>
+      <li><a href="agents.html" >Agents</a></li>
+      <li><a href="queue.html" >Queue</a></li>
+      <li><a href="run-detail.html" >Run</a></li>
+      <li><a href="diff.html" >Diff</a></li>
+      <li><a href="templates.html" >Templates</a></li>
+      <li><a href="costs.html" >Costs</a></li>
+      <li><a href="audit.html" >Audit</a></li>
+      <li><a href="quality.html" >Quality</a></li>
+      <li><a href="models.html" >Models</a></li>
+      <li><a href="webhooks.html" >Webhooks</a></li>
+      <li><a href="chat.html" >Chat</a></li>
+    </ul>
+  </div>
+
   <nav>
+    <button class="nav-toggle" onclick="document.body.classList.toggle('nav-open')" aria-label="Menu">&#9776;</button>
     <ul>
       <li><a href="index.html" class="active">TerminalX</a></li>
       <li><a href="reference.html" >Reference</a></li>
