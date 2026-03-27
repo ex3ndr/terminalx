@@ -103,6 +103,7 @@
       display: flex;
       flex-direction: column;
       background: var(--bg);
+      min-height: 0;
     }
 
     .chat-header {
@@ -377,7 +378,62 @@
       </div>
 
       <div class="chat-messages">
+        <div class="msg-system">Yesterday, Mar 25</div>
+
+        <div class="msg msg-in">
+          <span class="msg-sender">mike-ops</span>
+          <div class="msg-bubble">Heads up — we're switching the default model to Opus 4 for the payment-gateway project. Sonnet was generating incomplete error handlers.</div>
+          <span class="msg-meta">16:42</span>
+        </div>
+
+        <div class="msg msg-in">
+          <span class="msg-sender">jane-dev</span>
+          <div class="msg-bubble">Makes sense. The cost difference is worth it for financial code.</div>
+          <span class="msg-meta">16:45</span>
+        </div>
+
+        <div class="msg msg-out">
+          <div class="msg-bubble">Agreed. I updated the model config. Also bumped temperature down to 0.1 for that project.</div>
+          <span class="msg-meta">16:48 — you</span>
+        </div>
+
+        <div class="msg msg-in">
+          <span class="msg-sender">mike-ops</span>
+          <div class="msg-bubble">Good call. Let's also add a quality gate rule for payment code — require 90%+ coverage minimum.</div>
+          <span class="msg-meta">16:51</span>
+        </div>
+
         <div class="msg-system">Today, Mar 26</div>
+
+        <div class="msg msg-in">
+          <span class="msg-sender">jane-dev</span>
+          <div class="msg-bubble">Morning. The auth token refresh fix landed on main last night — pipeline passed. Anyone seeing issues?</div>
+          <span class="msg-meta">09:14</span>
+        </div>
+
+        <div class="msg msg-out">
+          <div class="msg-bubble">All green. Ran a manual smoke test against staging too.</div>
+          <span class="msg-meta">09:22 — you</span>
+        </div>
+
+        <div class="msg msg-in">
+          <span class="msg-sender">mike-ops</span>
+          <div class="msg-bubble">Deployed to prod at 09:30. No alerts so far.</div>
+          <span class="msg-meta">09:35</span>
+        </div>
+
+        <div class="msg-system">agent-09 crashed on task "Split monolith" — context limit</div>
+
+        <div class="msg msg-in">
+          <span class="msg-sender">mike-ops</span>
+          <div class="msg-bubble">agent-09 just blew up on the monolith split task. Hit 1M token context limit. We need to break that task into smaller chunks.</div>
+          <span class="msg-meta">13:48</span>
+        </div>
+
+        <div class="msg msg-out">
+          <div class="msg-bubble">I'll split it into 4 sub-tasks — one per service boundary. Should keep each under 200k tokens.</div>
+          <span class="msg-meta">13:52 — you</span>
+        </div>
 
         <div class="msg msg-in">
           <span class="msg-sender">jane-dev</span>
