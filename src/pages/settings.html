@@ -4,6 +4,14 @@ nav.settings: true
 ---
 
 <style>
+    .settings-section {
+      margin-bottom: var(--space-xl);
+    }
+
+    .settings-section:last-child {
+      margin-bottom: 0;
+    }
+
     .settings-section h2 {
       margin-top: 0;
       padding-bottom: var(--space);
@@ -54,10 +62,13 @@ nav.settings: true
 
     .avatar-placeholder {
       width: 64px;
+      min-width: 64px;
       height: 64px;
+      min-height: 64px;
       border-radius: 50%;
       background: var(--bg-elevated);
       border: 2px solid var(--border-strong);
+      flex-shrink: 0;
       display: flex;
       align-items: center;
       justify-content: center;
